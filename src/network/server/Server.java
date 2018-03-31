@@ -5,7 +5,9 @@ import network.model.Status;
 import javax.websocket.DeploymentException;
 import javax.websocket.EncodeException;
 import javax.websocket.Session;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import static util.NetworkConstants.PORT;
 import static util.NetworkConstants.HOST;
@@ -13,21 +15,29 @@ import static util.NetworkConstants.ROOT_PATH;
 
 public class Server {
 
-    private org.glassfish.tyrus.server.Server server;
+    private static org.glassfish.tyrus.server.Server server;
 
     public Server() {
         server = new org.glassfish.tyrus.server.Server(HOST, PORT, "/" + ROOT_PATH, ServerEndpoint.class);
     }
 
     public void start() {
+
         try {
             server.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Please press a key to stop the server.");
+            reader.readLine();
         } catch (DeploymentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
     public void sendStatus(Status status) {
+
         status.setRightWink(0.234);
         status.setBlink(0.123);
         status.setClench(0.2343);
@@ -55,5 +65,11 @@ public class Server {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public static void main(String[] args) {
+        new Server().start();
+
     }
 }
