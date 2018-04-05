@@ -54,6 +54,7 @@ public class Console {
         clrLogBtn.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         clrLogBtn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+			consoleTextPane.setText("");
         	}
         });
         console.add(clrLogBtn);
