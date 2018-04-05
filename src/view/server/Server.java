@@ -17,7 +17,7 @@ public class Server {
 
         contentPane.add(AttributeContainer.getPanel(), BorderLayout.CENTER);
 
-        contentPane.add(Console.getPanel(), BorderLayout.PAGE_END);
+        contentPane.add(Console.getConsolePanel(), BorderLayout.PAGE_END);
     }
 
     private static void createAndShowServerGUI() {
