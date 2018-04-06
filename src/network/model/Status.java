@@ -21,6 +21,9 @@ public class Status {
     private double excitementShortTerm;
     private double frustration;
     private double excitementLongTerm;
+    
+    // Activate Status
+    private boolean isAvtivateEye;
 
     public double getEyebrowRaise() {
         return eyebrowRaise;
@@ -149,4 +152,14 @@ public class Status {
     public void setMediation(double mediation) {
         this.mediation = mediation;
     }
+
+	public boolean isAvtivateEye() {
+		return isAvtivateEye;
+	}
+
+	public void setAvtivateEye(boolean isAvtivateEye) {
+		this.isAvtivateEye = isAvtivateEye;
+	}
+
+	
 }
