@@ -3,14 +3,16 @@ package network.client;
 import network.model.Status;
 import network.model.StatusDecoder;
 import network.model.StatusEncoder;
+import view.client.ImageLoader;
+import view.client.components.expressive.FacialExpressions;
 
-import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
+import controller.client.FacialExpressionSolver;
+
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
 import static java.lang.String.format;
 
@@ -30,7 +32,10 @@ public class ClientEndpoint {
 
     @OnMessage
     public void onMessage(Status status) {
-        System.out.println("Got status yoooo");
+		FacialExpressionSolver.LowerFace lowerFace = FacialExpressionSolver.computeLowerFace(status);
+		FacialExpressionSolver.UpperFace upperFace = FacialExpressionSolver.computeUpperrFace(status);
+		ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
+		//TODO  For displaying graph	
     }
 
 
