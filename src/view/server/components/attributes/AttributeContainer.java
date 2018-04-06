@@ -62,7 +62,9 @@ public class AttributeContainer {
         detectionTab.add(upperFaceCombo1);
         
         JSpinner spinnerUpperFace = new JSpinner();
-        spinnerUpperFace.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30", "0.20", "0.50", "0.60", "0.70", "0.80", "0.90", "1.00"}));
+        spinnerUpperFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor0 = new JSpinner.NumberEditor(spinnerUpperFace);
+        spinnerUpperFace.setEditor(editor0);
         spinnerUpperFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         spinnerUpperFace.setBounds(201, 225, 62, 26);
         detectionTab.add(spinnerUpperFace);
@@ -79,7 +81,9 @@ public class AttributeContainer {
         detectionTab.add(lowerFaceCombo1);
         
         JSpinner spinnerLowerFace = new JSpinner();
-        spinnerLowerFace.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30", "0.20", "0.50", "0.60", "0.70", "0.80", "0.90", "1.00"}));
+        spinnerLowerFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinnerLowerFace);
+        spinnerLowerFace.setEditor(editor);
         spinnerLowerFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         spinnerLowerFace.setBounds(487, 225, 62, 26);
         detectionTab.add(spinnerLowerFace);
@@ -121,16 +125,21 @@ public class AttributeContainer {
         detectionTab.add(lblEngagementboredom);
         
         JSpinner spinnerExcitement = new JSpinner();
-        spinnerExcitement.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30"}));
+        spinnerExcitement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor1 = new JSpinner.NumberEditor(spinnerExcitement);
+        spinnerExcitement.setEditor(editor1);
         spinnerExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         spinnerExcitement.setBounds(281, 97, 59, 26);
         detectionTab.add(spinnerExcitement);
         
         JSpinner spinnerEngagement = new JSpinner();
-        spinnerEngagement.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30"}));
+        spinnerEngagement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(spinnerEngagement);
+        spinnerEngagement.setEditor(editor2);
         spinnerEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         spinnerEngagement.setBounds(281, 133, 59, 26);
         detectionTab.add(spinnerEngagement);
+        
         
         JLabel lblLongTerm = new JLabel("Long Term");
         lblLongTerm.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -138,7 +147,9 @@ public class AttributeContainer {
         detectionTab.add(lblLongTerm);
         
         JSpinner spinnerLongTerm = new JSpinner();
-        spinnerLongTerm.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30"}));
+        spinnerLongTerm.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(spinnerLongTerm);
+        spinnerLongTerm.setEditor(editor3);
         spinnerLongTerm.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         spinnerLongTerm.setBounds(464, 97, 59, 26);
         detectionTab.add(spinnerLongTerm);
