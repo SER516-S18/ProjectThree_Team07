@@ -1,159 +1,152 @@
-package view.server.components.attributes;
+package view.server.components;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.awt.event.ActionEvent;
 
-public class AttributeContainer {
-	private static JTextField textField;
+public class Console {
+	
+	private static JPanel console = null;
+	private final static Logger LOGGER = Logger.getLogger(Console.class.getName());
+	private final static String CONTENT_TYPE = "text/html";
 
+	
     /**
      * @wbp.parser.entryPoint
      */
-    @SuppressWarnings("unchecked")
-	public static JPanel getPanel() {
-        JPanel attributeContainer = new JPanel();
+	
+	public static JPanel getConsolePanel()
+	{
+		if(console == null)
+		{	
+			getPanel();
+		}
+		return console;
+	}
+	
+    /**
+     * @wbp.parser.entryPoint
+     */
+    public static void getPanel() {
+        console = new JPanel();
 
-     
-        attributeContainer.setPreferredSize(new Dimension(600, 502));
-        attributeContainer.setLayout(null);
+        console.setPreferredSize(new Dimension(600, 190));
+        console.setLayout(null);
         
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(0, 0, 698, 502);
-        attributeContainer.add(tabbedPane);
+        JLabel consoleLabel = new JLabel("Console");
+        consoleLabel.setBounds(15, -1, 119, 27);
+        consoleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        console.add(consoleLabel);
+          
+        JTextPane consoleTextPane = new JTextPane();
+        consoleTextPane.setBounds(15, 30, 538, 103);
+        consoleTextPane.setForeground(new Color(255, 0, 51));
+        consoleTextPane.setBackground(new Color(255, 255, 255));
+      //  console.add(consoleTextPane);
         
-        JPanel detectionTab = new JPanel();
-        detectionTab.setBackground(Color.WHITE);
-        detectionTab.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-        tabbedPane.addTab("Detection", null, detectionTab, null);
-        detectionTab.setLayout(null);
+        JButton clrLogBtn = new JButton("ClearLog");
+        clrLogBtn.setBounds(15, 147, 144, 27);
+        clrLogBtn.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        clrLogBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		consoleTextPane.setText("");
+        	}
+        });
+        console.add(clrLogBtn);
         
-        JLabel detectionTopLabel = new JLabel("Emo State ");
-        detectionTopLabel.setBounds(15, 13, 104, 32);
-        detectionTopLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        detectionTab.add(detectionTopLabel);
+        JScrollPane scrollPane = new JScrollPane(consoleTextPane);
+        scrollPane.setBounds(15, 30, 538, 103);
+        console.add(scrollPane);
         
-        JLabel labelTime = new JLabel("Time:");
-        labelTime.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelTime.setBounds(15, 61, 69, 20);
-        detectionTab.add(labelTime);
-        
-        textField = new JTextField();
-        textField.setBounds(66, 58, 146, 26);
-        detectionTab.add(textField);
-        textField.setColumns(10);
-        
-        JLabel labelSec = new JLabel("sec");
-        labelSec.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelSec.setBounds(224, 61, 69, 20);
-        detectionTab.add(labelSec); 
-       
-        JLabel labelUpperFace = new JLabel("Upper Face:");
-        labelUpperFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelUpperFace.setBounds(15, 189, 197, 20);
-        detectionTab.add(labelUpperFace);
-        
-        JComboBox upperFaceCombo1 = new JComboBox();
-        upperFaceCombo1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        upperFaceCombo1.setModel(new DefaultComboBoxModel(new String[] {"Raise Brow", "Furrow Brow"}));
-        upperFaceCombo1.setBounds(25, 225, 173, 26);
-        upperFaceCombo1.setBackground(Color.WHITE);
-        detectionTab.add(upperFaceCombo1);
-        
-        JSpinner spinnerUpperFace = new JSpinner();
-        spinnerUpperFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-        JSpinner.NumberEditor editor0 = new JSpinner.NumberEditor(spinnerUpperFace);
-        spinnerUpperFace.setEditor(editor0);
-        spinnerUpperFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        spinnerUpperFace.setBounds(201, 225, 62, 26);
-        detectionTab.add(spinnerUpperFace);
-        
-        JLabel labelLowerFace = new JLabel("Lower Face:");
-        labelLowerFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelLowerFace.setBounds(324, 189, 127, 20);
-        detectionTab.add(labelLowerFace);
-        
-        JComboBox lowerFaceCombo1 = new JComboBox();
-        lowerFaceCombo1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        lowerFaceCombo1.setModel(new DefaultComboBoxModel(new String[] {"Smile", "Clench", "Laugh"}));
-        lowerFaceCombo1.setBounds(324, 225, 155, 27);
-        detectionTab.add(lowerFaceCombo1);
-        
-        JSpinner spinnerLowerFace = new JSpinner();
-        spinnerLowerFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinnerLowerFace);
-        spinnerLowerFace.setEditor(editor);
-        spinnerLowerFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        spinnerLowerFace.setBounds(487, 225, 62, 26);
-        detectionTab.add(spinnerLowerFace);
-        
-        JLabel labelEye = new JLabel("Eye");
-        labelEye.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelEye.setBounds(15, 267, 69, 20);
-        detectionTab.add(labelEye);
-        
-        JComboBox comboBoxEye = new JComboBox();
-        comboBoxEye.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        comboBoxEye.setModel(new DefaultComboBoxModel(new String[] {"Blink", "Looking Left", "Looking Right", "Looking Up", "Looking Down"}));
-        comboBoxEye.setBounds(25, 303, 173, 29);
-        detectionTab.add(comboBoxEye);
-        
-        JButton btnActivate = new JButton("Activate");
-        btnActivate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        btnActivate.setBounds(225, 303, 115, 29);
-        detectionTab.add(btnActivate);
-        
-        JCheckBox detectionCheckBox = new JCheckBox("Auto Reset");
-        detectionCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        detectionCheckBox.setBounds(366, 303, 183, 29);
-        detectionTab.add(detectionCheckBox);
-        
-        JLabel labelAffective = new JLabel("Affective");
-        labelAffective.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        labelAffective.setBounds(15, 97, 76, 20);
-        detectionTab.add(labelAffective);
-        
-        JLabel lblExcitement = new JLabel("Excitement");
-        lblExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        lblExcitement.setBounds(106, 100, 96, 20);
-        detectionTab.add(lblExcitement);
-        
-        JLabel lblEngagementboredom = new JLabel("Engagement/Boredom");
-        lblEngagementboredom.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        lblEngagementboredom.setBounds(106, 136, 174, 20);
-        detectionTab.add(lblEngagementboredom);
-        
-        JSpinner spinnerExcitement = new JSpinner();
-        spinnerExcitement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-        JSpinner.NumberEditor editor1 = new JSpinner.NumberEditor(spinnerExcitement);
-        spinnerExcitement.setEditor(editor1);
-        spinnerExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        spinnerExcitement.setBounds(281, 97, 59, 26);
-        detectionTab.add(spinnerExcitement);
-        
-        JSpinner spinnerEngagement = new JSpinner();
-        spinnerEngagement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-        JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(spinnerEngagement);
-        spinnerEngagement.setEditor(editor2);
-        spinnerEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        spinnerEngagement.setBounds(281, 133, 59, 26);
-        detectionTab.add(spinnerEngagement);
-        
-        
-        JLabel lblLongTerm = new JLabel("Long Term");
-        lblLongTerm.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        lblLongTerm.setBounds(364, 100, 86, 20);
-        detectionTab.add(lblLongTerm);
-        
-        JSpinner spinnerLongTerm = new JSpinner();
-        spinnerLongTerm.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-        JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(spinnerLongTerm);
-        spinnerLongTerm.setEditor(editor3);
-        spinnerLongTerm.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        spinnerLongTerm.setBounds(464, 97, 59, 26);
-        detectionTab.add(spinnerLongTerm);
-        tabbedPane.setEnabledAt(0, true);
-        return attributeContainer;
+//        JScrollBar scrollBarConsole = new JScrollBar();
+//        scrollPane.setViewportView(scrollBarConsole);
+       // return console;
     }
+   
+    
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public static void setErrorMessage(String errorMessage) {
+
+		try
+		{
+			console = new JPanel();
+
+	        console.setPreferredSize(new Dimension(600, 190));
+	        console.setLayout(null);
+
+	        JLabel consoleLabel = new JLabel("Console");
+	        consoleLabel.setBounds(15, -1, 119, 27);
+	        consoleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+	        console.add(consoleLabel);
+	       
+	        JTextPane consoleTextPane = new JTextPane();
+	        
+			consoleTextPane.setContentType(CONTENT_TYPE);
+			StyledDocument doc = (StyledDocument) consoleTextPane.getDocument();
+			SimpleAttributeSet keyWord = new SimpleAttributeSet();
+			StyleConstants.setForeground(keyWord, Color.RED);
+			StyleConstants.setFontFamily(keyWord, "Times New Roman");
+			StyleConstants.setFontSize(keyWord, 9);
+			StyleConstants.setBackground(keyWord, Color.LIGHT_GRAY);
+
+			doc.insertString(0,new Date()+" - Error - "+errorMessage +"\n",keyWord );
+			
+			JButton clrLogBtn = new JButton("ClearLog");
+	        clrLogBtn.setBounds(15, 147, 144, 27);
+	        clrLogBtn.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+	        clrLogBtn.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent arg0) {
+	        	}
+	        });
+	        console.add(clrLogBtn);
+	        
+	        JScrollPane scrollPane = new JScrollPane(consoleTextPane);
+	        scrollPane.setBounds(15, 30, 538, 103);
+	        console.add(scrollPane);
+		}
+		catch(Exception ex) 
+		{ 
+			LOGGER.log(Level.SEVERE,"Exception while adding Error Message.", ex); 
+		}
+
+	}
+
+	/**
+	 * sets the layout for normal messages
+	 * @param message
+	 * @wbp.parser.entryPoint
+	 */
+	public static void setMessage(String message) {
+		try {
+			console = new JPanel();
+
+	        console.setPreferredSize(new Dimension(600, 190));
+	        console.setLayout(null);
+
+	        JTextPane consoleTextPane = new JTextPane();
+
+			consoleTextPane.setContentType(CONTENT_TYPE);
+			StyledDocument doc = (StyledDocument) consoleTextPane.getDocument();
+			SimpleAttributeSet keyWord = new SimpleAttributeSet();
+			StyleConstants.setForeground(keyWord, Color.BLACK);
+			StyleConstants.setFontFamily(keyWord, "Times New Roman");
+			StyleConstants.setFontSize(keyWord, 9);
+			StyleConstants.setBackground(keyWord, Color.LIGHT_GRAY);
+			doc.insertString(0,new Date()+"- Message - "+message+"\n",keyWord );
+		} catch (Exception ex) {
+			LOGGER.log(Level.SEVERE,"Exception while adding Message", ex);
+		}
+	}
+
+
 }
