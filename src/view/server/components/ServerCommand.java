@@ -17,29 +17,6 @@ public class ServerCommand {
         serverCommand.setPreferredSize(new Dimension(520, 190));
         serverCommand.setLayout(null);
         
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBounds(0, 0, 600, 31);
-        serverCommand.add(menuBar);
-        
-        JMenu menuApplication = new JMenu("Application");
-        menuApplication.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        menuBar.add(menuApplication);
-        
-        JMenuItem mntmQuit = new JMenuItem("Quit");
-        mntmQuit.setVerticalTextPosition(SwingConstants.TOP);
-        mntmQuit.setVerticalAlignment(SwingConstants.TOP);
-        menuApplication.add(mntmQuit);
-        
-        JMenu mnHelp = new JMenu("Help");
-        mnHelp.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        menuBar.add(mnHelp);
-        
-        JMenuItem mntmAbout = new JMenuItem("About");
-        mntmAbout.setVerticalTextPosition(SwingConstants.TOP);
-        mntmAbout.setVerticalAlignment(SwingConstants.TOP);
-        mntmAbout.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        mnHelp.add(mntmAbout);
-        
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(0, 30, 670, 160);
         serverCommand.add(tabbedPane);
@@ -49,17 +26,18 @@ public class ServerCommand {
         tabbedPane.addTab("Interactive", null, tabInteractive, null);
         tabInteractive.setLayout(null);
         
-        Button startBtn = new Button("Start");
-        startBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        startBtn.setBounds(379, 20, 126, 42);
-        tabInteractive.add(startBtn);
-        
         Checkbox autoRepeatcheckbox = new Checkbox("Auto Repeat");
         autoRepeatcheckbox.setBounds(46, 66, 174, 27);
         tabInteractive.add(autoRepeatcheckbox);
+        
+        Button startBtn = new Button("Send");
+        startBtn.setBounds(379, 20, 126, 42);
+        tabInteractive.add(startBtn);
+        startBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        	}}
+        );
         
         JLabel lblEmoState = new JLabel("EmoState Interval ");
         lblEmoState.setBounds(25, 20, 160, 20);
@@ -68,7 +46,9 @@ public class ServerCommand {
         JSpinner intervalSpinner = new JSpinner();
         intervalSpinner.setAutoscrolls(true);
         intervalSpinner.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        intervalSpinner.setModel(new SpinnerListModel(new String[] {"0.10", "0.20", "0.30"}));
+        intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(intervalSpinner);
+        intervalSpinner.setEditor(editor);
         intervalSpinner.setBounds(152, 20, 68, 26);
         tabInteractive.add(intervalSpinner);
         
