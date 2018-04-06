@@ -30,15 +30,6 @@ public class ServerCommand {
         autoRepeatcheckbox.setBounds(46, 66, 174, 27);
         tabInteractive.add(autoRepeatcheckbox);
         
-        Button startBtn = new Button("Send");
-        startBtn.setBounds(379, 20, 126, 42);
-        tabInteractive.add(startBtn);
-        startBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		
-        	}}
-        );
-        
         JLabel lblEmoState = new JLabel("EmoState Interval ");
         lblEmoState.setBounds(25, 20, 160, 20);
         tabInteractive.add(lblEmoState);
@@ -55,6 +46,15 @@ public class ServerCommand {
         JLabel labelSec = new JLabel("sec");
         labelSec.setBounds(226, 20, 69, 20);
         tabInteractive.add(labelSec);
+        
+        JButton startButton = new JButton("Start");
+        startButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        startButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        startButton.setBounds(344, 16, 115, 60);
+        tabInteractive.add(startButton);
 
         return serverCommand;
     }
