@@ -33,9 +33,7 @@ public class TimerThread {
 							try {
 								//TODO Display Time call
 								System.out.println("\n timer time " + counter);
-								//TODO get json data  to the client
-								Status status = new Status();
-								MessageSender.sendData(status);
+								MessageSender.sendData();
 								Thread.sleep((int) (interval * 1000));
 								counter += interval;
 							} catch (InterruptedException e) {

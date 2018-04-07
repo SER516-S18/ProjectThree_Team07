@@ -23,8 +23,8 @@ public class MessageSender {
 	 * gets status object from server and sends to the client 
 	 * 
 	 */
-	public static void sendData(Status status) {
-		getServer().sendStatus(status);
+	public static void sendData() {
+		getServer().sendStatus();
 	}
 	
 }
