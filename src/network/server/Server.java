@@ -93,6 +93,15 @@ public class Server {
 
 		stat.setAvtivateEye(AttributeContainer.getActivateStatus());
 
+		
+		for (Session peer : ServerEndpoint.peers) {
+			try {
+				peer.getBasicRemote().sendObject(stat);
+			} catch (IOException | EncodeException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return stat;
 		// Original Method
 		//		public void sendStatus(Status status) {
