@@ -2,7 +2,8 @@ package view.server.components;
 
 import javax.swing.*;
 
-//import com.sun.javafx.logging.Logger;
+import controller.server.MessageTimer;
+import view.server.components.attributes.AttributeContainer;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -63,9 +64,23 @@ public class ServerCommand {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(startButton.isEnabled())
-					startButton.setText("Stop");
-				
+				if(startButton.isEnabled()) {
+					String btnText= startButton.getText();
+					if(btnText=="Start") {
+						MessageTimer.getInstance().setAutoRepeated(true);
+						MessageTimer.getInstance().startTimer(AttributeContainer.getTimeTextField());
+						startButton.setText("Stop");
+					}
+					else if(btnText=="Stop") {
+						MessageTimer.getInstance().stopTimer();
+						startButton.setText("Start");
+					}
+					else {
+						MessageTimer.getInstance().setAutoRepeated(false);
+						MessageTimer.getInstance().startTimer(AttributeContainer.getTimeTextField());
+						startButton.setText("Send");			
+					}
+				}
 			}
 		});
           
@@ -74,11 +89,16 @@ public class ServerCommand {
 			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(autoRepeatcheckbox.getState()==true)
+				if(autoRepeatcheckbox.getState())
 				{
 					startButton.setText("Start");
 				}
-				
+				else if(!autoRepeatcheckbox.getState())
+				{
+					startButton.setText("Send");
+				}
+				else
+					System.out.println("");
 			}
 		});
         	

@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.event.ChangeListener;
+
+import controller.server.MessageTimer;
+
 import javax.swing.event.ChangeEvent;
 
 public class AttributeContainer {
@@ -30,7 +33,13 @@ public class AttributeContainer {
 	public static void setTimeTextField(String time)
 	{
 		textFieldTime.setText(time);
+		MessageTimer.getInstance().setTimer(Float.parseFloat(time));
 	}
+	
+	public static float getTimeTextField() {
+		return Float.parseFloat(textFieldTime.getText());
+	}
+	
 	public static JComboBox getEyeCombo() {
 		return comboBoxEye;
 	}
