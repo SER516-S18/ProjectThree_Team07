@@ -17,13 +17,6 @@ import view.server.components.attributes.AttributeContainer;
 public class MessageSender {
 	private static Server server = null;
 
-	private static Server getServer() {
-		if (server == null) {
-			server = new Server();
-		}
-		return server;
-	}
-
 	/**
 	 *
 	 * gets status object from server and sends to the client 
@@ -105,7 +98,7 @@ public class MessageSender {
 		return status;
 	}
 	public static void sendData() {
-		getServer().sendStatus(getStatus());
+		Server.getInstance().sendStatus(getStatus());
 	}
 
 	private void clearFacialCombos() {
