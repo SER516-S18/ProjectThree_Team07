@@ -70,11 +70,11 @@ public class FacialExpressionSolver {
 			return LowerFace.SMILE;
 		} else if (status.getClench() > 0.5) {
 			return LowerFace.CLENCH;
-		} else if (status.getSmile() > 0) { //TODO
+		} else if (status.getSmirkLeft() > 0) { 
 			return LowerFace.SMIRK_LEFT;
-		} else if (status.getSmile() > 0) { //TODO
+		} else if (status.getSmirkRight() > 0) { 
 			return LowerFace.SMIRK_RIGHT;
-		} else if (status.getSmile() > 0) { //TODO
+		} else if (status.getLaugh() > 0) { 
 			return LowerFace.LAUGH;
 		}
 		return LowerFace.NORMAL;
@@ -89,7 +89,7 @@ public class FacialExpressionSolver {
 	public static UpperFace computeUpperrFace(Status status) {
 		if (status.getEyebrowRaise()) {
 			return UpperFace.RAISE_BROW;
-		} else if (status.getEyebrowRaise()) { //TODO
+		} else if (status.isEyebrowFurrow()) { 
 			return UpperFace.FURROW_BROW;
 		} else if (status.getLeftWink()) {
 			return UpperFace.WINK_LEFT;
