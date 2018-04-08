@@ -36,30 +36,30 @@ public class JsonUtil {
     }
 
     public static Status decodeServerStatus(String statusMessage) {
-        Status status = new Status();
+        Status status = Status.getInstance();
         JsonObject jsonObject = Json.createReader(new StringReader(statusMessage)).readObject();
 
         JsonObject jsonExpressive = jsonObject.getJsonObject(EXPRESSIVE);
 
-        status.setLookingRight(jsonExpressive.getJsonNumber(LOOKING_RIGHT).doubleValue());
-        status.setEyebrowRaise(jsonExpressive.getJsonNumber(EYEBROW_RAISE).doubleValue());
-        status.setLookingLeft(jsonExpressive.getJsonNumber(LOOKING_LEFT).doubleValue());
-        status.setLookingDown(jsonExpressive.getJsonNumber(LOOKING_DOWN).doubleValue());
-        status.setLookingUp(jsonExpressive.getJsonNumber(LOOKING_UP).doubleValue());
-        status.setLeftWink(jsonExpressive.getJsonNumber(LEFT_WINK).doubleValue());
-        status.setRightWink(jsonExpressive.getJsonNumber(RIGHT_WINK).doubleValue());
-        status.setBlink(jsonExpressive.getJsonNumber(BLINK).doubleValue());
+        status.setLookingRight(jsonExpressive.getBoolean(LOOKING_RIGHT));
+        status.setEyebrowRaise(jsonExpressive.getBoolean(EYEBROW_RAISE));
+        status.setLookingLeft(jsonExpressive.getBoolean(LOOKING_LEFT));
+        status.setLookingDown(jsonExpressive.getBoolean(LOOKING_DOWN));
+        status.setLookingUp(jsonExpressive.getBoolean(LOOKING_UP));
+        status.setLeftWink(jsonExpressive.getBoolean(LEFT_WINK));
+        status.setRightWink(jsonExpressive.getBoolean(RIGHT_WINK));
+        status.setBlink(jsonExpressive.getBoolean(BLINK));
         status.setEyesOpen(jsonExpressive.getJsonNumber(EYES_OPEN).doubleValue());
         status.setSmile(jsonExpressive.getJsonNumber(SMILE).doubleValue());
         status.setClench(jsonExpressive.getJsonNumber(CLENCH).doubleValue());
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);
 
-        status.setMediation(jsonAffective.getBoolean(MEDITATION));
-        status.setEngagementBoredom(jsonAffective.getBoolean(ENGAGEMENT_BOREDOM));
-        status.setExcitementShortTerm(jsonAffective.getBoolean(EXCITEMENT_SHORT_TERM));
-        status.setFrustration(jsonAffective.getBoolean(FRUSTRATION));
-        status.setExcitementShortTerm(jsonAffective.getBoolean(EXCITEMENT_LONG_TERM));
+        status.setMediation(jsonAffective.getJsonNumber(MEDITATION).doubleValue());
+        status.setEngagementBoredom(jsonAffective.getJsonNumber(ENGAGEMENT_BOREDOM).doubleValue());
+        status.setExcitementShortTerm(jsonAffective.getJsonNumber(EXCITEMENT_SHORT_TERM).doubleValue());
+        status.setFrustration(jsonAffective.getJsonNumber(FRUSTRATION).doubleValue());
+        status.setExcitementShortTerm(jsonAffective.getJsonNumber(EXCITEMENT_LONG_TERM).doubleValue());
 
         return status;
     }

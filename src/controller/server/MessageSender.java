@@ -1,7 +1,5 @@
 package controller.server;
 
-import java.util.HashMap;
-
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 
@@ -16,23 +14,22 @@ import view.server.components.attributes.AttributeContainer;
  */
 public class MessageSender {
 	private static Server server = null;
-	
+
 	private static Server getServer() {
 		if (server == null) {
 			server = new Server();
 		}
 		return server;
 	}
-	
+
 	/**
-	 * 
-	 * gets status object from server and sends to the client 
-	 * 
+	 *
+	 * get status object from server and sends to the client
+	 *
 	 */
-	public static Status getStatus()
-	{
+	public static Status getStatus() {
 		System.out.println("In getStatus");
-		Status stat = new Status();
+		Status status = Status.getInstance();
 
 		// Getting values from Server UI
 		JComboBox eyeCombo = AttributeContainer.getEyeCombo();
@@ -49,49 +46,98 @@ public class MessageSender {
 		JSpinner shortTermSpinner = AttributeContainer.getShortTermSpinner();
 		JSpinner meditationSpinner = AttributeContainer.getMeditationSpinner();
 
-		HashMap<String,Double> eyeMap = new HashMap<String,Double>();
-		HashMap<String,Double> uperFaceMap = new HashMap<String,Double>();
-		HashMap<String,Double> lowerFaceMap = new HashMap<String,Double>();
-
 		// Adding value as 1 in selected eye expression - boolean values
 		String eyeSelection = eyeCombo.getSelectedItem().toString();
-		eyeMap.put(eyeSelection, 1.0);
 
 		String uperFaceSelection = uperFaceCombo.getSelectedItem().toString();
 		double uperFaceValue = (Double) uperFaceSpinner.getValue();
-		uperFaceMap.put(uperFaceSelection, uperFaceValue);
 
 		String lowerFaceSelection = uperFaceCombo.getSelectedItem().toString();
 		double lowerFaceValue = (Double) uperFaceSpinner.getValue();
-		uperFaceMap.put(uperFaceSelection, uperFaceValue);
 
-		// Setting status object
-		stat.setBlink(eyeMap.get("blink"));
-		stat.setLeftWink(eyeMap.get("leftWink"));
-		stat.setRightWink(eyeMap.get("rightWink"));
-		stat.setLookingDown(eyeMap.get("lookingDown"));
-		stat.setLookingUp(eyeMap.get("lookingUp"));
-		stat.setRightWink(eyeMap.get("rightWink"));
-		stat.setLeftWink(eyeMap.get("leftWink"));
+		//clearFacialCombos();
+		switch(eyeSelection){
+			case "Blink":
+				status.setBlink(true);
+				break;
+			case "Looking Left":
+				status.setLookingLeft(true);
+				break;
+			case "Looking Right":
+				status.setLookingRight(true);
+				break;
+			case "Looking Up" :
+				status.setLookingUp(true);
+				break;
+			case "Looking Down":
+				status.setLookingDown(true);
+				break;
+			case "Right Wink":
+				status.setRightWink(true);
+				break;
+			case "Left Wink":
+				status.setLeftWink(true);
+				break;
+		}
 
-		stat.setEyebrowRaise(uperFaceMap.get("RaisedEyebrow"));
-		stat.setEyesOpen(uperFaceMap.get("EyesOpen"));
+		System.out.println(status.getLookingDown());
 
-		stat.setClench(lowerFaceMap.get("Clench"));
-		stat.setSmile(lowerFaceMap.get("Smile"));
 
-		stat.setFrustration((Double)frustrationSpinner.getValue());
-		stat.setMediation((Double)meditationSpinner.getValue());
-		stat.setExcitmentLongTerm((Double)longTermSpinner.getValue());
-		stat.setExcitementShortTerm((Double)shortTermSpinner.getValue());
-		stat.setEngagementBoredom((Double)engagementSpinner.getValue());
+		status.setFrustration((Double)frustrationSpinner.getValue());
+		status.setMediation((Double)meditationSpinner.getValue());
+		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
+		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
+		status.setEngagementBoredom((Double)engagementSpinner.getValue());
 
-		stat.setAvtivateEye(AttributeContainer.getActivateStatus());
+		status.setActivatedEye(AttributeContainer.getActivateStatus());
 
-		return stat;
+		return status;
 	}
+
 	public static void sendData() {
 		getServer().sendStatus(getStatus());
 	}
-	
+
+	private void clearFacialCombos() {
+		Status status = Status.getInstance();
+		status.setBlink(false);
+		status.setLeftWink(false);
+		status.setRightWink(false);
+		status.setLookingDown(false);
+		status.setLookingUp(false);
+		status.setLookingLeft(false);
+		status.setLookingRight(false);
+	}
+
+	private void setFacialCombos() {
+		clearFacialCombos();
+		JComboBox eyeCombo = AttributeContainer.getEyeCombo();
+		Status status = Status.getInstance();
+
+		String eyeSelection = eyeCombo.getSelectedItem().toString();
+
+		switch(eyeSelection){
+			case "Blink":
+				status.setBlink(true);
+				break;
+			case "Looking Left":
+				status.setLookingLeft(true);
+				break;
+			case "Looking Right":
+				status.setLookingRight(true);
+				break;
+			case "Looking Up" :
+				status.setLookingUp(true);
+				break;
+			case "Looking Down":
+				status.setLookingDown(true);
+				break;
+			case "Right Wink":
+				status.setRightWink(true);
+				break;
+			case "Left Wink":
+				status.setLeftWink(true);
+				break;
+		}
+	}
 }
