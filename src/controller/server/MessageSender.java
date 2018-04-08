@@ -32,7 +32,7 @@ public class MessageSender {
 	public static Status getStatus()
 	{
 		System.out.println("In getStatus");
-		Status stat = new Status();
+		Status status = Status.getInstance();
 
 		// Getting values from Server UI
 		JComboBox eyeCombo = AttributeContainer.getEyeCombo();
@@ -65,33 +65,59 @@ public class MessageSender {
 		double lowerFaceValue = (Double) uperFaceSpinner.getValue();
 		uperFaceMap.put(uperFaceSelection, uperFaceValue);
 
-		// Setting status object
-		stat.setBlink(eyeMap.get("blink"));
-		stat.setLeftWink(eyeMap.get("leftWink"));
-		stat.setRightWink(eyeMap.get("rightWink"));
-		stat.setLookingDown(eyeMap.get("lookingDown"));
-		stat.setLookingUp(eyeMap.get("lookingUp"));
-		stat.setRightWink(eyeMap.get("rightWink"));
-		stat.setLeftWink(eyeMap.get("leftWink"));
+		
+		//clearFacialCombos();
+		switch(eyeSelection){
+			case "Blink":
+				status.setBlink(true);
+				break;
+			case "Looking Left":
+				status.setLookingLeft(true);
+				break;
+			case "Looking Right":
+				status.setLookingRight(true);
+				break;
+			case "Looking Up" :
+				status.setLookingUp(true);
+				break;
+			case "Looking Down":
+				status.setLookingDown(true);
+				break;
+			case "Right Wink":
+				status.setRightWink(true);
+				break;
+			case "Left Wink":
+				status.setLeftWink(true);
+				break;
+		}
+		
+		System.out.println(status.getLookingDown());
+	
+	
+		status.setFrustration((Double)frustrationSpinner.getValue());
+		status.setMediation((Double)meditationSpinner.getValue());
+		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
+		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
+		status.setEngagementBoredom((Double)engagementSpinner.getValue());
 
-		stat.setEyebrowRaise(uperFaceMap.get("RaisedEyebrow"));
-		stat.setEyesOpen(uperFaceMap.get("EyesOpen"));
+		status.setActivatedEye(AttributeContainer.getActivateStatus());
 
-		stat.setClench(lowerFaceMap.get("Clench"));
-		stat.setSmile(lowerFaceMap.get("Smile"));
-
-		stat.setFrustration((Double)frustrationSpinner.getValue());
-		stat.setMediation((Double)meditationSpinner.getValue());
-		stat.setExcitmentLongTerm((Double)longTermSpinner.getValue());
-		stat.setExcitementShortTerm((Double)shortTermSpinner.getValue());
-		stat.setEngagementBoredom((Double)engagementSpinner.getValue());
-
-		stat.setAvtivateEye(AttributeContainer.getActivateStatus());
-
-		return stat;
+		return status;
 	}
 	public static void sendData() {
 		getServer().sendStatus(getStatus());
 	}
+	
+	private void clearFacialCombos() {
+		Status status = Status.getInstance();
+		status.setBlink(false);
+		status.setLeftWink(false);
+		status.setRightWink(false);
+		status.setLookingDown(false);
+		status.setLookingUp(false);
+		status.setLookingLeft(false);
+		status.setLookingRight(false);
+	}
+	
 	
 }
