@@ -1,5 +1,9 @@
 package network.model;
 
+/**
+ * The singleton implementation of the server status
+ *
+ */
 public class Status {
 
     // expressive values
@@ -24,6 +28,17 @@ public class Status {
     
     // eye activate status
     private boolean isEyeActivated;
+
+    private static Status statusInstance = null;
+
+    private Status() {}
+
+    public static Status getInstance() {
+        if (statusInstance == null) {
+            statusInstance = new Status();
+        }
+        return statusInstance;
+    }
 
     public double getEyebrowRaise() {
         return eyebrowRaise;
@@ -160,6 +175,4 @@ public class Status {
 	public void setAvtivateEye(boolean isAvtivateEye) {
 		this.isEyeActivated = isAvtivateEye;
 	}
-
-	
 }
