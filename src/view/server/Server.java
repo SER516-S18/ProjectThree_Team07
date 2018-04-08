@@ -31,6 +31,7 @@ public class Server {
 
         clientFrame.pack();
         clientFrame.setVisible(true);
+         clientFrame.setResizable(false);
     }
 
     public static void main(String[] args) {
