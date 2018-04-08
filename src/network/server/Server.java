@@ -1,20 +1,12 @@
 package network.server;
 
 import network.model.Status;
-import view.server.components.attributes.AttributeContainer;
 
-import javax.swing.JComboBox;
-import javax.swing.JSpinner;
 import javax.websocket.DeploymentException;
 import javax.websocket.EncodeException;
 import javax.websocket.Session;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static util.NetworkConstants.PORT;
 import static util.NetworkConstants.HOST;

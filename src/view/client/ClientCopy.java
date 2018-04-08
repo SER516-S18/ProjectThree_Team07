@@ -126,6 +126,7 @@ public class ClientCopy {
         });
         btnOpenServer.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         clientFrame.getContentPane().add(btnOpenServer);
+        clientFrame.setVisible(true);
     }
 
     public static void main(String[] args) {
