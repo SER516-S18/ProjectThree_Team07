@@ -1,6 +1,9 @@
 package controller.server;
 
 import javax.swing.Timer;
+
+import view.server.components.attributes.AttributeContainer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,7 +34,9 @@ public class MessageTimer {
 	public void startTimer(float interval) {
 		timer = new Timer( Math.round(interval * 1000), new ActionListener() {
 			public void actionPerformed( ActionEvent event )  {
-
+				ApplicationTimer.getInstance().updateTimer(interval);
+				MessageSender.sendData();
+				AttributeContainer.setTimeTextField(ApplicationTimer.getInstance() + "");
 			}
 		});
 		timer.setRepeats(this.isAutoRepeated);
