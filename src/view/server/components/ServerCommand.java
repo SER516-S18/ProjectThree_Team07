@@ -1,9 +1,6 @@
 package view.server.components;
 
 import javax.swing.*;
-
-import com.sun.javafx.logging.Logger;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -63,8 +60,13 @@ public class ServerCommand {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(startButton.isEnabled())
-					startButton.setText("Stop");
+				if(startButton.isEnabled()) {
+					String btnText= startButton.getText();
+					if(btnText=="Start")
+						startButton.setText("Stop");
+					else
+						startButton.setText("Start");
+				}
 				
 			}
 		});
@@ -78,7 +80,12 @@ public class ServerCommand {
 				{
 					startButton.setText("Start");
 				}
-				
+				else if(autoRepeatcheckbox.getState()==false)
+				{
+					startButton.setText("Send");
+				}
+				else
+					System.out.println("");
 			}
 		});
         	
