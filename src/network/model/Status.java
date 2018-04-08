@@ -16,14 +16,14 @@ public class Status {
     private double clench;
 
     // affective values
-    private double mediation;
-    private double engagementBoredom;
-    private double excitementShortTerm;
-    private double frustration;
-    private double excitementLongTerm;
+    private boolean mediation;
+    private boolean engagementBoredom;
+    private boolean excitementShortTerm;
+    private boolean frustration;
+    private boolean excitementLongTerm;
     
-    // Activate Status
-    private boolean isAvtivateEye;
+    // eye activate status
+    private boolean isEyeActivated;
 
     public double getEyebrowRaise() {
         return eyebrowRaise;
@@ -105,36 +105,36 @@ public class Status {
         this.clench = clench;
     }
 
-    public double getEngagementBoredom() {
+    public boolean getEngagementBoredom() {
         return engagementBoredom;
     }
 
-    public void setEngagementBoredom(double engagementBoredom) {
+    public void setEngagementBoredom(boolean engagementBoredom) {
         this.engagementBoredom = engagementBoredom;
     }
 
-    public double getExcitementShortTerm() {
+    public boolean getExcitementShortTerm() {
         return excitementShortTerm;
     }
 
-    public void setExcitementShortTerm(double excitementShortTerm) {
+    public void setExcitementShortTerm(boolean excitementShortTerm) {
         this.excitementShortTerm = excitementShortTerm;
     }
 
-    public double getFrustration() {
+    public boolean getFrustration() {
         return frustration;
     }
 
-    public void setFrustration(double frustration) {
+    public void setFrustration(boolean frustration) {
         this.frustration = frustration;
     }
 
-    public double getExcitementLongTerm() {
+    public boolean getExcitementLongTerm() {
         return excitementLongTerm;
     }
 
-    public void setExcitmentLongTerm(double excitementLongTerm) {
-        this.excitementLongTerm = excitementShortTerm;
+    public void setExcitementLongTerm(boolean excitementLongTerm) {
+        this.excitementLongTerm = excitementLongTerm;
     }
 
     public double getLookingRight() {
@@ -145,20 +145,20 @@ public class Status {
         this.lookingRight = lookingRight;
     }
 
-    public double getMediation() {
+    public boolean getMediation() {
         return mediation;
     }
 
-    public void setMediation(double mediation) {
+    public void setMediation(boolean mediation) {
         this.mediation = mediation;
     }
 
 	public boolean isAvtivateEye() {
-		return isAvtivateEye;
+		return isEyeActivated;
 	}
 
 	public void setAvtivateEye(boolean isAvtivateEye) {
-		this.isAvtivateEye = isAvtivateEye;
+		this.isEyeActivated = isAvtivateEye;
 	}
 
 	

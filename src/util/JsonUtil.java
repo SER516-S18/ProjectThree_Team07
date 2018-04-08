@@ -55,11 +55,11 @@ public class JsonUtil {
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);
 
-        status.setMediation(jsonAffective.getJsonNumber(MEDITATION).doubleValue());
-        status.setEngagementBoredom(jsonAffective.getJsonNumber(ENGAGEMENT_BOREDOM).doubleValue());
-        status.setExcitementShortTerm(jsonAffective.getJsonNumber(EXCITEMENT_SHORT_TERM).doubleValue());
-        status.setFrustration(jsonAffective.getJsonNumber(FRUSTRATION).doubleValue());
-        status.setExcitmentLongTerm(jsonAffective.getJsonNumber(EXCITEMENT_LONG_TERM).doubleValue());
+        status.setMediation(jsonAffective.getBoolean(MEDITATION));
+        status.setEngagementBoredom(jsonAffective.getBoolean(ENGAGEMENT_BOREDOM));
+        status.setExcitementShortTerm(jsonAffective.getBoolean(EXCITEMENT_SHORT_TERM));
+        status.setFrustration(jsonAffective.getBoolean(FRUSTRATION));
+        status.setExcitementShortTerm(jsonAffective.getBoolean(EXCITEMENT_LONG_TERM));
 
         return status;
     }
