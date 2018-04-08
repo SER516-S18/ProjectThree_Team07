@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 public class MessageTimer {
 	private boolean isAutoRepeated = false;
 	private Timer timer;
+	private float timeCounter = (float) 0.0;
 
 	private static MessageTimer timerInstance = null;
 
@@ -34,9 +35,9 @@ public class MessageTimer {
 	public void startTimer(float interval) {
 		timer = new Timer( Math.round(interval * 1000), new ActionListener() {
 			public void actionPerformed( ActionEvent event )  {
-				ApplicationTimer.getInstance().updateTimer(interval);
 				MessageSender.sendData();
-				AttributeContainer.setTimeTextField(ApplicationTimer.getInstance() + "");
+				updateTimer(interval);
+				AttributeContainer.setTimeTextField(getTimer() + "");
 			}
 		});
 		timer.setRepeats(this.isAutoRepeated);
@@ -55,5 +56,17 @@ public class MessageTimer {
 	 */
 	public void setAutoRepeated(boolean autoRepeated) {
 		this.isAutoRepeated = autoRepeated;
+	}
+	
+	void updateTimer(float interval) {
+		timeCounter += interval; 
+	}
+	
+	float getTimer() {
+		return timeCounter;
+	}
+	
+	public void setTimer(float time) {
+		timeCounter = time;
 	}
 }
