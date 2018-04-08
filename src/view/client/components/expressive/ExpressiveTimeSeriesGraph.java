@@ -114,16 +114,16 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
      */
     public void update(Status status) {
 
-        this.blinkSeries.addOrUpdate(new Millisecond(), status.getBlink()+3);
+        this.blinkSeries.addOrUpdate(new Millisecond(),  (status.getBlink() ? 1:0)+3);
         this.smileSeries.addOrUpdate(new Millisecond(), status.getSmile()+6);
-        this.rightWinkSeries.addOrUpdate(new Millisecond(), status.getRightWink()+9);
-        this.lookingUpSeries.addOrUpdate(new Millisecond(), status.getLookingUp()+12);
-        this.lookingRightSeries.addOrUpdate(new Millisecond(), status.getLookingRight()+15);
-        this.lookingLeftSeries.addOrUpdate(new Millisecond(), status.getLookingLeft()+18);
-        this.lookingDownSeries.addOrUpdate(new Millisecond(), status.getLookingDown()+21);
-        this.leftWinkSeries.addOrUpdate(new Millisecond(), status.getLeftWink()+24);
+        this.rightWinkSeries.addOrUpdate(new Millisecond(), (status.getRightWink()?1:0)+9);
+        this.lookingUpSeries.addOrUpdate(new Millisecond(), (status.getLookingUp()?1:0)+12);
+        this.lookingRightSeries.addOrUpdate(new Millisecond(), (status.getLookingRight()?1:0)+15);
+        this.lookingLeftSeries.addOrUpdate(new Millisecond(), (status.getLookingLeft()?1:0)+18);
+        this.lookingDownSeries.addOrUpdate(new Millisecond(), (status.getLookingDown()?1:0)+21);
+        this.leftWinkSeries.addOrUpdate(new Millisecond(), (status.getLeftWink()?1:0)+24);
         this.eyesOpenSeries.addOrUpdate(new Millisecond(), status.getEyesOpen()+27);
-        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), status.getEyebrowRaise()+30);
+        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), (status.getEyebrowRaise()?1:0)+30);
         this.clenchSeries.addOrUpdate(new Millisecond(), status.getClench()+33);
 
     }
@@ -140,32 +140,32 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
 
-        Status status = new Status();
+        Status status = Status.getInstance();
         int x = 0;
         while (x < 1000) {
-            status.setBlink(1);
+            status.setBlink(true);
             status.setClench(0);
-            status.setEyebrowRaise(1);
+            status.setEyebrowRaise(true);
             status.setEyesOpen(0);
-            status.setLookingDown(0);
-            status.setLookingLeft(1);
-            status.setLookingRight(0);
-            status.setLookingUp(1);
-            status.setLeftWink(0);
-            status.setRightWink(1);
+            status.setLookingDown(false);
+            status.setLookingLeft(true);
+            status.setLookingRight(false);
+            status.setLookingUp(true);
+            status.setLeftWink(false);
+            status.setRightWink(true);
             status.setSmile(0);
             demo.update(status);
             Thread.sleep(1000);
-            status.setBlink(0);
+            status.setBlink(false);
             status.setClench(1);
-            status.setEyebrowRaise(0);
+            status.setEyebrowRaise(false);
             status.setEyesOpen(1);
-            status.setLookingDown(1);
-            status.setLookingLeft(0);
-            status.setLookingRight(1);
-            status.setLookingUp(0);
-            status.setLeftWink(1);
-            status.setRightWink(0);
+            status.setLookingDown(true);
+            status.setLookingLeft(false);
+            status.setLookingRight(true);
+            status.setLookingUp(false);
+            status.setLeftWink(true);
+            status.setRightWink(false);
             status.setSmile(1);
             demo.update(status);
             Thread.sleep(1000);

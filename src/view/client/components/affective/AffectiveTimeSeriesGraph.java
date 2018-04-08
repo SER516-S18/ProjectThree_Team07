@@ -8,7 +8,7 @@ package view.client.components.affective;
 import java.awt.BorderLayout;
 import java.util.Random;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import network.model.Status;
 import org.jfree.chart.ChartFactory;
@@ -24,7 +24,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 
-public class AffectiveTimeSeriesGraph extends ApplicationFrame {
+public class AffectiveTimeSeriesGraph {
 
     /**
      * The time Series data.
@@ -34,7 +34,7 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
     private TimeSeries excitementShortTermSeries;
     private TimeSeries frustrationSeries;
     private TimeSeries excitementLongTermSeries;
-
+    static JPanel content;
 
     /**
      * Constructs a new graph application.
@@ -43,7 +43,7 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
      */
     public AffectiveTimeSeriesGraph(final String title) {
 
-        super(title);
+        //super(title);
         this.mediationSeries = new TimeSeries("Mediation", Millisecond.class);
         this.engagementBoredomeSeries = new TimeSeries("engagement Boredome", Millisecond.class);
         this.excitementShortTermSeries = new TimeSeries("excitement short term", Millisecond.class);
@@ -59,10 +59,10 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
 
         final ChartPanel chartPanel = new ChartPanel(chart);
 
-        final JPanel content = new JPanel(new BorderLayout());
+        content = new JPanel(new BorderLayout());
         content.add(chartPanel);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setContentPane(content);
+        //setContentPane(content);
 
     }
 
@@ -74,21 +74,37 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
      */
     private JFreeChart createChart(final XYDataset dataset) {
         final JFreeChart result = ChartFactory.createTimeSeriesChart(
-                "Affective Graph",
-                "Time",
-                "Value",
+                "",
+                "",
+                "",
                 dataset,
                 true,
                 true,
                 false
         );
         final XYPlot plot = result.getXYPlot();
-        ValueAxis axis = plot.getDomainAxis();
+        ValueAxis axis = plot.getRangeAxis();
         axis.setAutoRange(true);
         axis.setFixedAutoRange(60000.0);  // 60 seconds
         axis = plot.getRangeAxis();
-        axis.setRange(0.0, 200.0);
+        axis.setRange(0.0, 1.0);
+        axis.setVerticalTickLabels(false);
+        axis.setTickLabelsVisible(false);
         return result;
+    }
+
+    public  void startplotting() throws InterruptedException{
+        Status status = Status.getInstance();
+        int x = 0;
+        while (x < 1000) {
+            status.setMediation(new Random().nextDouble() * 100);
+            status.setEngagementBoredom(new Random().nextDouble() * 100);
+            status.setExcitementShortTerm(new Random().nextDouble() * 100);
+            status.setExcitementLongTerm(new Random().nextDouble() * 100);
+            status.setFrustration(new Random().nextDouble() * 100);
+            update(status);
+            Thread.sleep(1000);
+        }
     }
 
     /**
@@ -105,11 +121,11 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
 
     }
 
-    /**
+   /**
      * Starting point for the demonstration application.
      *
      * @param args ignored.
-     */
+     *//*
     public static void main(final String[] args) throws InterruptedException {
 
         final AffectiveTimeSeriesGraph demo = new AffectiveTimeSeriesGraph("Affective Graph");
@@ -128,8 +144,22 @@ public class AffectiveTimeSeriesGraph extends ApplicationFrame {
             demo.update(status);
             Thread.sleep(1000);
         }
+    }*/
+   private static AffectiveTimeSeriesGraph affectiveTimeSeriesGraph;
+   public static AffectiveTimeSeriesGraph getinstance(){
+       if(affectiveTimeSeriesGraph == null){
+           affectiveTimeSeriesGraph = new AffectiveTimeSeriesGraph("Affective Graph");
+       }
+       return affectiveTimeSeriesGraph;
+    }
 
+    public static JPanel getPanel() {
+        JPanel affectiveGraph = new JPanel();
 
+        //JLabel instructions = new JLabel("Graph displaying affective data", JLabel.CENTER);
+        affectiveGraph.add(content);
+
+        return affectiveGraph;
     }
 
 }

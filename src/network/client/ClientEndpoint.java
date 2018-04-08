@@ -4,6 +4,7 @@ import network.model.Status;
 import network.model.StatusDecoder;
 import network.model.StatusEncoder;
 import view.client.ImageLoader;
+import view.client.components.affective.AffectiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
 
 import javax.websocket.OnMessage;
@@ -35,7 +36,12 @@ public class ClientEndpoint {
 		FacialExpressionSolver.LowerFace lowerFace = FacialExpressionSolver.computeLowerFace(status);
 		FacialExpressionSolver.UpperFace upperFace = FacialExpressionSolver.computeUpperrFace(status);
 		ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
-		//TODO  For displaying graph	
+		//TODO  For displaying graph
+
+        status.setEngagementBoredom(0.9);
+        status.setExcitementShortTerm(0.3);
+        status.setExcitementLongTerm(1);
+        AffectiveTimeSeriesGraph.getinstance().update(status);
     }
 
 

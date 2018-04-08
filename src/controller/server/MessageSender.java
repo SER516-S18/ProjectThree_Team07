@@ -1,5 +1,7 @@
 package controller.server;
 
+import java.util.HashMap;
+
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 
@@ -24,10 +26,11 @@ public class MessageSender {
 
 	/**
 	 *
-	 * get status object from server and sends to the client
+	 * gets status object from server and sends to the client 
 	 *
 	 */
-	public static Status getStatus() {
+	public static Status getStatus()
+	{
 		System.out.println("In getStatus");
 		Status status = Status.getInstance();
 
@@ -46,14 +49,22 @@ public class MessageSender {
 		JSpinner shortTermSpinner = AttributeContainer.getShortTermSpinner();
 		JSpinner meditationSpinner = AttributeContainer.getMeditationSpinner();
 
+		HashMap<String,Double> eyeMap = new HashMap<String,Double>();
+		HashMap<String,Double> uperFaceMap = new HashMap<String,Double>();
+		HashMap<String,Double> lowerFaceMap = new HashMap<String,Double>();
+
 		// Adding value as 1 in selected eye expression - boolean values
 		String eyeSelection = eyeCombo.getSelectedItem().toString();
+		eyeMap.put(eyeSelection, 1.0);
 
 		String uperFaceSelection = uperFaceCombo.getSelectedItem().toString();
 		double uperFaceValue = (Double) uperFaceSpinner.getValue();
+		uperFaceMap.put(uperFaceSelection, uperFaceValue);
 
 		String lowerFaceSelection = uperFaceCombo.getSelectedItem().toString();
 		double lowerFaceValue = (Double) uperFaceSpinner.getValue();
+		uperFaceMap.put(uperFaceSelection, uperFaceValue);
+
 
 		//clearFacialCombos();
 		switch(eyeSelection){
@@ -93,7 +104,6 @@ public class MessageSender {
 
 		return status;
 	}
-
 	public static void sendData() {
 		getServer().sendStatus(getStatus());
 	}
@@ -109,35 +119,5 @@ public class MessageSender {
 		status.setLookingRight(false);
 	}
 
-	private void setFacialCombos() {
-		clearFacialCombos();
-		JComboBox eyeCombo = AttributeContainer.getEyeCombo();
-		Status status = Status.getInstance();
 
-		String eyeSelection = eyeCombo.getSelectedItem().toString();
-
-		switch(eyeSelection){
-			case "Blink":
-				status.setBlink(true);
-				break;
-			case "Looking Left":
-				status.setLookingLeft(true);
-				break;
-			case "Looking Right":
-				status.setLookingRight(true);
-				break;
-			case "Looking Up" :
-				status.setLookingUp(true);
-				break;
-			case "Looking Down":
-				status.setLookingDown(true);
-				break;
-			case "Right Wink":
-				status.setRightWink(true);
-				break;
-			case "Left Wink":
-				status.setLeftWink(true);
-				break;
-		}
-	}
 }
