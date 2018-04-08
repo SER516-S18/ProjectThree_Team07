@@ -9,11 +9,7 @@ import javax.websocket.DeploymentException;
 import javax.websocket.EncodeException;
 import javax.websocket.Session;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static util.NetworkConstants.PORT;

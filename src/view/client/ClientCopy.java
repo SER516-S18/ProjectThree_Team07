@@ -1,16 +1,11 @@
 package view.client;
 
-import view.client.components.affective.AffectiveTab;
-import view.client.components.ConnectedStatus;
-import view.client.components.expressive.ExpressionTab;
-
 import java.awt.*;
 import javax.swing.*;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Client {
+public class ClientCopy {
 
     private static void addComponentsToPane(Container contentPane) {
     }
@@ -19,7 +14,7 @@ public class Client {
         JFrame.setDefaultLookAndFeelDecorated(true);
 
         JFrame clientFrame = new JFrame("Emotiv Xavier Control Panel");
-        clientFrame.getContentPane().setBackground(Color.White);
+        clientFrame.getContentPane().setBackground(Color.WHITE);
         clientFrame.setName("frame212");
         clientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         clientFrame.getContentPane().setLayout(null);

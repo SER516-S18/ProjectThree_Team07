@@ -23,10 +23,10 @@ public class ImageLoader {
 	 * @return Loaded Image object
 	 */
 	public static Image getImage(String path) {
+		System.out.println(path);
 		try {
 		    File pathToFile = new File(ClientConstants.IMG_PATH + path + ClientConstants.FILE_TYPE);
-		    Image image = ImageIO.read(pathToFile);
-		    return image;
+		    return ImageIO.read(pathToFile);
 		} catch (IOException ex) {
 		    ex.printStackTrace();
 		}
