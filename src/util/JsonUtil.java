@@ -49,9 +49,13 @@ public class JsonUtil {
         status.setLeftWink(jsonExpressive.getBoolean(LEFT_WINK));
         status.setRightWink(jsonExpressive.getBoolean(RIGHT_WINK));
         status.setBlink(jsonExpressive.getBoolean(BLINK));
+        status.setEyebrowFurrow(jsonExpressive.getBoolean(EYEBROW_FURROW));
+        status.setSmirkLeft(jsonExpressive.getJsonNumber(SMIRK_LEFT).doubleValue());
+        status.setSmirkRight(jsonExpressive.getJsonNumber(SMIRK_RIGHT).doubleValue());
         status.setEyesOpen(jsonExpressive.getJsonNumber(EYES_OPEN).doubleValue());
         status.setSmile(jsonExpressive.getJsonNumber(SMILE).doubleValue());
         status.setClench(jsonExpressive.getJsonNumber(CLENCH).doubleValue());
+        status.setLaugh(jsonExpressive.getJsonNumber(LAUGH).doubleValue());
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);
 

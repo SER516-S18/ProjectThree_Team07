@@ -15,7 +15,10 @@ public class StatusConstants {
     public static final String EYES_OPEN = "EyesOpen";
     public static final String SMILE = "Smile";
     public static final String CLENCH = "Clench";
-
+    public static final String SMIRK_LEFT = "SmirkLeft";
+    public static final String SMIRK_RIGHT = "SmirkRight";
+    public static final String EYEBROW_FURROW = "EyebrowFurrow";
+    public static final String LAUGH = "Laugh";
 
     public static final String AFFECTIVE = "Affective";
 

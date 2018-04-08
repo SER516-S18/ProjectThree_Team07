@@ -15,10 +15,14 @@ public class Status {
     private boolean rightWink;
     private boolean leftWink;
     private boolean blink;
+    private boolean eyebrowFurrow;
 
     private double eyesOpen;
     private double smile;
     private double clench;
+    private double smirkLeft;
+    private double smirkRight;
+    private double laugh;
 
     // affective values
     private double mediation;
@@ -39,6 +43,38 @@ public class Status {
             statusInstance = new Status();
         }
         return statusInstance;
+    }
+
+    public double getLaugh() {
+        return laugh;
+    }
+
+    public void setLaugh(double laugh) {
+        this.laugh = laugh;
+    }
+
+    public boolean isEyebrowFurrow() {
+        return eyebrowFurrow;
+    }
+
+    public void setEyebrowFurrow(boolean eyebrowFurrow) {
+        this.eyebrowFurrow = eyebrowFurrow;
+    }
+
+    public double getSmirkLeft() {
+        return smirkLeft;
+    }
+
+    public void setSmirkLeft(double smirkLeft) {
+        this.smirkLeft = smirkLeft;
+    }
+
+    public double getSmirkRight() {
+        return smirkRight;
+    }
+
+    public void setSmirkRight(double smirkRight) {
+        this.smirkRight = smirkRight;
     }
 
     public boolean getEyebrowRaise() {
