@@ -35,6 +35,9 @@ public class Server {
     }
 
     public static void main(String[] args) {
+        network.server.Server server = network.server.Server.getInstance();
+        server.start();
+
         createAndShowServerGUI();
     }
 }

@@ -14,10 +14,18 @@ import static util.NetworkConstants.ROOT_PATH;
 
 public class Server {
 
-	private org.glassfish.tyrus.server.Server server;
+	private static org.glassfish.tyrus.server.Server server;
 
-	public Server() {
-		server = new org.glassfish.tyrus.server.Server(HOST, PORT, "/" + ROOT_PATH, ServerEndpoint.class);
+	private static Server serverInstance;
+
+	private Server() {}
+
+	public static Server getInstance() {
+		if (serverInstance == null) {
+			serverInstance = new Server();
+			server = new org.glassfish.tyrus.server.Server(HOST, PORT, "/" + ROOT_PATH, ServerEndpoint.class);
+		}
+		return serverInstance;
 	}
 
 	public void start() {
@@ -26,6 +34,10 @@ public class Server {
 		} catch (DeploymentException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void stop() {
+		server.stop();
 	}
 
 	public void sendStatus(Status stat) {
@@ -37,6 +49,4 @@ public class Server {
 			}
 		}
 	}
-
-
 }
