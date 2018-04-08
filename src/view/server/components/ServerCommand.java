@@ -64,8 +64,10 @@ public class ServerCommand {
 					String btnText= startButton.getText();
 					if(btnText=="Start")
 						startButton.setText("Stop");
-					else
+					else if(btnText=="Stop")
 						startButton.setText("Start");
+					else
+						startButton.setText("Send");
 				}
 				
 			}
