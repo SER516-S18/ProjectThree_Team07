@@ -1,13 +1,19 @@
 package view.server.components;
 
 import javax.swing.*;
+
+import com.sun.javafx.logging.Logger;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 
 public class ServerCommand {
 
-    /**
+
+	/**
      * @wbp.parser.entryPoint
      */
     public static JPanel getPanel() {
@@ -30,6 +36,7 @@ public class ServerCommand {
         autoRepeatcheckbox.setBounds(46, 66, 174, 27);
         tabInteractive.add(autoRepeatcheckbox);
         
+        
         JLabel lblEmoState = new JLabel("EmoState Interval ");
         lblEmoState.setBounds(25, 20, 160, 20);
         tabInteractive.add(lblEmoState);
@@ -46,16 +53,38 @@ public class ServerCommand {
         JLabel labelSec = new JLabel("sec");
         labelSec.setBounds(226, 20, 69, 20);
         tabInteractive.add(labelSec);
+        JButton startButton = new JButton("Send");
         
-        JButton startButton = new JButton("Start");
         startButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        startButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
         startButton.setBounds(344, 16, 115, 60);
         tabInteractive.add(startButton);
-
+        
+        startButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(startButton.isEnabled())
+					startButton.setText("Stop");
+				
+			}
+		});
+          
+        
+        autoRepeatcheckbox.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(autoRepeatcheckbox.getState()==true)
+				{
+					startButton.setText("Start");
+				}
+				
+			}
+		});
+        	
+       
+          
+          
         return serverCommand;
     }
 }
