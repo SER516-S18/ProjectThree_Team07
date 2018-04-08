@@ -56,6 +56,7 @@ public class ImageLoader {
     		tempPanel.add(lowerImageLabel);
     		facePanel.removeAll();
     		facePanel.add(tempPanel);
+    		facePanel.validate();
     		
     }
 }
