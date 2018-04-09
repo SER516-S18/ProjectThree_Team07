@@ -61,7 +61,7 @@ public class AffectiveTimeSeriesGraph {
 
         content = new JPanel(new BorderLayout());
         content.add(chartPanel);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
         //setContentPane(content);
 
     }

@@ -11,6 +11,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.Value;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -22,7 +23,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
+public class ExpressiveTimeSeriesGraph {
 
     /**
      * The time Series data.
@@ -38,16 +39,15 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
     private TimeSeries blinkSeries;
     private TimeSeries eyesOpenSeries;
     private TimeSeries smileSeries;
-
+    static JPanel content;
 
     /**
      * Constructs a new graph application.
      *
      * @param title the frame title.
      */
-    public ExpressiveTimeSeriesGraph(final String title) {
+    private ExpressiveTimeSeriesGraph(final String title) {
 
-        super(title);
         this.blinkSeries = new TimeSeries("blink", Millisecond.class);
         this.clenchSeries = new TimeSeries("clench", Millisecond.class);
         this.eyebrowRaiseSeries = new TimeSeries("eyebrowRaise", Millisecond.class);
@@ -75,10 +75,10 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
 
         final ChartPanel chartPanel = new ChartPanel(chart);
 
-        final JPanel content = new JPanel(new BorderLayout());
+        content = new JPanel(new BorderLayout());
         content.add(chartPanel);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setContentPane(content);
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
+        //setContentPane(content);
 
     }
 
@@ -90,9 +90,9 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
      */
     private JFreeChart createChart(final XYDataset dataset) {
         final JFreeChart result = ChartFactory.createTimeSeriesChart(
-                "Affective Graph",
-                "Time",
-                "Value",
+                "",
+                "",
+                "",
                 dataset,
                 true,
                 true,
@@ -104,6 +104,17 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
         axis.setFixedAutoRange(60000.0);  // 60 seconds
         axis = plot.getRangeAxis();
         axis.setRange(0.0, 50);
+        axis.setVerticalTickLabels(false);
+        axis.setTickLabelsVisible(false);
+        plot.setDomainGridlinesVisible(false);
+        plot.setRangeGridlinesVisible(false);
+        axis.setVisible(false);
+        axis.setTickLabelPaint(Color.WHITE);
+
+        axis = plot.getRangeAxis();
+        axis.setVisible(false);
+        axis.setTickLabelsVisible(false);
+        axis.setTickLabelPaint(Color.WHITE);
         return result;
     }
 
@@ -133,9 +144,9 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
      *
      * @param args ignored.
      */
-    public static void main(final String[] args) throws InterruptedException {
+    /*public static void main(final String[] args) throws InterruptedException {
 
-        final ExpressiveTimeSeriesGraph demo = new ExpressiveTimeSeriesGraph("Affective Graph");
+        final ExpressiveTimeSeriesGraph demo = new ExpressiveTimeSeriesGraph("Expressive Graph");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
@@ -173,6 +184,23 @@ public class ExpressiveTimeSeriesGraph extends ApplicationFrame {
         }
 
 
+    }*/
+
+    private static ExpressiveTimeSeriesGraph expTimeSeriesGraph;
+    public static ExpressiveTimeSeriesGraph getinstance(){
+        if(expTimeSeriesGraph == null){
+            expTimeSeriesGraph = new ExpressiveTimeSeriesGraph("Expressive Graph");
+        }
+        return expTimeSeriesGraph;
+    }
+
+    public  JPanel getPanel() {
+        JPanel expressiveGraph = new JPanel();
+
+        //JLabel instructions = new JLabel("Graph displaying affective data", JLabel.CENTER);
+        expressiveGraph.add(content);
+
+        return expressiveGraph;
     }
 
 }
