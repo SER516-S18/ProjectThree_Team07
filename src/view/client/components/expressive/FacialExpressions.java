@@ -23,13 +23,17 @@ public class FacialExpressions {
 	 */
     public static JPanel getPanel() {
         if (facialExpressions == null) {
-        		facialExpressions = new JPanel();
-        		facialExpressions.setBackground(new Color(177, 177, 177));
-        		ImageLoader.loadImage(facialExpressions,
-        			FacialExpressionSolver.UpperFace.NORMAL.getFileName(),
-                	FacialExpressionSolver.LowerFace.NORMAL.getFileName());
+        		constructFacePanel();
         }
         
         return facialExpressions;
+    }
+    
+    public static void constructFacePanel() {
+		facialExpressions = new JPanel();
+		facialExpressions.setBackground(new Color(177, 177, 177));
+		ImageLoader.loadImage(facialExpressions,
+			FacialExpressionSolver.UpperFace.NORMAL.getFileName(),
+        	FacialExpressionSolver.LowerFace.NORMAL.getFileName());
     }
 }

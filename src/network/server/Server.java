@@ -1,6 +1,7 @@
 package network.server;
 
 import network.model.Status;
+import view.server.components.Console;
 
 import javax.websocket.DeploymentException;
 import javax.websocket.EncodeException;
@@ -44,7 +45,9 @@ public class Server {
 		for (Session peer : ServerEndpoint.peers) {
 			try {
 				peer.getBasicRemote().sendObject(status);
+				Console.setMessage("Data Sent to Client");
 			} catch (IOException | EncodeException e) {
+				Console.setErrorMessage("Error while sending data to client");
 				e.printStackTrace();
 			}
 		}

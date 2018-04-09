@@ -40,5 +40,6 @@ public class Server {
         server.start();
 
         createAndShowServerGUI();
+        Console.setMessage("Server is ready");
     }
 }

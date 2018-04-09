@@ -2,9 +2,7 @@ package view.server.components;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.html.HTMLDocument;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -19,14 +17,13 @@ public class Console {
 	private final static Logger LOGGER = Logger.getLogger(Console.class.getName());
 	private final static String CONTENT_TYPE = "text/html";
 	private static JTextPane consoleTextPane = null;
+	private static int consoleCounter = 1;
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public static JPanel getConsolePanel()
-	{
-		if(console == null)
-		{	
+	public static JPanel getConsolePanel() {
+		if(console == null) {	
 			getPanel();
 		}
 		return console;
@@ -47,7 +44,7 @@ public class Console {
 			consoleTextPane = new JTextPane();
 			consoleTextPane.setBounds(15, 30, 538, 150);
 			consoleTextPane.setForeground(new Color(255, 0, 51));
-			consoleTextPane.setBackground(new Color(255, 255, 255));
+			consoleTextPane.setBackground(Color.WHITE);
 		}
 
 		JScrollPane scrollPane = new JScrollPane(consoleTextPane);
@@ -60,31 +57,33 @@ public class Console {
 		clrLogBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				consoleTextPane.setContentType(CONTENT_TYPE);
-				StyledDocument doc = (StyledDocument) consoleTextPane.getDocument();
-				try {
+				HTMLDocument doc = (HTMLDocument) consoleTextPane.getDocument();
+			    try {
 					doc.remove(0, doc.getLength());
-					//doc.insertString(0,null,null );
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
+					LOGGER.log(Level.SEVERE,"Exception while clearing Console", e); 
 					e.printStackTrace();
 				}
+			    consoleCounter = 1;
 			}
 		});
 		console.add(clrLogBtn);
 	}
 
+	/**
+	 * setErrorMessage
+	 * @param errorMessage - Error message that has to be displayed
+	 */
 	public static void setErrorMessage(String errorMessage) {
-		try
-		{
-			consoleTextPane = new JTextPane();
+		try {
 			consoleTextPane.setContentType(CONTENT_TYPE);
-			StyledDocument doc = (StyledDocument) consoleTextPane.getDocument();
-			SimpleAttributeSet keyWord = new SimpleAttributeSet();
-			StyleConstants.setForeground(keyWord, Color.RED);
-			doc.insertString(0,new Date()+" - Error - "+errorMessage +"\n",keyWord );
+    			HTMLDocument doc = (HTMLDocument) consoleTextPane.getDocument();
+    			doc.insertAfterEnd(doc.getCharacterElement(doc.getLength()),
+    				"<span style=\"color:red\">" + consoleCounter + ":[" + new Date() + "] "
+    						+ errorMessage + "</span> <br>");
+    			consoleCounter++;
 		}
-		catch(Exception ex) 
-		{ 
+		catch(Exception ex) { 
 			LOGGER.log(Level.SEVERE,"Exception while adding Error Message.", ex); 
 		}
 
@@ -95,14 +94,19 @@ public class Console {
 	 * @param message to be displayed
 	 */
 	public static void setMessage(String message) {
-		try {
-			consoleTextPane = new JTextPane();
-			consoleTextPane.setContentType(CONTENT_TYPE);
-			StyledDocument doc = (StyledDocument) consoleTextPane.getDocument();
-			doc.insertString(0,new Date()+"- Message - "+message+"\n",null );
-		} catch (Exception ex) {
-			LOGGER.log(Level.SEVERE,"Exception while adding Message", ex);
-		}
+        try {
+        		consoleTextPane.setContentType(CONTENT_TYPE);
+	    		HTMLDocument doc = (HTMLDocument) consoleTextPane.getDocument();
+	    		doc.insertAfterEnd(doc.getCharacterElement(doc.getLength()), 
+	    				"<span style=\"color:black\">" + consoleCounter +":[" + new Date() + "] "
+	    						+ message + "</span> <br>");
+	    		consoleCounter++;
+	    		
+	    } catch (Exception ex) {
+	        LOGGER.log(Level.SEVERE,
+	        		"Exception while adding Message to client console",
+	        		ex);
+	    }
 	}
 
 }

@@ -42,8 +42,8 @@ public class ImageLoader {
 	 */
     public static void loadImage(JPanel facePanel, String upperImagePath, String lowerImagePath) {
     		
-    		Image scaledUpperImage = getImage(upperImagePath).getScaledInstance(320, 240, Image.SCALE_SMOOTH);
-    		Image scaledLowerImage = getImage(lowerImagePath).getScaledInstance(320, 165, Image.SCALE_SMOOTH);
+    		Image scaledUpperImage = getImage(upperImagePath).getScaledInstance(490, 265, Image.SCALE_SMOOTH);
+    		Image scaledLowerImage = getImage(lowerImagePath).getScaledInstance(490, 250, Image.SCALE_SMOOTH);
     		
     		JLabel upperImageLabel = new JLabel(new ImageIcon(scaledUpperImage));
     		JLabel lowerImageLabel = new JLabel(new ImageIcon(scaledLowerImage));

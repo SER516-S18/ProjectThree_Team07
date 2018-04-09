@@ -6,6 +6,9 @@ import view.client.components.expressive.FacialExpressions;
 
 import java.awt.*;
 import javax.swing.*;
+
+import controller.client.FacialExpressionSolver;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -112,7 +115,6 @@ public class Client {
     tabbedPane.addTab("Expressive Suite", null, splitPaneExpressive, null);
     splitPaneExpressive.setDividerLocation(490);
 
-
     splitPaneExpressive.setLeftComponent(FacialExpressions.getPanel());
 
     splitPaneExpressive.setRightComponent(ExpressiveTimeSeriesGraph.getinstance().getPanel());
@@ -130,9 +132,27 @@ public class Client {
     clientFrame.setResizable(false);
 
   }
+  
+  //TODO to be removed after testing
+  public static void testFacialExpression() {
 
+	  for (FacialExpressionSolver.UpperFace upperFace : FacialExpressionSolver.UpperFace.values()) {
+			for (FacialExpressionSolver.LowerFace lowerFace : FacialExpressionSolver.LowerFace.values()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
+			}
+		}
+	  }
+  
+  }
   public static void main(String[] args) {
     createAndShowClientGUI();
+    //TODO to be removed after testing
+    testFacialExpression();
     //TODO Added temporary code to open client and make websockets up
     network.client.Client.getInstance().start();
     
