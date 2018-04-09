@@ -1,5 +1,7 @@
 package view.client.components.expressive;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import controller.client.FacialExpressionSolver;
@@ -22,6 +24,7 @@ public class FacialExpressions {
     public static JPanel getPanel() {
         if (facialExpressions == null) {
         		facialExpressions = new JPanel();
+        		facialExpressions.setBackground(new Color(177, 177, 177));
         		ImageLoader.loadImage(facialExpressions,
         			FacialExpressionSolver.UpperFace.NORMAL.getFileName(),
                 	FacialExpressionSolver.LowerFace.NORMAL.getFileName());
