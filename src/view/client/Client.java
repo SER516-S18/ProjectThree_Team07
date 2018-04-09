@@ -143,12 +143,12 @@ public class Client {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
 				ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
 			}
-		}
 	  }
-  
   }
+  
   public static void main(String[] args) {
     createAndShowClientGUI();
     //TODO to be removed after testing
