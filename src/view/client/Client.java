@@ -5,6 +5,8 @@ import view.client.components.affective.AffectiveTab;
 import view.client.components.ConnectedStatus;
 import view.client.components.affective.AffectiveTimeSeriesGraph;
 import view.client.components.expressive.ExpressionTab;
+import view.client.components.expressive.ExpressiveTimeSeriesGraph;
+import view.client.components.expressive.FacialExpressions;
 
 import java.awt.*;
 import javax.swing.*;
@@ -61,11 +63,8 @@ public class Client {
     splitPanePerformance.setDividerLocation(490);
     tabbedPane.addTab("Performance Metrics", null, splitPanePerformance, null);
 
-    Panel panel = new Panel();
-    panel.setBackground(Color.WHITE);
-    panel.setForeground(new Color(255, 255, 255));
-    splitPanePerformance.setLeftComponent(panel);
-    panel.setLayout(null);
+
+    splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
 
     Panel btnPanel = new Panel();
     btnPanel.setBackground(Color.WHITE);
@@ -114,18 +113,13 @@ public class Client {
 
 
     JSplitPane splitPaneExpressive = new JSplitPane();
-    tabbedPane.addTab("Expressiv Suite", null, splitPaneExpressive, null);
+    tabbedPane.addTab("Expressive Suite", null, splitPaneExpressive, null);
     splitPaneExpressive.setDividerLocation(490);
 
-    Panel faceExpressivePanel = new Panel();
-    faceExpressivePanel.setBackground(Color.WHITE);
-    splitPaneExpressive.setLeftComponent(faceExpressivePanel);
-    faceExpressivePanel.setLayout(null);
 
-    Panel graphExpressivePanel = new Panel();
-    graphExpressivePanel.setBackground(Color.WHITE);
-    splitPaneExpressive.setRightComponent(graphExpressivePanel);
-    graphExpressivePanel.setLayout(null);
+    splitPaneExpressive.setLeftComponent(FacialExpressions.getPanel());
+
+    splitPaneExpressive.setRightComponent(ExpressiveTimeSeriesGraph.getinstance().getPanel());
 
     JButton btnOpenServer = new JButton("Open EmoComposer");
     btnOpenServer.setBounds(180, 25, 180, 23);
