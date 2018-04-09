@@ -261,6 +261,21 @@ public class AttributeContainer {
 		 spinnerShortTerm.setEditor(editor5);
 		 detectionTab.add(spinnerShortTerm);
 		 tabbedPane.setEnabledAt(0, true);
+
+		 JLabel lblMeditation = new JLabel("Meditation");
+		 lblMeditation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		 lblMeditation.setBounds(364, 178, 174, 20);
+		 detectionTab.add(lblMeditation);
+
+		 spinnerMeditation = new JSpinner();
+		 spinnerMeditation.setBounds(499, 175, 59, 26);
+		 spinnerMeditation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		 spinnerMeditation.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
+		 JSpinner.NumberEditor editor6 = new JSpinner.NumberEditor(spinnerMeditation);
+		 spinnerMeditation.setEditor(editor6);
+		 detectionTab.add(spinnerMeditation);
+		 tabbedPane.setEnabledAt(0, true);
+
 		 return attributeContainer;
 	 }
 }
