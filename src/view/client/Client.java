@@ -1,10 +1,6 @@
 package view.client;
 
-import network.model.Status;
 import view.client.components.affective.AffectiveTab;
-import view.client.components.ConnectedStatus;
-import view.client.components.affective.AffectiveTimeSeriesGraph;
-import view.client.components.expressive.ExpressionTab;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
 
@@ -137,5 +133,11 @@ public class Client {
 
   public static void main(String[] args) {
     createAndShowClientGUI();
+    //TODO Added temporary code to open client and make websockets up
+    network.client.Client.getInstance().start();
+    
+    for(;;) {
+    	
+    }
   }
 }
