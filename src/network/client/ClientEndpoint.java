@@ -33,16 +33,16 @@ public class ClientEndpoint {
 
     @OnMessage
     public void onMessage(Status status) {
-		FacialExpressionSolver.LowerFace lowerFace = FacialExpressionSolver.computeLowerFace(status);
-		FacialExpressionSolver.UpperFace upperFace = FacialExpressionSolver.computeUpperrFace(status);
-		ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
-		//TODO  For displaying graph
+//		FacialExpressionSolver.LowerFace lowerFace = FacialExpressionSolver.computeLowerFace(status);
+//		FacialExpressionSolver.UpperFace upperFace = FacialExpressionSolver.computeUpperrFace(status);
+//		ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
+//		//TODO  For displaying graph
+//
+//        status.setEngagementBoredom(0.9);
+//        status.setExcitementShortTerm(0.3);
+//        status.setExcitementLongTerm(1);
+//        AffectiveTimeSeriesGraph.getinstance().update(status);
 
-        status.setEngagementBoredom(0.9);
-        status.setExcitementShortTerm(0.3);
-        status.setExcitementLongTerm(1);
-        AffectiveTimeSeriesGraph.getinstance().update(status);
+        System.out.println(status.getEngagementBoredom());
     }
-
-
 }

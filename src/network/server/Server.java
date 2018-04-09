@@ -40,10 +40,10 @@ public class Server {
 		server.stop();
 	}
 
-	public void sendStatus(Status stat) {
+	public void sendStatus(Status status) {
 		for (Session peer : ServerEndpoint.peers) {
 			try {
-				peer.getBasicRemote().sendObject(stat);
+				peer.getBasicRemote().sendObject(status);
 			} catch (IOException | EncodeException e) {
 				e.printStackTrace();
 			}

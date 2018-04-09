@@ -23,7 +23,11 @@ public class JsonUtil {
                         .add(BLINK, status.getBlink())
                         .add(EYES_OPEN, status.getEyesOpen())
                         .add(SMILE, status.getSmile())
-                        .add(CLENCH, status.getClench()))
+                        .add(CLENCH, status.getClench())
+                        .add(SMIRK_LEFT, status.getSmirkLeft())
+                        .add(SMIRK_RIGHT, status.getSmirkRight())
+                        .add(EYEBROW_FURROW, status.isEyebrowFurrow())
+                        .add(LAUGH, status.getLaugh()))
 
                 .add(AFFECTIVE, Json.createObjectBuilder()
                         .add(MEDITATION, status.getMediation())

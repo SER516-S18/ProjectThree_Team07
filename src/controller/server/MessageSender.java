@@ -15,16 +15,12 @@ import view.server.components.attributes.AttributeContainer;
  *
  */
 public class MessageSender {
-	private static Server server = null;
 
 	/**
-	 *
 	 * gets status object from server and sends to the client 
 	 *
 	 */
-	public static Status getStatus()
-	{
-		System.out.println("In getStatus");
+	public static Status getStatus() {
 		Status status = Status.getInstance();
 
 		// Getting values from Server UI
@@ -48,7 +44,7 @@ public class MessageSender {
 
 		// Adding value as 1 in selected eye expression - boolean values
 		String eyeSelection = eyeCombo.getSelectedItem().toString();
-		eyeMap.put(eyeSelection, 1.0);
+		setFacialCombos(eyeSelection);
 
 		String uperFaceSelection = uperFaceCombo.getSelectedItem().toString();
 		double uperFaceValue = (Double) uperFaceSpinner.getValue();
@@ -58,8 +54,20 @@ public class MessageSender {
 		double lowerFaceValue = (Double) uperFaceSpinner.getValue();
 		uperFaceMap.put(uperFaceSelection, uperFaceValue);
 
+		status.setFrustration((Double)frustrationSpinner.getValue());
+		status.setMediation((Double)meditationSpinner.getValue());
+		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
+		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
+		status.setEngagementBoredom((Double)engagementSpinner.getValue());
 
-		//clearFacialCombos();
+		status.setActivatedEye(AttributeContainer.getActivateStatus());
+
+		return status;
+	}
+
+	private static void setFacialCombos(String eyeSelection) {
+		Status status = Status.getInstance();
+		clearFacialCombos();
 		switch(eyeSelection){
 			case "Blink":
 				status.setBlink(true);
@@ -83,25 +91,9 @@ public class MessageSender {
 				status.setLeftWink(true);
 				break;
 		}
-
-		System.out.println(status.getLookingDown());
-
-
-		status.setFrustration((Double)frustrationSpinner.getValue());
-		status.setMediation((Double)meditationSpinner.getValue());
-		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
-		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
-		status.setEngagementBoredom((Double)engagementSpinner.getValue());
-
-		status.setActivatedEye(AttributeContainer.getActivateStatus());
-
-		return status;
-	}
-	public static void sendData() {
-		Server.getInstance().sendStatus(getStatus());
 	}
 
-	private void clearFacialCombos() {
+	private static void clearFacialCombos() {
 		Status status = Status.getInstance();
 		status.setBlink(false);
 		status.setLeftWink(false);
@@ -112,5 +104,7 @@ public class MessageSender {
 		status.setLookingRight(false);
 	}
 
-
+	public static void sendData() {
+		Server.getInstance().sendStatus(getStatus());
+	}
 }

@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 public class MessageTimer {
 	private boolean isAutoRepeated = false;
 	private Timer timer;
-	private float timeCounter = (float) 0.0;
+	private double timeCounter = (double) 0.0;
 
 	private static MessageTimer timerInstance = null;
 
@@ -32,8 +32,8 @@ public class MessageTimer {
 	 * 
 	 * @param interval - interval in which data has to sent to the client
 	 */
-	public void startTimer(float interval) {
-		timer = new Timer( Math.round(interval * 1000), new ActionListener() {
+	public void startTimer(double interval) {
+		timer = new Timer((int) Math.round(interval * 1000), new ActionListener() {
 			public void actionPerformed( ActionEvent event )  {
 				MessageSender.sendData();
 				updateTimer(interval);
@@ -58,15 +58,15 @@ public class MessageTimer {
 		this.isAutoRepeated = autoRepeated;
 	}
 	
-	void updateTimer(float interval) {
+	void updateTimer(double interval) {
 		timeCounter += interval; 
 	}
 	
-	float getTimer() {
+	double getTimer() {
 		return timeCounter;
 	}
 	
-	public void setTimer(float time) {
+	public void setTimer(double time) {
 		timeCounter = time;
 	}
 }

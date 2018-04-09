@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class ServerCommand {
 
+    private static JSpinner intervalSpinner;
 
 	/**
      * @wbp.parser.entryPoint
@@ -42,7 +43,7 @@ public class ServerCommand {
         lblEmoState.setBounds(25, 20, 160, 20);
         tabInteractive.add(lblEmoState);
         
-        JSpinner intervalSpinner = new JSpinner();
+        intervalSpinner = new JSpinner();
         intervalSpinner.setAutoscrolls(true);
         intervalSpinner.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
@@ -66,18 +67,16 @@ public class ServerCommand {
 			public void actionPerformed(ActionEvent e) {
 				if(startButton.isEnabled()) {
 					String btnText= startButton.getText();
-					if(btnText=="Start") {
+					if(btnText.equals("Start")) {
 						MessageTimer.getInstance().setAutoRepeated(true);
-						MessageTimer.getInstance().startTimer(AttributeContainer.getTimeTextField());
+						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue());
 						startButton.setText("Stop");
-					}
-					else if(btnText=="Stop") {
+					} else if(btnText.equals("Stop")) {
 						MessageTimer.getInstance().stopTimer();
 						startButton.setText("Start");
-					}
-					else {
+					} else {
 						MessageTimer.getInstance().setAutoRepeated(false);
-						MessageTimer.getInstance().startTimer(AttributeContainer.getTimeTextField());
+						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue());
 						startButton.setText("Send");			
 					}
 				}
