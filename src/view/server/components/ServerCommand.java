@@ -20,13 +20,13 @@ public class ServerCommand {
      */
     public static JPanel getPanel() {
         JPanel serverCommand = new JPanel();
-        serverCommand.setBackground(new Color(255, 218, 185));
+//        serverCommand.setBackground(new Color(255, 218, 185));
 
-        serverCommand.setPreferredSize(new Dimension(520, 190));
+        serverCommand.setPreferredSize(new Dimension(1000, 150));
         serverCommand.setLayout(null);
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(0, 30, 670, 160);
+        tabbedPane.setBounds(0, 6, 1000, 140);
         serverCommand.add(tabbedPane);
         
         JPanel tabInteractive = new JPanel();
@@ -35,12 +35,12 @@ public class ServerCommand {
         tabInteractive.setLayout(null);
         
         Checkbox autoRepeatcheckbox = new Checkbox("Auto Repeat");
-        autoRepeatcheckbox.setBounds(46, 66, 174, 27);
+        autoRepeatcheckbox.setBounds(242, 50, 164, 27);
         tabInteractive.add(autoRepeatcheckbox);
         
         
         JLabel lblEmoState = new JLabel("EmoState Interval ");
-        lblEmoState.setBounds(25, 20, 160, 20);
+        lblEmoState.setBounds(250, 20, 160, 20);
         tabInteractive.add(lblEmoState);
         
         intervalSpinner = new JSpinner();
@@ -49,16 +49,16 @@ public class ServerCommand {
         intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(intervalSpinner);
         intervalSpinner.setEditor(editor);
-        intervalSpinner.setBounds(152, 20, 68, 26);
+        intervalSpinner.setBounds(370, 20, 68, 26);
         tabInteractive.add(intervalSpinner);
         
         JLabel labelSec = new JLabel("sec");
-        labelSec.setBounds(226, 20, 69, 20);
+        labelSec.setBounds(450, 20, 69, 20);
         tabInteractive.add(labelSec);
         JButton startButton = new JButton("Send");
         
         startButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        startButton.setBounds(344, 16, 115, 60);
+        startButton.setBounds(600, 16, 115, 60);
         tabInteractive.add(startButton);
         
         startButton.addActionListener(new ActionListener() {

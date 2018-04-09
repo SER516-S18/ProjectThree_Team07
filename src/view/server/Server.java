@@ -28,6 +28,7 @@ public class Server {
 
         // set up the content pane and add swing components to it
         addComponentsToPane(clientFrame.getContentPane());
+        clientFrame.setPreferredSize(new Dimension(1000,800));
 
         clientFrame.pack();
         clientFrame.setVisible(true);
