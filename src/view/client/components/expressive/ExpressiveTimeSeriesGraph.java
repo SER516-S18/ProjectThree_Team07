@@ -18,6 +18,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+import util.ServerConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,21 +53,21 @@ public class ExpressiveTimeSeriesGraph {
      */
     private ExpressiveTimeSeriesGraph(final String title) {
 
-        this.eyebrowRaiseSeries = new TimeSeries("Eyebrow Raise", Millisecond.class);
-        this.eyebrowFurrowSeries = new TimeSeries("Eyebrow Furrow", Millisecond.class);
-        this.smileSeries = new TimeSeries("Smile", Millisecond.class);
-        this.clenchSeries = new TimeSeries("Clench", Millisecond.class);
-        this.smirkLeftSeries = new TimeSeries("Smirk Left", Millisecond.class);
-        this.smirkRightSeries = new TimeSeries("Smirk Right", Millisecond.class);
-        this.laughSeries = new TimeSeries("Laugh", Millisecond.class);
+        this.eyebrowRaiseSeries = new TimeSeries(ServerConstants.EYEBROW_RAISE, Millisecond.class);
+        this.eyebrowFurrowSeries = new TimeSeries(ServerConstants.EYEBROW_FURROW, Millisecond.class);
+        this.smileSeries = new TimeSeries(ServerConstants.SMILE, Millisecond.class);
+        this.clenchSeries = new TimeSeries(ServerConstants.CLENCH, Millisecond.class);
+        this.smirkLeftSeries = new TimeSeries(ServerConstants.SMIRK_LEFT, Millisecond.class);
+        this.smirkRightSeries = new TimeSeries(ServerConstants.SMIRK_RIGHT, Millisecond.class);
+        this.laughSeries = new TimeSeries(ServerConstants.LAUGH, Millisecond.class);
         //this.eyesOpenSeries = new TimeSeries("eyesOpen", Millisecond.class);
-        this.blinkSeries = new TimeSeries("Blink", Millisecond.class);
-        this.lookingLeftSeries = new TimeSeries("Looking Left", Millisecond.class);
-        this.lookingRightSeries = new TimeSeries("Looking Right", Millisecond.class);
+        this.blinkSeries = new TimeSeries(ServerConstants.BLINK, Millisecond.class);
+        this.lookingLeftSeries = new TimeSeries(ServerConstants.LOOKING_LEFT, Millisecond.class);
+        this.lookingRightSeries = new TimeSeries(ServerConstants.LOOKING_RIGHT, Millisecond.class);
         //this.lookingUpSeries = new TimeSeries("Looking Up", Millisecond.class);
         //this.lookingDownSeries = new TimeSeries("Looking Down", Millisecond.class);
-        this.rightWinkSeries = new TimeSeries("Right Wink", Millisecond.class);
-        this.leftWinkSeries = new TimeSeries("Left Wink", Millisecond.class);
+        this.rightWinkSeries = new TimeSeries(ServerConstants.RIGHT_WINK, Millisecond.class);
+        this.leftWinkSeries = new TimeSeries(ServerConstants.LEFT_WINK, Millisecond.class);
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.eyebrowRaiseSeries);
         dataset.addSeries(this.eyebrowFurrowSeries);
