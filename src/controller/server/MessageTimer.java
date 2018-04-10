@@ -37,7 +37,7 @@ public class MessageTimer {
 			public void actionPerformed( ActionEvent event )  {
 				MessageSender.sendData();
 				updateTimer(interval);
-				AttributeContainer.setTimeTextField(getTimer() + "");
+				AttributeContainer.setTimeTextField(String.valueOf(getTimerInSeconds()));
 			}
 		});
 		timer.setRepeats(this.isAutoRepeated);
@@ -62,8 +62,8 @@ public class MessageTimer {
 		timeCounter += interval; 
 	}
 	
-	double getTimer() {
-		return timeCounter;
+	double getTimerInSeconds() {
+		return Math.round(timeCounter * 100.0) / 100.0;
 	}
 	
 	public void setTimer(double time) {
