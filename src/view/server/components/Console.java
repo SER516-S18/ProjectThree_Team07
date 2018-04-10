@@ -32,7 +32,7 @@ public class Console {
 	public static void getPanel() {
 		console = new JPanel();
 
-		console.setPreferredSize(new Dimension(1000, 240));
+		console.setPreferredSize(new Dimension(1000, 200));
 		console.setLayout(null);
 
 		JLabel consoleLabel = new JLabel("Console");
@@ -52,7 +52,7 @@ public class Console {
 		console.add(scrollPane);
 
 		JButton clrLogBtn = new JButton("ClearLog");
-		clrLogBtn.setBounds(378, 147, 144, 27);
+		clrLogBtn.setBounds(440, 150, 144, 27);
 		clrLogBtn.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		clrLogBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

@@ -190,7 +190,6 @@ public class Client {
     createAndShowClientGUI();
     //TODO to be removed after testing
     // testFacialExpression();
-
     for(;;) {
     	
     }

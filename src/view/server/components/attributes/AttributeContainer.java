@@ -101,7 +101,7 @@ public class AttributeContainer {
 		attributeContainer.setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 1000, 360);
+		tabbedPane.setBounds(0, 0, 1000, 400);
 		attributeContainer.add(tabbedPane);
 
 		JPanel detectionTab = new JPanel();
