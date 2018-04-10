@@ -20,6 +20,15 @@ public class StatusConstants {
     public static final String EYEBROW_FURROW = "EyebrowFurrow";
     public static final String LAUGH = "Laugh";
 
+    public static final String EMOTIONAL = "Emotional";
+
+    public static final String INTEREST = "Interest";
+    public static final String ENGAGEMENT = "Engagement";
+    public static final String STRESS = "Stress";
+    public static final String RELAXATION = "Relaxation";
+    public static final String Excitement = "Excitement";
+    public static final String FOCUS = "Focus";
+
     public static final String AFFECTIVE = "Affective";
 
     public static final String MEDITATION = "Meditation";
@@ -27,4 +36,9 @@ public class StatusConstants {
     public static final String EXCITEMENT_SHORT_TERM = "ExcitementShortTerm";
     public static final String FRUSTRATION = "Frustration";
     public static final String EXCITEMENT_LONG_TERM = "ExcitementLongTerm";
+
+    public static final String META = "Meta";
+
+    public static final String IS_AUTO_REST = "IsAutoReset";
+    public static final String TIMESTAMP = "Timestamp";
 }

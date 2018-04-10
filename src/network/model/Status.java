@@ -8,21 +8,29 @@ public class Status {
 
     // expressive values
     private boolean lookingRight;
-    private boolean eyebrowRaise;
     private boolean lookingLeft;
     private boolean lookingDown;
     private boolean lookingUp;
     private boolean rightWink;
     private boolean leftWink;
     private boolean blink;
-    private boolean eyebrowFurrow;
 
+    private double eyebrowRaise;
+    private double eyebrowFurrow;
     private double eyesOpen;
     private double smile;
     private double clench;
     private double smirkLeft;
     private double smirkRight;
     private double laugh;
+
+    // emotional values
+    private double interest;
+    private double engagement;
+    private double stress;
+    private double relaxation;
+    private double excitement;
+    private double focus;
 
     // affective values
     private double mediation;
@@ -33,6 +41,10 @@ public class Status {
     
     // eye activate status
     private boolean isEyeActivated;
+
+    private boolean isAutoReset;
+
+    private double timestamp;
 
     private static Status statusInstance = null;
 
@@ -45,6 +57,70 @@ public class Status {
         return statusInstance;
     }
 
+    public boolean isAutoReset() {
+        return isAutoReset;
+    }
+
+    public void setAutoReset(boolean autoReset) {
+        isAutoReset = autoReset;
+    }
+
+    public double getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(double timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
+    }
+
+    public double getEngagement() {
+        return engagement;
+    }
+
+    public void setEngagement(double engagement) {
+        this.engagement = engagement;
+    }
+
+    public double getStress() {
+        return stress;
+    }
+
+    public void setStress(double stress) {
+        this.stress = stress;
+    }
+
+    public double getRelaxation() {
+        return relaxation;
+    }
+
+    public void setRelaxation(double relaxation) {
+        this.relaxation = relaxation;
+    }
+
+    public double getExcitement() {
+        return excitement;
+    }
+
+    public void setExcitement(double excitement) {
+        this.excitement = excitement;
+    }
+
+    public double getFocus() {
+        return focus;
+    }
+
+    public void setFocus(double focus) {
+        this.focus = focus;
+    }
+
     public double getLaugh() {
         return laugh;
     }
@@ -53,11 +129,11 @@ public class Status {
         this.laugh = laugh;
     }
 
-    public boolean isEyebrowFurrow() {
+    public double isEyebrowFurrow() {
         return eyebrowFurrow;
     }
 
-    public void setEyebrowFurrow(boolean eyebrowFurrow) {
+    public void setEyebrowFurrow(double eyebrowFurrow) {
         this.eyebrowFurrow = eyebrowFurrow;
     }
 
@@ -77,11 +153,11 @@ public class Status {
         this.smirkRight = smirkRight;
     }
 
-    public boolean getEyebrowRaise() {
+    public double getEyebrowRaise() {
         return eyebrowRaise;
     }
 
-    public void setEyebrowRaise(boolean eyebrowRaise) {
+    public void setEyebrowRaise(double eyebrowRaise) {
         this.eyebrowRaise = eyebrowRaise;
     }
 

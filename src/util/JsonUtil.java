@@ -29,12 +29,24 @@ public class JsonUtil {
                         .add(EYEBROW_FURROW, status.isEyebrowFurrow())
                         .add(LAUGH, status.getLaugh()))
 
+                .add(EMOTIONAL, Json.createObjectBuilder()
+                        .add(INTEREST, status.getInterest())
+                        .add(ENGAGEMENT, status.getEngagement())
+                        .add(STRESS, status.getStress())
+                        .add(RELAXATION, status.getRelaxation())
+                        .add(Excitement, status.getExcitement())
+                        .add(FOCUS, status.getFocus()))
+
                 .add(AFFECTIVE, Json.createObjectBuilder()
                         .add(MEDITATION, status.getMediation())
                         .add(ENGAGEMENT_BOREDOM, status.getEngagementBoredom())
                         .add(EXCITEMENT_SHORT_TERM, status.getExcitementShortTerm())
                         .add(FRUSTRATION, status.getFrustration())
                         .add(EXCITEMENT_LONG_TERM, status.getExcitementLongTerm()))
+
+                .add(META, Json.createObjectBuilder()
+                        .add(IS_AUTO_REST, status.isAutoReset())
+                        .add(TIMESTAMP, status.getTimestamp()))
 
                 .build().toString();
     }
@@ -46,20 +58,29 @@ public class JsonUtil {
         JsonObject jsonExpressive = jsonObject.getJsonObject(EXPRESSIVE);
 
         status.setLookingRight(jsonExpressive.getBoolean(LOOKING_RIGHT));
-        status.setEyebrowRaise(jsonExpressive.getBoolean(EYEBROW_RAISE));
         status.setLookingLeft(jsonExpressive.getBoolean(LOOKING_LEFT));
         status.setLookingDown(jsonExpressive.getBoolean(LOOKING_DOWN));
         status.setLookingUp(jsonExpressive.getBoolean(LOOKING_UP));
         status.setLeftWink(jsonExpressive.getBoolean(LEFT_WINK));
         status.setRightWink(jsonExpressive.getBoolean(RIGHT_WINK));
         status.setBlink(jsonExpressive.getBoolean(BLINK));
-        status.setEyebrowFurrow(jsonExpressive.getBoolean(EYEBROW_FURROW));
+        status.setEyebrowRaise(jsonExpressive.getJsonNumber(EYEBROW_RAISE).doubleValue());
+        status.setEyebrowFurrow(jsonExpressive.getJsonNumber(EYEBROW_FURROW).doubleValue());
         status.setSmirkLeft(jsonExpressive.getJsonNumber(SMIRK_LEFT).doubleValue());
         status.setSmirkRight(jsonExpressive.getJsonNumber(SMIRK_RIGHT).doubleValue());
         status.setEyesOpen(jsonExpressive.getJsonNumber(EYES_OPEN).doubleValue());
         status.setSmile(jsonExpressive.getJsonNumber(SMILE).doubleValue());
         status.setClench(jsonExpressive.getJsonNumber(CLENCH).doubleValue());
         status.setLaugh(jsonExpressive.getJsonNumber(LAUGH).doubleValue());
+
+        JsonObject jsonEmotional = jsonObject.getJsonObject(EMOTIONAL);
+
+        status.setMediation(jsonEmotional.getJsonNumber(INTEREST).doubleValue());
+        status.setEngagementBoredom(jsonEmotional.getJsonNumber(ENGAGEMENT).doubleValue());
+        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(STRESS).doubleValue());
+        status.setFrustration(jsonEmotional.getJsonNumber(RELAXATION).doubleValue());
+        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(Excitement).doubleValue());
+        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(FOCUS).doubleValue());
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);
 
@@ -68,6 +89,11 @@ public class JsonUtil {
         status.setExcitementShortTerm(jsonAffective.getJsonNumber(EXCITEMENT_SHORT_TERM).doubleValue());
         status.setFrustration(jsonAffective.getJsonNumber(FRUSTRATION).doubleValue());
         status.setExcitementShortTerm(jsonAffective.getJsonNumber(EXCITEMENT_LONG_TERM).doubleValue());
+
+        JsonObject jsonMeta = jsonObject.getJsonObject(META);
+
+        status.setAutoReset(jsonMeta.getBoolean(IS_AUTO_REST));
+        status.setTimestamp(jsonMeta.getJsonNumber(TIMESTAMP).doubleValue());
 
         return status;
     }
