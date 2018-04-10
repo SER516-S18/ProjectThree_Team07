@@ -18,7 +18,6 @@ public class MessageSender {
 		clearEyeBrowValue();
 		clearLowerFaceValues();
 		clearEyeActionValues();
-		clearEmotionalValues();
 		
 		setEyeBrowValue();
 		setLowerFaceValues();
@@ -46,12 +45,6 @@ public class MessageSender {
 		status.setLookingLeft(false);
 		status.setLookingRight(false);
 	}
-	
-	
-	private static void clearEmotionalValues() {
-		// TODO Auto-generated method stub	
-	}
-
 	
 	private static void setEyeBrowValue() {
 		String eyeBrow = AttributeContainer.getUpperFaceCombo().getSelectedItem().toString();
@@ -120,8 +113,12 @@ public class MessageSender {
 	}
 	
 	private static void setEmotionalValues() {
-		// TODO Auto-generated method stub
-		
+		status.setInterest((Double) AttributeContainer.getInterestSpinner().getValue());
+		status.setEngagement((Double) AttributeContainer.getEngagementSpinner().getValue());
+		status.setStress((Double) AttributeContainer.getStressSpinner().getValue());
+		status.setRelaxation((Double) AttributeContainer.getRelaxationSpinner().getValue());
+		status.setExcitement((Double) AttributeContainer.getExcitementSpinner().getValue());
+		status.setFocus((Double) AttributeContainer.getFocusSpinner().getValue());	
 	}
 	
 	public static void sendData() {
