@@ -82,10 +82,13 @@ public class ServerInit {
     else {
       System.out.println("NOT already active.");
       try {
-        Connection.getInstance().setHost(host);
-        Connection.getInstance().setPort(Integer.valueOf(port));
-        System.out.println("Starting Server at: " + host + ":" + port);
-        Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
+        if(!Connection.getInstance().isLaunched()) {
+          Connection.getInstance().setHost(host);
+          Connection.getInstance().setPort(Integer.valueOf(port));
+          System.out.println("Starting Server at: " + host + ":" + port);
+          Connection.getInstance().setLaunched(true);
+          Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
+        }
       }
       catch (Exception e) { 
     	   	System.out.println("exception");

@@ -2,6 +2,7 @@ package network.client;
 
 import network.model.Connection;
 import org.glassfish.tyrus.client.ClientManager;
+import view.client.ServerInit;
 
 import javax.websocket.DeploymentException;
 import java.net.URI;
@@ -34,7 +35,9 @@ public class Client {
      */
     public void start() {
         try {
-            clientManager.connectToServer(ClientEndpoint.class, new URI("ws://" + Connection.getInstance().getHost() + ":" + Connection.getInstance().getPort() + "/ws/status"));
+            if(Connection.getInstance().isLaunched()) {
+                clientManager.connectToServer(ClientEndpoint.class, new URI("ws://" + Connection.getInstance().getHost() + ":" + Connection.getInstance().getPort() + "/ws/status"));
+            }
         } catch (DeploymentException | URISyntaxException e) {
             throw new RuntimeException(e);
         }

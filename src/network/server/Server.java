@@ -1,5 +1,6 @@
 package network.server;
 
+import network.model.Connection;
 import network.model.Status;
 import view.server.components.Console;
 

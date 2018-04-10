@@ -1,9 +1,6 @@
 package network.client;
 
-import network.model.Status;
-import network.model.StatusDecoder;
-import network.model.StatusEncoder;
-import network.model.StatusObservable;
+import network.model.*;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -31,6 +28,7 @@ public class ClientEndpoint {
     @OnClose
     public void onClose(Session session) {
         view.client.Client.updateIsServerRunning(false);
+        Connection.getInstance().setLaunched(false);
     }
 
     /**

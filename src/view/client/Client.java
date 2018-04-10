@@ -1,5 +1,7 @@
 package view.client;
 
+import network.model.Connection;
+import util.NetworkConstants;
 import view.client.components.affective.AffectiveTab;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
@@ -53,12 +55,35 @@ public class Client {
     showTimestampValLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(showTimestampValLabel);
 
+    JTextField hostField = new JTextField(8);
+    JTextField portField = new JTextField(5);
+
+    hostField.setText(Connection.getInstance().getHost());
+    portField.setText(String.valueOf(Connection.getInstance().getPort()));
+
+    JPanel connectToServerPanel = new JPanel();
+    connectToServerPanel.add(new JLabel("host:"));
+    connectToServerPanel.add(hostField);
+    connectToServerPanel.add(new JLabel("port:"));
+    connectToServerPanel.add(portField);
+
+    JPanel errorPanel = new JPanel();
+    errorPanel.add(new JLabel("Cannot connect to server with the given host and port."));
+
     JButton btnConnect = new JButton("Connect Server");
     btnConnect.setBounds(180, 52, 180, 23);
     btnConnect.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     btnConnect.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        network.client.Client.getInstance().start();
+        int result = JOptionPane.showConfirmDialog(null, connectToServerPanel,
+                "Please Enter the Host and Port", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+          if(hostField.getText().equals(Connection.getInstance().getHost()) && portField.getText().equals(String.valueOf(Connection.getInstance().getPort())) && Connection.getInstance().isLaunched()) {
+            network.client.Client.getInstance().start();
+          } else {
+            JOptionPane.showConfirmDialog(null, errorPanel, "error", JOptionPane.PLAIN_MESSAGE);
+          }
+        }
       }
     });
     clientFrame.getContentPane().add(btnConnect);
@@ -131,22 +156,9 @@ public class Client {
     JButton btnOpenServer = new JButton("Open EmoComposer");
     btnOpenServer.setBounds(180, 25, 180, 23);
 
-    JTextField hostField = new JTextField(8);
-    JTextField portField = new JTextField(5);
-
-    JPanel launchServerPanel = new JPanel();
-    launchServerPanel.add(new JLabel("host:"));
-    launchServerPanel.add(hostField);
-    launchServerPanel.add(new JLabel("port:"));
-    launchServerPanel.add(portField);
-
     btnOpenServer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(null, launchServerPanel,
-                "Please Enter the Host and Port", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-          ServerInit.loadServer(hostField.getText(), portField.getText());
-        }
+        ServerInit.loadServer(NetworkConstants.HOST, String.valueOf(NetworkConstants.PORT));
       }
     });
 
