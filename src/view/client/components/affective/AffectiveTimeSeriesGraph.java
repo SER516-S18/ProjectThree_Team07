@@ -112,12 +112,12 @@ public class AffectiveTimeSeriesGraph {
     public AffectiveTimeSeriesGraph(final String title) {
 
         //super(title);
-        this.interestSeries = new TimeSeries("interest", Millisecond.class);
-        this.engagementSeries = new TimeSeries("engagement", Millisecond.class);
-        this.stressSeries = new TimeSeries("stress", Millisecond.class);
-        this.relaxationSeries = new TimeSeries("relaxation", Millisecond.class);
-        this.excitementSeries = new TimeSeries("excitement", Millisecond.class);
-        this.focusSeries = new TimeSeries("focus", Millisecond.class);
+        this.interestSeries = new TimeSeries(ServerConstants.INTEREST, Millisecond.class);
+        this.engagementSeries = new TimeSeries(ServerConstants.ENGAGEMENT, Millisecond.class);
+        this.stressSeries = new TimeSeries(ServerConstants.STRESS, Millisecond.class);
+        this.relaxationSeries = new TimeSeries(ServerConstants.RELAXATION, Millisecond.class);
+        this.excitementSeries = new TimeSeries(ServerConstants.EXCITEMENT, Millisecond.class);
+        this.focusSeries = new TimeSeries(ServerConstants.FOCUS, Millisecond.class);
         setColors();
 
         chart = createChart(createDataSet());
@@ -153,23 +153,14 @@ public class AffectiveTimeSeriesGraph {
                 "",
                 "",
                 dataset,
-                true,
+                false,
                 true,
                 false
         );
 
         final XYPlot plot = result.getXYPlot();
 
-        /* //Method 1
-        DefaultDrawingSupplier drawingSupplier = new DefaultDrawingSupplier(
-                new Paint[] { Color.GREEN, Color.RED, Color.BLUE, Color.MAGENTA, Color.BLACK, Color.CYAN },
-                DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE,
-                DefaultDrawingSupplier.DEFAULT_STROKE_SEQUENCE,
-                DefaultDrawingSupplier.DEFAULT_OUTLINE_STROKE_SEQUENCE,
-                DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE);
-        plot.setDrawingSupplier(drawingSupplier);*/
 
-         //Method 2
         plot.getRenderer().setSeriesPaint(0, interestColor);
         plot.getRenderer().setSeriesPaint(1, engagementColor);
         plot.getRenderer().setSeriesPaint(2, stressColor);
@@ -230,12 +221,12 @@ public class AffectiveTimeSeriesGraph {
      *
      * @param args ignored.
      */
-    public static void main(final String[] args) throws InterruptedException {
+    /*public static void main(final String[] args) throws InterruptedException {
         final AffectiveTimeSeriesGraph demo = new AffectiveTimeSeriesGraph("Affective Graph");
 
         JFrame jFrame = new JFrame("Affective Graph JPanel");
         jFrame.setVisible(true);
-        jFrame.setSize(600, 400);
+        jFrame.setSize(600, 500);
         jFrame.add(content);
 
         //demo.pack();
@@ -253,7 +244,7 @@ public class AffectiveTimeSeriesGraph {
             demo.update(status);
             Thread.sleep(1000);
         }
-    }
+    }*/
     private static AffectiveTimeSeriesGraph affectiveTimeSeriesGraph;
 
     public static AffectiveTimeSeriesGraph getinstance() {
@@ -265,10 +256,7 @@ public class AffectiveTimeSeriesGraph {
 
     public static JPanel getPanel() {
         JPanel affectiveGraph = new JPanel();
-
-        //JLabel instructions = new JLabel("Graph displaying affective data", JLabel.CENTER);
         affectiveGraph.add(content);
-
         return affectiveGraph;
     }
 
