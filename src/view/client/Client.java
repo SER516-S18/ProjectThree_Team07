@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class Client {
   private static boolean isServerReady = false;
-  private static String isServerReadyLabelText = "Not Coonnected";
   private static JLabel showStatusValLabel;
 
   private static void createAndShowClientGUI() {
@@ -56,6 +55,7 @@ public class Client {
     btnConnect.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     btnConnect.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        network.client.Client.getInstance().start();
       }
     });
     clientFrame.getContentPane().add(btnConnect);
@@ -127,11 +127,26 @@ public class Client {
 
     JButton btnOpenServer = new JButton("Open EmoComposer");
     btnOpenServer.setBounds(180, 25, 180, 23);
+
+    JTextField hostField = new JTextField(8);
+    JTextField portField = new JTextField(5);
+
+    JPanel launchServerPanel = new JPanel();
+    launchServerPanel.add(new JLabel("host:"));
+    launchServerPanel.add(hostField);
+    launchServerPanel.add(new JLabel("port:"));
+    launchServerPanel.add(portField);
+
     btnOpenServer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        ServerInit.loadServer();
+        int result = JOptionPane.showConfirmDialog(null, launchServerPanel,
+                "Please Enter the Host and Port", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+          ServerInit.loadServer(hostField.getText(), portField.getText());
+        }
       }
     });
+
     btnOpenServer.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(btnOpenServer);
     clientFrame.setVisible(true);
@@ -174,10 +189,8 @@ public class Client {
   public static void main(String[] args) {
     createAndShowClientGUI();
     //TODO to be removed after testing
-    testFacialExpression();
-    //TODO Added temporary code to open client and make websockets up
-    network.client.Client.getInstance().start();
-    
+    // testFacialExpression();
+
     for(;;) {
     	
     }

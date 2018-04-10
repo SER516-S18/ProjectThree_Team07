@@ -1,5 +1,6 @@
 package view.client;
 
+import network.model.Connection;
 import network.server.Server;
 
 import java.io.*;
@@ -77,7 +78,7 @@ public class ServerInit {
     }
   }
 
-  static void loadServer() {
+  public static void loadServer(String host, String port) {
     ServerInit serverInstance = ServerInit.getInstance();
 
     if (serverInstance.isAppActive()) {
@@ -86,15 +87,18 @@ public class ServerInit {
     else {
       System.out.println("NOT already active.");
       try {
-        Runtime.getRuntime().exec("java -jar server.jar");
+        Connection.getInstance().setHost(host);
+        Connection.getInstance().setPort(Integer.valueOf(port));
+
+        System.out.println("Starting Server at: " + host + ":" + port);
+
+        Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
       }
       catch (Exception e) { 
     	   	System.out.println("exception");
     	   	e.printStackTrace();
       }
     }
-
-
 //    try {
 //      if (true) {
 //

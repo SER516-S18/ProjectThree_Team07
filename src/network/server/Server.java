@@ -24,13 +24,13 @@ public class Server {
 	public static Server getInstance() {
 		if (serverInstance == null) {
 			serverInstance = new Server();
-			server = new org.glassfish.tyrus.server.Server(HOST, PORT, "/" + ROOT_PATH, ServerEndpoint.class);
 		}
 		return serverInstance;
 	}
 
-	public void start() {
+	public void start(String host, int port) {
 		try {
+			server = new org.glassfish.tyrus.server.Server(host, port, "/" + ROOT_PATH, ServerEndpoint.class);
 			server.start();
 		} catch (DeploymentException e) {
 			e.printStackTrace();

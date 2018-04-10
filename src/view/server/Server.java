@@ -1,5 +1,6 @@
 package view.server;
 
+import util.NetworkConstants;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;
@@ -8,6 +9,9 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
+
+import static util.NetworkConstants.HOST;
+import static util.NetworkConstants.PORT;
 
 public class Server {
 
@@ -51,7 +55,14 @@ public class Server {
 
     public static void main(String[] args) {
         network.server.Server server = network.server.Server.getInstance();
-        server.start();
+
+        if(args.length == 0) {
+            // development server running off localhost
+            server.start(HOST, PORT);
+        } else {
+            // production server launched from client
+            server.start(args[0], Integer.valueOf(args[1]));
+        }
 
         createAndShowServerGUI();
         Console.setMessage("Server is ready");
