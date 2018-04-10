@@ -216,7 +216,7 @@ public class AttributeContainer {
 
 		upperFaceCombo = new JComboBox();
 		upperFaceCombo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		upperFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"RaisedEyebrow", "EyesOpen"}));
+		upperFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"Raised Eyebrow", "Furrow Brow"}));
 		upperFaceCombo.setBounds(560, 130, 173, 26);
 		upperFaceCombo.setBackground(Color.WHITE);
 		detectionTab.add(upperFaceCombo);
@@ -237,7 +237,7 @@ public class AttributeContainer {
 
 		lowerFaceCombo = new JComboBox();
 		lowerFaceCombo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lowerFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"Smile", "Clench"}));
+		lowerFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"Smile", "Clench","Smirk Left","Smirk Right","Laugh"}));
 		lowerFaceCombo.setBounds(560, 160, 173, 27);
 		detectionTab.add(lowerFaceCombo);
 
