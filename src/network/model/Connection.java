@@ -4,8 +4,8 @@ public class Connection {
 
     private static Connection connectionInstance = null;
 
-    private String host;
-    private int port;
+    private String host = util.NetworkConstants.HOST;
+    private int port = util.NetworkConstants.PORT;
 
     private Connection() {}
 
