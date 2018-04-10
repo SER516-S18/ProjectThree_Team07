@@ -41,6 +41,10 @@ public class Server {
 		server.stop();
 	}
 
+	public int numConnections() {
+		return ServerEndpoint.peers.size();
+	}
+
 	public void sendStatus(Status status) {
 		for (Session peer : ServerEndpoint.peers) {
 			try {
