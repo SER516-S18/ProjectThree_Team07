@@ -90,7 +90,7 @@ public class AffectiveTimeSeriesGraph {
         axis.setAutoRange(true);
         axis.setFixedAutoRange(60000.0);  // 60 seconds
         axis = plot.getRangeAxis();
-        axis.setRange(0.0, 100.0);
+        axis.setRange(0.0, 1.0);
         axis.setVerticalTickLabels(false);
         axis.setTickLabelsVisible(false);
         return result;
