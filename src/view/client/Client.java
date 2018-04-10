@@ -2,7 +2,9 @@ package view.client;
 
 import network.model.Connection;
 import util.NetworkConstants;
+import util.ServerConstants;
 import view.client.components.affective.AffectiveTab;
+import view.client.components.affective.AffectiveTimeSeriesGraph;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
 
@@ -104,6 +106,7 @@ public class Client {
     splitPanePerformance.setDividerLocation(490);
     tabbedPane.addTab("Performance Metrics", null, splitPanePerformance, null);
 
+
     splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
 
     Panel btnPanel = new Panel();
@@ -115,40 +118,105 @@ public class Client {
     btnInterest.setBackground(Color.WHITE);
     btnInterest.setBounds(60, 60, 140, 100);
     btnPanel.add(btnInterest);
-    btnInterest.addActionListener(
-        new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {}
-        });
+    btnInterest.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getInterestColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.INTEREST + " Color",
+                  initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setInterestColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+        }
+      }
+    });
 
     JButton btnExcitement = new JButton("Excitement");
     btnExcitement.setBackground(Color.WHITE);
     btnExcitement.setBounds(240, 60, 140, 100);
     btnPanel.add(btnExcitement);
-    btnExcitement.addActionListener(
-        new ActionListener() {
-          public void actionPerformed(ActionEvent e) {}
-        });
+    btnExcitement.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getExcitementColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.EXCITEMENT + " Color",
+                initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setExcitementColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+      }
+      }
+    });
 
     JButton btnEngagement = new JButton("Engagement");
     btnEngagement.setBackground(Color.WHITE);
     btnEngagement.setBounds(60, 210, 140, 100);
     btnPanel.add(btnEngagement);
+    btnEngagement.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getEngagementColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.ENGAGEMENT + " Color",
+                initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setEngagementColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+        }
+      }
+    });
 
     JButton btnStress = new JButton("Stress");
     btnStress.setBackground(Color.WHITE);
     btnStress.setBounds(240, 210, 140, 100);
     btnPanel.add(btnStress);
+    btnStress.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getStressColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.STRESS + " Color",
+                initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setStressColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+        }
+      }
+    });
 
     JButton btnRelaxation = new JButton("Relaxation");
     btnRelaxation.setBackground(Color.WHITE);
     btnRelaxation.setBounds(60, 370, 140, 100);
     btnPanel.add(btnRelaxation);
+    btnRelaxation.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getRelaxationColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.RELAXATION + " Color",
+                initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setRelaxationColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+        }
+      }
+    });
 
     JButton btnFocus = new JButton("Focus");
     btnFocus.setBackground(Color.WHITE);
     btnFocus.setBounds(240, 370, 140, 100);
     btnPanel.add(btnFocus);
+    btnFocus.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getFocusColor();
+        Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.FOCUS + " Color",
+                initialBackground);
+        if (newBackground != null) {
+          AffectiveTimeSeriesGraph.getinstance().setFocusColor(newBackground);
+          AffectiveTimeSeriesGraph.getinstance().updateGraph();
+          //splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+        }
+      }
+    });
+
 
     JSplitPane splitPaneExpressive = new JSplitPane();
     tabbedPane.addTab("Expressive Suite", null, splitPaneExpressive, null);
@@ -173,6 +241,7 @@ public class Client {
     clientFrame.setVisible(true);
     clientFrame.pack();
     clientFrame.setResizable(false);
+
   }
 
   private static void setServerReadyLabel() {

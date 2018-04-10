@@ -5,7 +5,9 @@ package view.client.components.affective;
  * @author spraka10
  */
 
-import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.*;
@@ -15,13 +17,17 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+import util.ServerConstants;
 
 
 public class AffectiveTimeSeriesGraph {
@@ -36,6 +42,67 @@ public class AffectiveTimeSeriesGraph {
     private TimeSeries excitementSeries;
     private TimeSeries focusSeries;
     static JPanel content;
+    private ChartPanel chartPanel;
+    private JFreeChart chart;
+
+    private Color interestColor;
+    private Color engagementColor;
+    private Color stressColor;
+    private Color relaxationColor;
+    private Color excitementColor;
+    private Color focusColor;
+
+    public Color getInterestColor() {
+        return interestColor;
+    }
+
+    public void setInterestColor(Color interestColor) {
+        this.interestColor = interestColor;
+    }
+
+
+    public Color getEngagementColor() {
+        return engagementColor;
+    }
+
+    public void setEngagementColor(Color engagementColor) {
+        this.engagementColor = engagementColor;
+    }
+
+
+    public Color getStressColor() {
+        return stressColor;
+    }
+
+    public void setStressColor(Color stressColor) {
+        this.stressColor = stressColor;
+    }
+
+
+    public Color getRelaxationColor() {
+        return relaxationColor;
+    }
+
+    public void setRelaxationColor(Color relaxationColor) {
+        this.relaxationColor = relaxationColor;
+    }
+
+    public Color getExcitementColor() {
+        return excitementColor;
+    }
+
+    public void setExcitementColor(Color excitementColor) {
+        this.excitementColor = excitementColor;
+    }
+
+    public Color getFocusColor() {
+        return focusColor;
+    }
+
+    public void setFocusColor(Color focusColor) {
+        this.focusColor = focusColor;
+    }
+
 
     /**
      * Constructs a new graph application.
@@ -51,6 +118,19 @@ public class AffectiveTimeSeriesGraph {
         this.relaxationSeries = new TimeSeries("relaxation", Millisecond.class);
         this.excitementSeries = new TimeSeries("excitement", Millisecond.class);
         this.focusSeries = new TimeSeries("focus", Millisecond.class);
+        setColors();
+
+        chart = createChart(createDataSet());
+
+        chartPanel = new ChartPanel(chart);
+
+        content = new JPanel(new BorderLayout());
+        content.add(chartPanel);
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
+        //setContentPane(chartPanel);
+    }
+
+    public TimeSeriesCollection createDataSet(){
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.interestSeries);
         dataset.addSeries(this.engagementSeries);
@@ -58,15 +138,7 @@ public class AffectiveTimeSeriesGraph {
         dataset.addSeries(this.relaxationSeries);
         dataset.addSeries(this.excitementSeries);
         dataset.addSeries(this.focusSeries);
-        final JFreeChart chart = createChart(dataset);
-
-        final ChartPanel chartPanel = new ChartPanel(chart);
-
-        content = new JPanel(new BorderLayout());
-        content.add(chartPanel);
-        chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
-        //setContentPane(chartPanel);
-
+        return dataset;
     }
 
     /**
@@ -85,7 +157,26 @@ public class AffectiveTimeSeriesGraph {
                 true,
                 false
         );
+
         final XYPlot plot = result.getXYPlot();
+
+        /* //Method 1
+        DefaultDrawingSupplier drawingSupplier = new DefaultDrawingSupplier(
+                new Paint[] { Color.GREEN, Color.RED, Color.BLUE, Color.MAGENTA, Color.BLACK, Color.CYAN },
+                DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE,
+                DefaultDrawingSupplier.DEFAULT_STROKE_SEQUENCE,
+                DefaultDrawingSupplier.DEFAULT_OUTLINE_STROKE_SEQUENCE,
+                DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE);
+        plot.setDrawingSupplier(drawingSupplier);*/
+
+         //Method 2
+        plot.getRenderer().setSeriesPaint(0, interestColor);
+        plot.getRenderer().setSeriesPaint(1, engagementColor);
+        plot.getRenderer().setSeriesPaint(2, stressColor);
+        plot.getRenderer().setSeriesPaint(3, relaxationColor);
+        plot.getRenderer().setSeriesPaint(4, excitementColor);
+        plot.getRenderer().setSeriesPaint(5, focusColor);
+
         ValueAxis axis = plot.getDomainAxis();
         axis.setAutoRange(true);
         axis.setFixedAutoRange(60000.0);  // 60 seconds
@@ -96,19 +187,15 @@ public class AffectiveTimeSeriesGraph {
         return result;
     }
 
-    public void startplotting() throws InterruptedException {
-        Status status = Status.getInstance();
-        int x = 0;
-        while (x < 1000) {
-            status.setMediation(new Random().nextDouble());
-            status.setEngagementBoredom(new Random().nextDouble());
-            status.setExcitementShortTerm(new Random().nextDouble());
-            status.setExcitementLongTerm(new Random().nextDouble());
-            status.setFrustration(new Random().nextDouble());
-            update(status);
-            Thread.sleep(1000);
-        }
-    }
+   private void setColors(){
+        interestColor = Color.MAGENTA;
+        engagementColor = Color.BLUE;
+        stressColor = Color.GRAY;
+        relaxationColor = Color.BLACK;
+        excitementColor = Color.CYAN;
+        focusColor = Color.RED;
+   }
+
 
     /**
      * update the time series data from server status for affective values
@@ -129,34 +216,44 @@ public class AffectiveTimeSeriesGraph {
 
     }
 
+    public void updateGraph(){
+        content.remove(chartPanel);
+        chart = createChart(createDataSet());
+        chartPanel = new ChartPanel(chart);
+        content.add(chartPanel);
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
+        content.setVisible(true);
+        //update(Status.getInstance());
+    }
     /**
      * Starting point for the demonstration application.
      *
      * @param args ignored.
      */
-    /*public static void main(final String[] args) throws InterruptedException {
-
-
-
-
+    public static void main(final String[] args) throws InterruptedException {
         final AffectiveTimeSeriesGraph demo = new AffectiveTimeSeriesGraph("Affective Graph");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+
+        JFrame jFrame = new JFrame("Affective Graph JPanel");
+        jFrame.setVisible(true);
+        jFrame.setSize(600, 400);
+        jFrame.add(content);
+
+        //demo.pack();
+        //RefineryUtilities.centerFrameOnScreen(demo);
+        //demo.setVisible(true);
 
         Status status =Status.getInstance();
         int x = 0;
         while (x < 1000) {
-            status.setInterest(new Random().nextDouble() * 100);
-            status.setEngagement(new Random().nextDouble() * 100);
-            status.setExcitement(new Random().nextDouble() * 100);
-          //  status.setExcitmentLongTerm(new Random().nextDouble() * 100);
-            status.setRelaxation(new Random().nextDouble() * 100);
-            status.setFocus(new Random().nextDouble() * 100);
+            status.setInterest(new Random().nextDouble());
+            status.setEngagement(new Random().nextDouble());
+            status.setExcitement(new Random().nextDouble());
+            status.setRelaxation(new Random().nextDouble());
+            status.setFocus(new Random().nextDouble());
             demo.update(status);
             Thread.sleep(1000);
         }
-    }*/
+    }
     private static AffectiveTimeSeriesGraph affectiveTimeSeriesGraph;
 
     public static AffectiveTimeSeriesGraph getinstance() {
