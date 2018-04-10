@@ -16,6 +16,8 @@ import java.io.IOException;
 
 public class Client {
   private static boolean isServerReady = false;
+  private static String isServerReadyLabelText = "Not Coonnected";
+  private static JLabel showStatusValLabel;
 
   private static void createAndShowClientGUI() {
     JFrame.setDefaultLookAndFeelDecorated(true);
@@ -32,10 +34,12 @@ public class Client {
     lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
     clientFrame.getContentPane().add(lblStatus);
 
-    JLabel showStatusValLabel = new JLabel("New label");
+    showStatusValLabel = new JLabel("");
     showStatusValLabel.setBounds(750, 27, 100, 14);
     showStatusValLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(showStatusValLabel);
+
+    setServerReadyLabel();
 
     JLabel lblTimeStamp = new JLabel("Time Stamp:");
     lblTimeStamp.setBounds(650, 55, 90, 14);
@@ -134,6 +138,21 @@ public class Client {
     clientFrame.pack();
     clientFrame.setResizable(false);
 
+  }
+
+  private static void setServerReadyLabel() {
+    if(isServerReady) {
+      showStatusValLabel.setText("Connected");
+      showStatusValLabel.setForeground(Color.GREEN);
+    } else {
+      showStatusValLabel.setText("Not Connected");
+      showStatusValLabel.setForeground(Color.RED);
+    }
+  }
+
+  public static void updateIsServerRunning(boolean serverStatus) {
+    isServerReady = serverStatus;
+    setServerReadyLabel();
   }
   
   //TODO to be removed after testing
