@@ -12,6 +12,7 @@ public class StatusObservable extends Observable {
 			observerInstance = new StatusObservable();
 			observerInstance.addObserver(FaceObserver.getInstance());
 			observerInstance.addObserver(GraphObserver.getInstance());
+			observerInstance.addObserver(TimerObserver.getInstance());
 		}
 		return observerInstance;
 	}

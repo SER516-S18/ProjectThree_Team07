@@ -1,6 +1,5 @@
 package view.client;
 
-import network.server.Server;
 import view.client.components.affective.AffectiveTab;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
@@ -12,12 +11,16 @@ import controller.client.FacialExpressionSolver;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 public class Client {
   private static boolean isServerReady = false;
   private static JLabel showStatusValLabel;
+  private static JLabel showTimestampValLabel;
 
+  public static JLabel getTimestampValLabel() {
+	  return showTimestampValLabel;
+  }
+		  
   private static void createAndShowClientGUI() {
     JFrame.setDefaultLookAndFeelDecorated(true);
     JFrame clientFrame = new JFrame("Project 3 Team 7 - Emotiv Xavier Control Panel");
@@ -45,7 +48,7 @@ public class Client {
     lblTimeStamp.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(lblTimeStamp);
 
-    JLabel showTimestampValLabel = new JLabel("New label");
+    showTimestampValLabel = new JLabel("0.00");
     showTimestampValLabel.setBounds(750, 55, 100, 14);
     showTimestampValLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(showTimestampValLabel);

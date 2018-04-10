@@ -2,6 +2,7 @@ package controller.server;
 
 import javax.swing.Timer;
 
+import network.model.Status;
 import view.server.components.attributes.AttributeContainer;
 
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class MessageTimer {
 				MessageSender.sendData();
 				updateTimer(interval);
 				AttributeContainer.setTimeTextField(String.valueOf(getTimerInSeconds()));
+				Status.getInstance().setTimestamp(getTimerInSeconds());
 			}
 		});
 		timer.setRepeats(this.isAutoRepeated);
