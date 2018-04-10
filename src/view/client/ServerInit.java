@@ -19,11 +19,13 @@ public class ServerInit {
   private FileChannel channel;
   private FileLock lock;
   private static ServerInit serverInitInstance;
+  public static boolean isServerLeaunched;
 
   public static ServerInit getInstance() {
     if (serverInitInstance == null) {
       serverInitInstance = new ServerInit("EmojiServer");
     }
+    isServerLeaunched = true;
     return serverInitInstance;
   }
 
@@ -38,11 +40,13 @@ public class ServerInit {
       try {
         lock = channel.tryLock();
       } catch (OverlappingFileLockException e) {
-        return true;
+        isServerLeaunched = false;
+        return isServerLeaunched;
       }
       if (lock == null) {
         closeLock();
-        return true;
+        isServerLeaunched = false;
+        return isServerLeaunched;
       }
       Runtime.getRuntime().addShutdownHook(new Thread() {
         // destroy the lock when the JVM is closing
@@ -51,10 +55,12 @@ public class ServerInit {
           deleteFile();
         }
       });
-      return false;
+      isServerLeaunched = true;
+      return isServerLeaunched;
     } catch (Exception e) {
       closeLock();
-      return true;
+      isServerLeaunched = false;
+      return isServerLeaunched;
     }
   }
 
@@ -79,7 +85,7 @@ public class ServerInit {
 
   public static void loadServer(String host, String port) {
     ServerInit serverInstance = ServerInit.getInstance();
-    if (!serverInstance.isAppActive()) {
+    if (serverInstance.isAppActive()) {
       try {
         Connection.getInstance().setHost(host);
         Connection.getInstance().setPort(Integer.valueOf(port));

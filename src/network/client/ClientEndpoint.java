@@ -28,7 +28,7 @@ public class ClientEndpoint {
     @OnClose
     public void onClose(Session session) {
         view.client.Client.updateIsServerRunning(false);
-        Connection.getInstance().setLaunched(false);
+//        Connection.getInstance().setLaunched(false);
     }
 
     /**

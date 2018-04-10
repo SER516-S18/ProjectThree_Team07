@@ -12,13 +12,13 @@ public class Connection {
     private int port = util.NetworkConstants.PORT;
     private boolean isLaunched;
 
-    public boolean isLaunched() {
-        return isLaunched;
-    }
-
-    public void setLaunched(boolean launched) {
-        isLaunched = launched;
-    }
+//    public boolean isLaunched() {
+//        return isLaunched;
+//    }
+//
+//    public void setLaunched(boolean launched) {
+//        isLaunched = launched;
+//    }
 
     private Connection() {}
 

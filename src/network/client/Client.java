@@ -35,9 +35,7 @@ public class Client {
      */
     public void start() {
         try {
-            if(Connection.getInstance().isLaunched()) {
-                clientManager.connectToServer(ClientEndpoint.class, new URI("ws://" + Connection.getInstance().getHost() + ":" + Connection.getInstance().getPort() + "/ws/status"));
-            }
+            clientManager.connectToServer(ClientEndpoint.class, new URI("ws://" + Connection.getInstance().getHost() + ":" + Connection.getInstance().getPort() + "/ws/status"));
         } catch (DeploymentException | URISyntaxException e) {
             throw new RuntimeException(e);
         }

@@ -20,9 +20,9 @@ public class Client {
   private static JLabel showTimestampValLabel;
 
   public static JLabel getTimestampValLabel() {
-	  return showTimestampValLabel;
+    return showTimestampValLabel;
   }
-		  
+
   private static void createAndShowClientGUI() {
     JFrame.setDefaultLookAndFeelDecorated(true);
     JFrame clientFrame = new JFrame("Project 3 Team 7 - Emotiv Xavier Control Panel");
@@ -73,19 +73,27 @@ public class Client {
     JButton btnConnect = new JButton("Connect Server");
     btnConnect.setBounds(180, 52, 180, 23);
     btnConnect.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    btnConnect.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(null, connectToServerPanel,
-                "Please Enter the Host and Port", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-          if(hostField.getText().equals(Connection.getInstance().getHost()) && portField.getText().equals(String.valueOf(Connection.getInstance().getPort())) && Connection.getInstance().isLaunched()) {
-            network.client.Client.getInstance().start();
-          } else {
-            JOptionPane.showConfirmDialog(null, errorPanel, "error", JOptionPane.PLAIN_MESSAGE);
+    btnConnect.addActionListener(
+        new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            int result =
+                JOptionPane.showConfirmDialog(
+                    null,
+                    connectToServerPanel,
+                    "Please Enter the Host and Port",
+                    JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+              System.out.println("ServerInit.isServerLeaunched in Client " + ServerInit.isServerLeaunched);
+              if (hostField.getText().equals(Connection.getInstance().getHost())
+                  && portField.getText().equals(String.valueOf(Connection.getInstance().getPort()))
+                  && ServerInit.isServerLeaunched) {
+                network.client.Client.getInstance().start();
+              } else {
+                JOptionPane.showConfirmDialog(null, errorPanel, "error", JOptionPane.PLAIN_MESSAGE);
+              }
+            }
           }
-        }
-      }
-    });
+        });
     clientFrame.getContentPane().add(btnConnect);
 
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -95,7 +103,6 @@ public class Client {
     JSplitPane splitPanePerformance = new JSplitPane();
     splitPanePerformance.setDividerLocation(490);
     tabbedPane.addTab("Performance Metrics", null, splitPanePerformance, null);
-
 
     splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
 
@@ -108,21 +115,20 @@ public class Client {
     btnInterest.setBackground(Color.WHITE);
     btnInterest.setBounds(60, 60, 140, 100);
     btnPanel.add(btnInterest);
-    btnInterest.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-
-      }
-    });
+    btnInterest.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {}
+        });
 
     JButton btnExcitement = new JButton("Excitement");
     btnExcitement.setBackground(Color.WHITE);
     btnExcitement.setBounds(240, 60, 140, 100);
     btnPanel.add(btnExcitement);
-    btnExcitement.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-      }
-    });
+    btnExcitement.addActionListener(
+        new ActionListener() {
+          public void actionPerformed(ActionEvent e) {}
+        });
 
     JButton btnEngagement = new JButton("Engagement");
     btnEngagement.setBackground(Color.WHITE);
@@ -144,7 +150,6 @@ public class Client {
     btnFocus.setBounds(240, 370, 140, 100);
     btnPanel.add(btnFocus);
 
-
     JSplitPane splitPaneExpressive = new JSplitPane();
     tabbedPane.addTab("Expressive Suite", null, splitPaneExpressive, null);
     splitPaneExpressive.setDividerLocation(490);
@@ -156,22 +161,22 @@ public class Client {
     JButton btnOpenServer = new JButton("Open EmoComposer");
     btnOpenServer.setBounds(180, 25, 180, 23);
 
-    btnOpenServer.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        ServerInit.loadServer(NetworkConstants.HOST, String.valueOf(NetworkConstants.PORT));
-      }
-    });
+    btnOpenServer.addActionListener(
+        new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            ServerInit.loadServer(NetworkConstants.HOST, String.valueOf(NetworkConstants.PORT));
+          }
+        });
 
     btnOpenServer.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     clientFrame.getContentPane().add(btnOpenServer);
     clientFrame.setVisible(true);
     clientFrame.pack();
     clientFrame.setResizable(false);
-
   }
 
   private static void setServerReadyLabel() {
-    if(isServerReady) {
+    if (isServerReady) {
       showStatusValLabel.setText("Connected");
       showStatusValLabel.setForeground(Color.GREEN);
     } else {
@@ -184,29 +189,28 @@ public class Client {
     isServerReady = serverStatus;
     setServerReadyLabel();
   }
-  
-  //TODO to be removed after testing
+
+  // TODO to be removed after testing
   public static void testFacialExpression() {
 
-	  for (FacialExpressionSolver.UpperFace upperFace : FacialExpressionSolver.UpperFace.values()) {
-			for (FacialExpressionSolver.LowerFace lowerFace : FacialExpressionSolver.LowerFace.values()) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ImageLoader.loadImage(FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
-			}
-	  }
+    for (FacialExpressionSolver.UpperFace upperFace : FacialExpressionSolver.UpperFace.values()) {
+      for (FacialExpressionSolver.LowerFace lowerFace : FacialExpressionSolver.LowerFace.values()) {
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        ImageLoader.loadImage(
+            FacialExpressions.getPanel(), upperFace.getFileName(), lowerFace.getFileName());
+      }
+    }
   }
-  
+
   public static void main(String[] args) {
     createAndShowClientGUI();
-    //TODO to be removed after testing
+    // TODO to be removed after testing
     // testFacialExpression();
-    for(;;) {
-    	
-    }
+    for (; ; ) {}
   }
 }

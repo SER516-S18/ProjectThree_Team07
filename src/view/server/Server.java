@@ -1,5 +1,6 @@
 package view.server;
 
+import view.client.ServerInit;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;
@@ -39,11 +40,11 @@ public class Server {
                 view.client.ServerInit serverInstance = view.client.ServerInit.getInstance();
                 serverInstance.closeLock();
 //                serverInstance.deleteFile();
+                ServerInit.isServerLeaunched = false;
                 File file = new File(System.getProperty("user.home"), "EmojiServer.tmp");
                 if(file.exists() && !file.isDirectory()) {
                     file.delete();
                 }
-
                 serverFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
         });
