@@ -75,12 +75,12 @@ public class JsonUtil {
 
         JsonObject jsonEmotional = jsonObject.getJsonObject(EMOTIONAL);
 
-        status.setMediation(jsonEmotional.getJsonNumber(INTEREST).doubleValue());
-        status.setEngagementBoredom(jsonEmotional.getJsonNumber(ENGAGEMENT).doubleValue());
-        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(STRESS).doubleValue());
-        status.setFrustration(jsonEmotional.getJsonNumber(RELAXATION).doubleValue());
-        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(EXCITEMENT).doubleValue());
-        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(FOCUS).doubleValue());
+        status.setInterest(jsonEmotional.getJsonNumber(INTEREST).doubleValue());
+        status.setEngagement(jsonEmotional.getJsonNumber(ENGAGEMENT).doubleValue());
+        status.setStress(jsonEmotional.getJsonNumber(STRESS).doubleValue());
+        status.setRelaxation(jsonEmotional.getJsonNumber(RELAXATION).doubleValue());
+        status.setExcitement(jsonEmotional.getJsonNumber(EXCITEMENT).doubleValue());
+        status.setFocus(jsonEmotional.getJsonNumber(FOCUS).doubleValue());
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);
 

@@ -117,10 +117,11 @@ public class AffectiveTimeSeriesGraph {
      */
     public void update(Status status) {
 
+    	
         this.interestSeries.addOrUpdate(new Millisecond(), status.getInterest());
 
         this.engagementSeries.addOrUpdate(new Millisecond(), status.getEngagement());
-        this.stressSeries.addOrUpdate(new Millisecond(), status.getExcitementShortTerm());
+        this.stressSeries.addOrUpdate(new Millisecond(), status.getStress());
         this.excitementSeries.addOrUpdate(new Millisecond(), status.getExcitement());
         this.relaxationSeries.addOrUpdate(new Millisecond(), status.getRelaxation());
         this.focusSeries.addOrUpdate(new Millisecond(), status.getFocus());
