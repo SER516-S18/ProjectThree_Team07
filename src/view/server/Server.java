@@ -39,7 +39,7 @@ public class Server {
                 view.client.ServerInit serverInstance = view.client.ServerInit.getInstance();
                 serverInstance.closeLock();
 //                serverInstance.deleteFile();
-                File file = new File(System.getProperty("user.home"), "EmojiServer" + ".tmp");
+                File file = new File(System.getProperty("user.home"), "EmojiServer.tmp");
                 if(file.exists() && !file.isDirectory()) {
                     file.delete();
                 }

@@ -5,9 +5,14 @@ import network.server.Server;
 
 import java.io.*;
 import java.nio.channels.*;
-/*
-To make sure only one instance of Emoji Server running, when launched from Client.
+
+/**
+ * @author Team 7
+ * @version 1.0
+ *
+ * Handles Opening Server from Client
  */
+
 public class ServerInit {
   private String appName;
   private static File file;
@@ -61,6 +66,7 @@ public class ServerInit {
     try {
       channel.close();
     } catch (Exception e) {
+//      e.printStackTrace();
     }
   }
 
@@ -73,24 +79,14 @@ public class ServerInit {
 
   public static void loadServer(String host, String port) {
     ServerInit serverInstance = ServerInit.getInstance();
-
-    if (serverInstance.isAppActive()) {
-      System.out.println("Already active.");
-    }
-    else {
-      System.out.println("NOT already active.");
+    if (!serverInstance.isAppActive()) {
       try {
-        if(!Connection.getInstance().isLaunched()) {
-          Connection.getInstance().setHost(host);
-          Connection.getInstance().setPort(Integer.valueOf(port));
-          System.out.println("Starting Server at: " + host + ":" + port);
-          Connection.getInstance().setLaunched(true);
-          Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
-        }
+        Connection.getInstance().setHost(host);
+        Connection.getInstance().setPort(Integer.valueOf(port));
+        Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
       }
-      catch (Exception e) { 
-    	   	System.out.println("exception");
-    	   	e.printStackTrace();
+      catch (Exception e) {
+        e.printStackTrace();
       }
     }
   }
