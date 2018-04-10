@@ -33,8 +33,6 @@ public class ServerInit {
       try {
         lock = channel.tryLock();
       } catch (OverlappingFileLockException e) {
-        // already locked
-        closeLock();
         return true;
       }
       if (lock == null) {

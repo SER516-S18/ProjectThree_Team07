@@ -3,7 +3,7 @@ package view.server;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;
-
+import java.io.File;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -38,7 +38,12 @@ public class Server {
                 System.out.println("Closing Server Window");
                 view.client.ServerInit serverInstance = view.client.ServerInit.getInstance();
                 serverInstance.closeLock();
-                serverInstance.deleteFile();
+//                serverInstance.deleteFile();
+                File file = new File(System.getProperty("user.home"), "EmojiServer" + ".tmp");
+                if(file.exists() && !file.isDirectory()) {
+                    file.delete();
+                }
+
                 serverFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
         });
