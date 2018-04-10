@@ -39,6 +39,10 @@ public class ExpressiveTimeSeriesGraph {
     private TimeSeries blinkSeries;
     private TimeSeries eyesOpenSeries;
     private TimeSeries smileSeries;
+    private TimeSeries eyebrowFurrowSeries;
+    private TimeSeries smirkLeftSeries;
+    private TimeSeries smirkRightSeries;
+    private TimeSeries laughSeries;
     static JPanel content;
 
     /**
@@ -59,6 +63,10 @@ public class ExpressiveTimeSeriesGraph {
         this.lookingUpSeries = new TimeSeries("lookingUp", Millisecond.class);
         this.rightWinkSeries = new TimeSeries("rightWink", Millisecond.class);
         this.smileSeries = new TimeSeries("smile", Millisecond.class);
+        this.eyebrowFurrowSeries = new TimeSeries("eyebrowFurrow", Millisecond.class);
+        this.smirkLeftSeries = new TimeSeries("smirkLeft", Millisecond.class);
+        this.smirkRightSeries = new TimeSeries("smirkRight", Millisecond.class);
+        this.laughSeries = new TimeSeries("laugh", Millisecond.class);
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.blinkSeries);
         dataset.addSeries(this.clenchSeries);
@@ -70,6 +78,10 @@ public class ExpressiveTimeSeriesGraph {
         dataset.addSeries(this.lookingRightSeries);
         dataset.addSeries(this.lookingUpSeries);
         dataset.addSeries(this.rightWinkSeries);
+        dataset.addSeries(this.eyebrowFurrowSeries);
+        dataset.addSeries(this.smirkLeftSeries);
+        dataset.addSeries(this.smirkRightSeries);
+        dataset.addSeries(this.laughSeries);
         dataset.addSeries(this.smileSeries);
         final JFreeChart chart = createChart(dataset);
 
@@ -125,17 +137,24 @@ public class ExpressiveTimeSeriesGraph {
      */
     public void update(Status status) {
 
+        //Boolean
         this.blinkSeries.addOrUpdate(new Millisecond(),  (status.getBlink() ? 1:0)+3);
-        this.smileSeries.addOrUpdate(new Millisecond(), status.getSmile()+6);
         this.rightWinkSeries.addOrUpdate(new Millisecond(), (status.getRightWink()?1:0)+9);
         this.lookingUpSeries.addOrUpdate(new Millisecond(), (status.getLookingUp()?1:0)+12);
         this.lookingRightSeries.addOrUpdate(new Millisecond(), (status.getLookingRight()?1:0)+15);
         this.lookingLeftSeries.addOrUpdate(new Millisecond(), (status.getLookingLeft()?1:0)+18);
         this.lookingDownSeries.addOrUpdate(new Millisecond(), (status.getLookingDown()?1:0)+21);
         this.leftWinkSeries.addOrUpdate(new Millisecond(), (status.getLeftWink()?1:0)+24);
+
+         //double
+        this.smileSeries.addOrUpdate(new Millisecond(), status.getSmile()+6);
         this.eyesOpenSeries.addOrUpdate(new Millisecond(), status.getEyesOpen()+27);
-        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), status.getEyebrowRaise()+30);
+        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), (status.getEyebrowRaise())+30);
         this.clenchSeries.addOrUpdate(new Millisecond(), status.getClench()+33);
+        this.smirkRightSeries.addOrUpdate(new Millisecond(), status.getSmirkRight()+33);
+        this.smirkLeftSeries.addOrUpdate(new Millisecond(), status.getSmirkLeft()+33);
+        this.laughSeries.addOrUpdate(new Millisecond(), status.getLaugh()+33);
+        this.eyebrowFurrowSeries.addOrUpdate(new Millisecond(), status.getEyebrowFurrow()+33);
 
     }
 
