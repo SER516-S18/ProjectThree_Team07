@@ -57,7 +57,6 @@ public class MessageSender {
 		status.setFrustration((Double)frustrationSpinner.getValue());
 		status.setMediation((Double)meditationSpinner.getValue());
 		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
-		System.out.println("data"+"=================="+shortTermSpinner.getValue());
 		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
 		status.setEngagementBoredom((Double)engagementSpinner.getValue());
 
