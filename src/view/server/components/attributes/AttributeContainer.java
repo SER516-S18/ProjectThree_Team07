@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeListener;
 
 import controller.server.MessageTimer;
+import util.ServerConstants;
 
 import javax.swing.event.ChangeEvent;
 
@@ -216,7 +217,7 @@ public class AttributeContainer {
 
 		upperFaceCombo = new JComboBox();
 		upperFaceCombo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		upperFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"Raised Eyebrow", "Furrow Brow"}));
+		upperFaceCombo.setModel(new DefaultComboBoxModel(new String[] {ServerConstants.EYEBROW_RAISE, ServerConstants.EYEBROW_FURROW}));
 		upperFaceCombo.setBounds(560, 130, 173, 26);
 		upperFaceCombo.setBackground(Color.WHITE);
 		detectionTab.add(upperFaceCombo);
@@ -237,7 +238,8 @@ public class AttributeContainer {
 
 		lowerFaceCombo = new JComboBox();
 		lowerFaceCombo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lowerFaceCombo.setModel(new DefaultComboBoxModel(new String[] {"Smile", "Clench","Smirk Left","Smirk Right","Laugh"}));
+		lowerFaceCombo.setModel(new DefaultComboBoxModel(new String[] {ServerConstants.SMILE, ServerConstants.CLENCH, 
+				ServerConstants.SMIRK_LEFT, ServerConstants.SMIRK_RIGHT, ServerConstants.LAUGH}));
 		lowerFaceCombo.setBounds(560, 160, 173, 27);
 		detectionTab.add(lowerFaceCombo);
 
@@ -257,7 +259,8 @@ public class AttributeContainer {
 
 		comboBoxEye = new JComboBox();
 		comboBoxEye.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		comboBoxEye.setModel(new DefaultComboBoxModel(new String[] {"Blink", "Looking Left", "Looking Right", "Looking Up", "Looking Down", "Right Wink", "Left Wink"}));
+		comboBoxEye.setModel(new DefaultComboBoxModel(new String[] {ServerConstants.BLINK, ServerConstants.LOOKING_LEFT,
+				ServerConstants.LOOKING_RIGHT, "Looking Up", "Looking Down", ServerConstants.RIGHT_WINK, ServerConstants.LEFT_WINK}));
 		comboBoxEye.setBounds(560, 190, 173, 29);
 		detectionTab.add(comboBoxEye);
 

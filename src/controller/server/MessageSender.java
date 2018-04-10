@@ -1,12 +1,8 @@
 package controller.server;
 
-import java.util.HashMap;
-
-import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-
 import network.model.Status;
 import network.server.Server;
+import util.ServerConstants;
 import view.server.components.attributes.AttributeContainer;
 
 /**
@@ -16,95 +12,120 @@ import view.server.components.attributes.AttributeContainer;
  */
 public class MessageSender {
 
-	/**
-	 * gets status object from server and sends to the client 
-	 *
-	 */
-	public static Status getStatus() {
-		Status status = Status.getInstance();
+	static Status status = Status.getInstance();
 
-		// Getting values from Server UI
-		JComboBox eyeCombo = AttributeContainer.getEyeCombo();
-
-		JComboBox uperFaceCombo = AttributeContainer.getUpperFaceCombo();
-		JSpinner uperFaceSpinner = AttributeContainer.getUpperFaceSpinner();
-
-		JComboBox lowerFaceCombo = AttributeContainer.getLowerFaceCombo();
-		JSpinner lowerFaceSpinner = AttributeContainer.getLowerFaceSpinner();
-
-		JSpinner frustrationSpinner = AttributeContainer.getFrustrationSpinner();
-		JSpinner engagementSpinner = AttributeContainer.getEngagementSpinner();
-		JSpinner longTermSpinner = AttributeContainer.getLongTermSpinner();
-		JSpinner shortTermSpinner = AttributeContainer.getShortTermSpinner();
-		JSpinner meditationSpinner = AttributeContainer.getMeditationSpinner();
-
-		HashMap<String,Double> eyeMap = new HashMap<String,Double>();
-		HashMap<String,Double> uperFaceMap = new HashMap<String,Double>();
-		HashMap<String,Double> lowerFaceMap = new HashMap<String,Double>();
-
-		// Adding value as 1 in selected eye expression - boolean values
-		String eyeSelection = eyeCombo.getSelectedItem().toString();
-		setFacialCombos(eyeSelection);
-
-		String uperFaceSelection = uperFaceCombo.getSelectedItem().toString();
-		double uperFaceValue = (Double) uperFaceSpinner.getValue();
-		uperFaceMap.put(uperFaceSelection, uperFaceValue);
-
-		String lowerFaceSelection = uperFaceCombo.getSelectedItem().toString();
-		double lowerFaceValue = (Double) uperFaceSpinner.getValue();
-		uperFaceMap.put(uperFaceSelection, uperFaceValue);
-
-		status.setFrustration((Double)frustrationSpinner.getValue());
-		status.setMediation((Double)meditationSpinner.getValue());
-		status.setExcitementLongTerm((Double)longTermSpinner.getValue());
-		status.setExcitementShortTerm((Double)shortTermSpinner.getValue());
-		status.setEngagementBoredom((Double)engagementSpinner.getValue());
-
-		status.setActivatedEye(AttributeContainer.getActivateStatus());
-
-		return status;
+	public static void constructStatus() {
+		clearEyeBrowValue();
+		clearLowerFaceValues();
+		clearEyeActionValues();
+		clearEmotionalValues();
+		
+		setEyeBrowValue();
+		setLowerFaceValues();
+		setEyeActionValues();
+		setEmotionalValues();
 	}
 
-	private static void setFacialCombos(String eyeSelection) {
-		Status status = Status.getInstance();
-		clearFacialCombos();
-		switch(eyeSelection){
-			case "Blink":
-				status.setBlink(true);
-				break;
-			case "Looking Left":
-				status.setLookingLeft(true);
-				break;
-			case "Looking Right":
-				status.setLookingRight(true);
-				break;
-			case "Looking Up" :
-				status.setLookingUp(true);
-				break;
-			case "Looking Down":
-				status.setLookingDown(true);
-				break;
-			case "Right Wink":
-				status.setRightWink(true);
-				break;
-			case "Left Wink":
-				status.setLeftWink(true);
-				break;
-		}
+	private static void clearLowerFaceValues() {
+		status.setSmile(0);
+		status.setClench(0);
+		status.setSmirkLeft(0);
+		status.setSmirkRight(0);
+		status.setLaugh(0);
 	}
-
-	private static void clearFacialCombos() {
-		Status status = Status.getInstance();
+	
+	private static void clearEyeBrowValue() {
+		status.setEyebrowRaise(0);
+		status.setEyebrowFurrow(0);
+	}
+	
+	private static void clearEyeActionValues() {
 		status.setBlink(false);
 		status.setLeftWink(false);
 		status.setRightWink(false);
-		status.setLookingDown(false);
-		status.setLookingUp(false);
 		status.setLookingLeft(false);
 		status.setLookingRight(false);
 	}
+	
+	
+	private static void clearEmotionalValues() {
+		// TODO Auto-generated method stub	
+	}
 
+	
+	private static void setEyeBrowValue() {
+		String eyeBrow = AttributeContainer.getUpperFaceCombo().getSelectedItem().toString();
+		Double value = (Double) AttributeContainer.getUpperFaceSpinner().getValue();
+		
+		switch (eyeBrow) {
+			case ServerConstants.EYEBROW_RAISE : 
+				status.setEyebrowRaise(value);
+				break;
+			case ServerConstants.EYEBROW_FURROW:
+				status.setEyebrowFurrow(value);
+				break;
+			default :
+				break;
+		}
+	
+	}
+	
+	private static void setLowerFaceValues() {
+		String lowerFace = AttributeContainer.getLowerFaceCombo().getSelectedItem().toString();
+		Double value = (Double) AttributeContainer.getLowerFaceSpinner().getValue();
+		
+		switch (lowerFace) {
+			case ServerConstants.SMILE : 
+				status.setSmile(value);
+				break;
+			case ServerConstants.CLENCH:
+				status.setClench(value);
+				break;
+			case ServerConstants.SMIRK_LEFT:
+				status.setSmirkLeft(value);
+				break;
+			case ServerConstants.SMIRK_RIGHT:
+				status.setSmirkRight(value);
+				break;
+			case ServerConstants.LAUGH:
+				status.setLaugh(value);
+				break;
+			default :
+				break;
+		}
+	}
+	
+	private static void setEyeActionValues() {
+		String eyeAction = AttributeContainer.getEyeCombo().getSelectedItem().toString();
+		
+		switch (eyeAction) {
+			case ServerConstants.BLINK : 
+				status.setBlink(true);
+				break;
+			case ServerConstants.LEFT_WINK:
+				status.setLeftWink(true);
+				break;
+			case ServerConstants.RIGHT_WINK:
+				status.setRightWink(true);
+				break;
+			case ServerConstants.LOOKING_LEFT:
+				status.setLookingLeft(true);
+				break;
+			case ServerConstants.LOOKING_RIGHT:
+				status.setLookingRight(true);
+				break;
+			default :
+				break;
+		}
+	}
+	
+	private static void setEmotionalValues() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public static void sendData() {
-		Server.getInstance().sendStatus(getStatus());
+		constructStatus();
+		Server.getInstance().sendStatus(status);
 	}
 }

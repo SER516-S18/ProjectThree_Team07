@@ -1,6 +1,5 @@
 package view.server;
 
-import view.client.ServerInit;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;

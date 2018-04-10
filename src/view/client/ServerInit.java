@@ -88,7 +88,10 @@ public class ServerInit {
       try {
         Runtime.getRuntime().exec("java -jar server.jar");
       }
-      catch (Exception e) {  }
+      catch (Exception e) { 
+    	   	System.out.println("exception");
+    	   	e.printStackTrace();
+      }
     }
 
 
