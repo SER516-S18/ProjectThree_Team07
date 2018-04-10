@@ -34,7 +34,7 @@ public class JsonUtil {
                         .add(ENGAGEMENT, status.getEngagement())
                         .add(STRESS, status.getStress())
                         .add(RELAXATION, status.getRelaxation())
-                        .add(Excitement, status.getExcitement())
+                        .add(EXCITEMENT, status.getExcitement())
                         .add(FOCUS, status.getFocus()))
 
                 .add(AFFECTIVE, Json.createObjectBuilder()
@@ -79,7 +79,7 @@ public class JsonUtil {
         status.setEngagementBoredom(jsonEmotional.getJsonNumber(ENGAGEMENT).doubleValue());
         status.setExcitementShortTerm(jsonEmotional.getJsonNumber(STRESS).doubleValue());
         status.setFrustration(jsonEmotional.getJsonNumber(RELAXATION).doubleValue());
-        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(Excitement).doubleValue());
+        status.setExcitementShortTerm(jsonEmotional.getJsonNumber(EXCITEMENT).doubleValue());
         status.setExcitementShortTerm(jsonEmotional.getJsonNumber(FOCUS).doubleValue());
 
         JsonObject jsonAffective = jsonObject.getJsonObject(AFFECTIVE);

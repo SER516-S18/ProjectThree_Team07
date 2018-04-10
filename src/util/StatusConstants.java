@@ -26,7 +26,7 @@ public class StatusConstants {
     public static final String ENGAGEMENT = "Engagement";
     public static final String STRESS = "Stress";
     public static final String RELAXATION = "Relaxation";
-    public static final String Excitement = "Excitement";
+    public static final String EXCITEMENT = "Excitement";
     public static final String FOCUS = "Focus";
 
     public static final String AFFECTIVE = "Affective";
