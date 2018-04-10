@@ -13,7 +13,6 @@ public class ServerInit {
   private static File file;
   private FileChannel channel;
   private FileLock lock;
-
   private static ServerInit serverInitInstance;
 
   public static ServerInit getInstance() {
@@ -29,10 +28,8 @@ public class ServerInit {
 
   public boolean isAppActive() {
     try {
-      file = new File
-        (System.getProperty("user.home"), appName + ".tmp");
+      file = new File(System.getProperty("user.home"), appName + ".tmp");
       channel = new RandomAccessFile(file, "rw").getChannel();
-
       try {
         lock = channel.tryLock();
       } catch (OverlappingFileLockException e) {
@@ -40,12 +37,10 @@ public class ServerInit {
         closeLock();
         return true;
       }
-
       if (lock == null) {
         closeLock();
         return true;
       }
-
       Runtime.getRuntime().addShutdownHook(new Thread() {
         // destroy the lock when the JVM is closing
         public void run() {
@@ -89,9 +84,7 @@ public class ServerInit {
       try {
         Connection.getInstance().setHost(host);
         Connection.getInstance().setPort(Integer.valueOf(port));
-
         System.out.println("Starting Server at: " + host + ":" + port);
-
         Runtime.getRuntime().exec("java -jar server.jar " + host + " " + port);
       }
       catch (Exception e) { 
@@ -99,16 +92,6 @@ public class ServerInit {
     	   	e.printStackTrace();
       }
     }
-//    try {
-//      if (true) {
-//
-//        Runtime.getRuntime().exec("java -jar server.jar");
-//      } else {
-//        System.out.println("Server running");
-//      }
-//    } catch (Exception ex) {
-//      ex.printStackTrace();
-//    }
   }
 }
 
