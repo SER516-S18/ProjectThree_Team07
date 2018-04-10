@@ -22,4 +22,9 @@ public class ServerConstants {
     public static final String RELAXATION = "Relaxation";
     public static final String EXCITEMENT = "Excitement";
     public static final String FOCUS = "Focus";
+    
+    public static final String START = "Start";
+    public static final String STOP = "Stop";
+    public static final String SEND = "Send";
+    
 }

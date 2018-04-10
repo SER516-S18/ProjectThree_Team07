@@ -1,6 +1,5 @@
 package view.server;
 
-import util.NetworkConstants;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;

@@ -2,15 +2,9 @@ package view.server.components.attributes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.event.ChangeListener;
 
 import controller.server.MessageTimer;
 import util.ServerConstants;
-
-import javax.swing.event.ChangeEvent;
 
 public class AttributeContainer {
 	private static JTextField textFieldTime = null;
@@ -25,12 +19,21 @@ public class AttributeContainer {
 	private static JSpinner spinnerStress = null;
 	private static JSpinner spinnerInterest = null;
 	private static JSpinner spinnerFocus = null;
-	private static boolean isActivateEye = false;
+	private static JToggleButton btnActivate = null;
+	private static JCheckBox detectionAutoResetCheckBox = null;
 
-	public static boolean getActivateStatus()
-	{
-		return isActivateEye ;
+	public static boolean getActivateStatus() {
+		return btnActivate.isSelected();
 	}
+	
+	public static boolean isAutoReset() {
+		return detectionAutoResetCheckBox.isSelected();
+	}
+	
+	public static void unSelectActivateButton() {
+		btnActivate.setSelected(false);
+	}
+	
 	public static void setTimeTextField(String time)
 	{
 		textFieldTime.setText(time);
@@ -351,17 +354,13 @@ public class AttributeContainer {
 		comboBoxEye.setBounds(560, 190, 173, 29);
 		detectionTab.add(comboBoxEye);
 
-		JButton btnActivate = new JButton("Activate");
+		btnActivate = new JToggleButton("Activate");
 		btnActivate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		btnActivate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				isActivateEye = true;
-			}
-		});
+				
 		btnActivate.setBounds(740, 190, 115, 29);
 		detectionTab.add(btnActivate);
 
-		JCheckBox detectionAutoResetCheckBox = new JCheckBox("Auto Reset");
+		detectionAutoResetCheckBox = new JCheckBox("Auto Reset");
 		detectionAutoResetCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		detectionAutoResetCheckBox.setBounds(862, 190, 183, 29);
 		detectionTab.add(detectionAutoResetCheckBox);

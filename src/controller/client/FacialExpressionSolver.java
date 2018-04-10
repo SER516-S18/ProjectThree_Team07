@@ -87,11 +87,7 @@ public class FacialExpressionSolver {
 	 * @return the upper face expression
 	 */
 	public static UpperFace computeUpperrFace(Status status) {
-		if (status.getEyebrowRaise()==1) {
-			return UpperFace.RAISE_BROW;
-		} else if (status.getEyebrowFurrow()==1) {
-			return UpperFace.FURROW_BROW;
-		} else if (status.getLeftWink()) {
+		if (status.getLeftWink()) {
 			return UpperFace.WINK_LEFT;
 		} else if (status.getRightWink()) {
 			return UpperFace.WINK_RIGHT;
@@ -101,7 +97,11 @@ public class FacialExpressionSolver {
 			return UpperFace.LOOK_RIGHT;
 		} else if (status.getBlink()) {
 			return UpperFace.BLINK;
-		}
+		} else if (status.getEyebrowRaise() > 0) {
+			return UpperFace.RAISE_BROW;
+		} else if (status.getEyebrowFurrow() > 0) {
+			return UpperFace.FURROW_BROW;
+		} 
 		return UpperFace.NORMAL;
 	}
 }

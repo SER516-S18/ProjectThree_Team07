@@ -3,6 +3,7 @@ package view.server.components;
 import javax.swing.*;
 
 import controller.server.MessageTimer;
+import util.ServerConstants;
 import view.server.components.attributes.AttributeContainer;
 
 import java.awt.*;
@@ -55,7 +56,7 @@ public class ServerCommand {
         JLabel labelSec = new JLabel("sec");
         labelSec.setBounds(450, 20, 69, 20);
         tabInteractive.add(labelSec);
-        JButton startButton = new JButton("Send");
+        JButton startButton = new JButton(ServerConstants.SEND);
         
         startButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         startButton.setBounds(600, 16, 115, 60);
@@ -67,17 +68,15 @@ public class ServerCommand {
 			public void actionPerformed(ActionEvent e) {
 				if(startButton.isEnabled()) {
 					String btnText= startButton.getText();
-					if(btnText.equals("Start")) {
-						MessageTimer.getInstance().setAutoRepeated(true);
-						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue());
-						startButton.setText("Stop");
-					} else if(btnText.equals("Stop")) {
+					if(btnText.equals(ServerConstants.START)) {
+						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue(), true);
+						startButton.setText(ServerConstants.STOP);
+					} else if(btnText.equals(ServerConstants.STOP)) {
 						MessageTimer.getInstance().stopTimer();
-						startButton.setText("Start");
+						startButton.setText(ServerConstants.START);
 					} else {
-						MessageTimer.getInstance().setAutoRepeated(false);
-						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue());
-						startButton.setText("Send");			
+						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue(), false);
+						startButton.setText(ServerConstants.SEND);	
 					}
 				}
 			}
@@ -90,11 +89,11 @@ public class ServerCommand {
 			public void itemStateChanged(ItemEvent e) {
 				if(autoRepeatcheckbox.getState())
 				{
-					startButton.setText("Start");
+					startButton.setText(ServerConstants.START);
 				}
 				else if(!autoRepeatcheckbox.getState())
 				{
-					startButton.setText("Send");
+					startButton.setText(ServerConstants.SEND);
 				}
 				else
 					System.out.println("");
@@ -106,4 +105,5 @@ public class ServerCommand {
           
         return serverCommand;
     }
+    
 }

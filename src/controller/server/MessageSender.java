@@ -23,6 +23,9 @@ public class MessageSender {
 		setLowerFaceValues();
 		setEyeActionValues();
 		setEmotionalValues();
+		if (AttributeContainer.isAutoReset()) {
+			AttributeContainer.unSelectActivateButton();
+		}
 	}
 
 	private static void clearLowerFaceValues() {
@@ -89,26 +92,28 @@ public class MessageSender {
 	}
 	
 	private static void setEyeActionValues() {
-		String eyeAction = AttributeContainer.getEyeCombo().getSelectedItem().toString();
-		
-		switch (eyeAction) {
-			case ServerConstants.BLINK : 
-				status.setBlink(true);
-				break;
-			case ServerConstants.LEFT_WINK:
-				status.setLeftWink(true);
-				break;
-			case ServerConstants.RIGHT_WINK:
-				status.setRightWink(true);
-				break;
-			case ServerConstants.LOOKING_LEFT:
-				status.setLookingLeft(true);
-				break;
-			case ServerConstants.LOOKING_RIGHT:
-				status.setLookingRight(true);
-				break;
-			default :
-				break;
+		if (AttributeContainer.getActivateStatus()) {
+			String eyeAction = AttributeContainer.getEyeCombo().getSelectedItem().toString();
+			
+			switch (eyeAction) {
+				case ServerConstants.BLINK : 
+					status.setBlink(true);
+					break;
+				case ServerConstants.LEFT_WINK:
+					status.setLeftWink(true);
+					break;
+				case ServerConstants.RIGHT_WINK:
+					status.setRightWink(true);
+					break;
+				case ServerConstants.LOOKING_LEFT:
+					status.setLookingLeft(true);
+					break;
+				case ServerConstants.LOOKING_RIGHT:
+					status.setLookingRight(true);
+					break;
+				default :
+					break;
+			}
 		}
 	}
 	

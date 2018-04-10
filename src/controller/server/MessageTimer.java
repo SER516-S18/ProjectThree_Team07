@@ -33,8 +33,10 @@ public class MessageTimer {
 	 * 
 	 * @param interval - interval in which data has to sent to the client
 	 */
-	public void startTimer(double interval) {
-		timer = new Timer((int) Math.round(interval * 1000), new ActionListener() {
+	public void startTimer(double interval,boolean isAutoRepeated) {
+		this.isAutoRepeated = isAutoRepeated;
+		int delay = isAutoRepeated? (int) Math.round(interval * 1000) : 0;
+		timer = new Timer(delay, new ActionListener() {
 			public void actionPerformed( ActionEvent event )  {
 				MessageSender.sendData();
 				updateTimer(interval);
