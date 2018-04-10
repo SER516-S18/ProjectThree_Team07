@@ -26,7 +26,7 @@ public class JsonUtil {
                         .add(CLENCH, status.getClench())
                         .add(SMIRK_LEFT, status.getSmirkLeft())
                         .add(SMIRK_RIGHT, status.getSmirkRight())
-                        .add(EYEBROW_FURROW, status.isEyebrowFurrow())
+                        .add(EYEBROW_FURROW, status.getEyebrowFurrow())
                         .add(LAUGH, status.getLaugh()))
 
                 .add(EMOTIONAL, Json.createObjectBuilder()

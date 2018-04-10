@@ -129,7 +129,7 @@ public class Status {
         this.laugh = laugh;
     }
 
-    public double isEyebrowFurrow() {
+    public double getEyebrowFurrow() {
         return eyebrowFurrow;
     }
 
