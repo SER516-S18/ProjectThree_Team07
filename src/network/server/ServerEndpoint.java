@@ -2,6 +2,7 @@ package network.server;
 
 import network.model.StatusDecoder;
 import network.model.StatusEncoder;
+import view.server.components.Console;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -19,8 +20,8 @@ public class ServerEndpoint {
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
-        System.out.println(format("%s is connected.", session.getId()));
         peers.add(session);
+        Console.setMessage(session.getId() + " is connected. Number of connections: " + peers.size());
     }
 
     @OnClose

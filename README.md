@@ -20,12 +20,6 @@
 
 ## How to Run Project
 
-Run Server
-
-    java -jar server.jar
- 
-Run Client
-
     java -jar client.jar
 
 ## How to Compile Project
