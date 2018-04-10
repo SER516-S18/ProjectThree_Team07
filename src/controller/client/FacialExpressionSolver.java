@@ -87,9 +87,9 @@ public class FacialExpressionSolver {
 	 * @return the upper face expression
 	 */
 	public static UpperFace computeUpperrFace(Status status) {
-		if (status.getEyebrowRaise()) {
+		if (status.getEyebrowRaise() > 0) {
 			return UpperFace.RAISE_BROW;
-		} else if (status.isEyebrowFurrow()) { 
+		} else if (status.isEyebrowFurrow() > 0) { 
 			return UpperFace.FURROW_BROW;
 		} else if (status.getLeftWink()) {
 			return UpperFace.WINK_LEFT;

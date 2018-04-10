@@ -134,7 +134,7 @@ public class ExpressiveTimeSeriesGraph {
         this.lookingDownSeries.addOrUpdate(new Millisecond(), (status.getLookingDown()?1:0)+21);
         this.leftWinkSeries.addOrUpdate(new Millisecond(), (status.getLeftWink()?1:0)+24);
         this.eyesOpenSeries.addOrUpdate(new Millisecond(), status.getEyesOpen()+27);
-        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), (status.getEyebrowRaise()?1:0)+30);
+        this.eyebrowRaiseSeries.addOrUpdate(new Millisecond(), status.getEyebrowRaise()+30);
         this.clenchSeries.addOrUpdate(new Millisecond(), status.getClench()+33);
 
     }
