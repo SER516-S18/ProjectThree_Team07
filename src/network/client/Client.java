@@ -7,6 +7,11 @@ import javax.websocket.DeploymentException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Websocket singleton client implementation
+ * @author team 7
+ *
+ */
 public class Client {
 
     private static ClientManager clientManager;
@@ -23,20 +28,16 @@ public class Client {
         return clientInstance;
     }
 
+    /**
+     * Starts the client
+     *
+     */
     public void start() {
         try {
             clientManager.connectToServer(ClientEndpoint.class, new URI("ws://" + Connection.getInstance().getHost() + ":" + Connection.getInstance().getPort() + "/ws/status"));
         } catch (DeploymentException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) {
-        Client client = Client.getInstance();
-
-        client.start();
-
-        for(;;){}
     }
 }
 

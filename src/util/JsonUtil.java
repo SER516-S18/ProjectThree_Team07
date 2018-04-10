@@ -8,8 +8,19 @@ import java.io.StringReader;
 
 import static util.StatusConstants.*;
 
+/**
+ * Json builders used to generate json payloads to send over the network
+ * @author team 7
+ *
+ */
 public class JsonUtil {
 
+    /**
+     * Encoding a status object to a json object
+     *
+     * @param status the status object to be serialized
+     *
+     */
     public static String encodeServerStatus(Status status) {
         return Json.createObjectBuilder()
                 .add(EXPRESSIVE, Json.createObjectBuilder()
@@ -51,6 +62,12 @@ public class JsonUtil {
                 .build().toString();
     }
 
+    /**
+     * Decodes a json string into a status object
+     *
+     * @param statusMessage json string representing a json status
+     *
+     */
     public static Status decodeServerStatus(String statusMessage) {
         Status status = Status.getInstance();
         JsonObject jsonObject = Json.createReader(new StringReader(statusMessage)).readObject();

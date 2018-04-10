@@ -1,5 +1,10 @@
 package util;
 
+/**
+ * Constants used by the server network
+ * @author team 7
+ *
+ */
 public class ServerConstants {
     public static final String LEFT_WINK = "Left Wink";
     public static final String RIGHT_WINK = "Right Wink";   

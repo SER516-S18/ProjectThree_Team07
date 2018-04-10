@@ -3,6 +3,7 @@ package test;
 import network.client.Client;
 import network.model.Connection;
 import network.server.Server;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import util.NetworkConstants;
@@ -33,5 +34,10 @@ public class TestNetwork {
         client.start();
 
         assertEquals(server.numConnections(), 1);
+    }
+
+    @After
+    public void afterTest() {
+        server.stop();
     }
 }

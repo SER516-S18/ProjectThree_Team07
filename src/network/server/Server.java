@@ -9,10 +9,13 @@ import javax.websocket.Session;
 
 import java.io.IOException;
 
-import static util.NetworkConstants.PORT;
-import static util.NetworkConstants.HOST;
 import static util.NetworkConstants.ROOT_PATH;
 
+/**
+ * Websocket singleton server implementation
+ * @author team 7
+ *
+ */
 public class Server {
 
 	private static org.glassfish.tyrus.server.Server server;
@@ -28,6 +31,12 @@ public class Server {
 		return serverInstance;
 	}
 
+	/**
+	 * Starts server under the given host and port
+	 *
+	 * @param host ip address of the server
+	 * @param port server port
+	 */
 	public void start(String host, int port) {
 		try {
 			server = new org.glassfish.tyrus.server.Server(host, port, "/" + ROOT_PATH, ServerEndpoint.class);
@@ -37,14 +46,26 @@ public class Server {
 		}
 	}
 
+	/**
+	 * Stops the server
+	 *
+	 */
 	public void stop() {
 		server.stop();
 	}
 
+	/**
+	 * Gets the number of clients connected
+	 * @return number of connections
+	 */
 	public int numConnections() {
 		return ServerEndpoint.peers.size();
 	}
 
+	/**
+	 * Sends a status object of the websocket
+	 * @param status status object to be sent
+	 */
 	public void sendStatus(Status status) {
 		for (Session peer : ServerEndpoint.peers) {
 			try {

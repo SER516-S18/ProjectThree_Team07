@@ -1,5 +1,9 @@
 package network.model;
 
+/**
+ * A singleton implementation of the current connection between a client and server
+ *
+ */
 public class Connection {
 
     private static Connection connectionInstance = null;

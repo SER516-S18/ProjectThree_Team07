@@ -1,5 +1,10 @@
 package util;
 
+/**
+ * Constants for all possible status attributes
+ * @author team 7
+ *
+ */
 public class StatusConstants {
 
     public static final String EXPRESSIVE = "Expressive";
