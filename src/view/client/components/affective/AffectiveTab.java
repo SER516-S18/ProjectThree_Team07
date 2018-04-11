@@ -7,8 +7,7 @@ public class AffectiveTab {
 
     public static JPanel getPanel() {
         JPanel affectiveTab = new JPanel();
-
-        affectiveTab.add(AffectiveGraph.getPanel());
+        affectiveTab.add(AffectiveTimeSeriesGraph.getinstance().getPanel());
 
         return affectiveTab;
     }
