@@ -10,10 +10,10 @@ public class ConnectionTest {
     @Test
     public void testConnectionModel() {
         Connection connection = Connection.getInstance();
-        connection.setHost("Localhost");
-        connection.setPort(8080);
-        assertEquals(connection.getHost(), "Localhost");
-        assertEquals(connection.getPort(), 8080);
+        connection.setHost("localhost");
+        connection.setPort(8025);
+        assertEquals(connection.getHost(), "localhost");
+        assertEquals(connection.getPort(), 8025);
     }
 
 }
