@@ -1,12 +1,14 @@
 package view.client;
 
 import network.model.Connection;
+import util.ClientConstants;
 import util.NetworkConstants;
 import util.ServerConstants;
 import view.client.components.affective.AffectiveTab;
 import view.client.components.affective.AffectiveTimeSeriesGraph;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
+
 import java.awt.event.KeyAdapter;
 import javax.swing.*;
 
@@ -29,34 +31,34 @@ public class Client {
 
     private static void createAndShowClientGUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame clientFrame = new JFrame("Project 3 Team 7 - Emotiv Xavier Control Panel");
+        JFrame clientFrame = new JFrame(ClientConstants.TITLE);
         clientFrame.getContentPane().setBackground(Color.WHITE);
-        clientFrame.setName("frame212");
+        clientFrame.setName(ClientConstants.FRAME_NAME);
         clientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         clientFrame.getContentPane().setLayout(null);
         clientFrame.setPreferredSize(new Dimension(1000, 700));
 
-        JLabel lblStatus = new JLabel("Status:");
+        JLabel lblStatus = new JLabel(ClientConstants.STATUS_LABEL);
         lblStatus.setBounds(665, 27, 90, 14);
-        lblStatus.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        lblStatus.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
         clientFrame.getContentPane().add(lblStatus);
 
         showStatusValLabel = new JLabel("");
         showStatusValLabel.setBounds(750, 27, 100, 14);
-        showStatusValLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        showStatusValLabel.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         clientFrame.getContentPane().add(showStatusValLabel);
 
         setServerReadyLabel();
 
-        JLabel lblTimeStamp = new JLabel("Time Stamp:");
+        JLabel lblTimeStamp = new JLabel(ClientConstants.TIMESTAMP_LABEL);
         lblTimeStamp.setBounds(650, 55, 90, 14);
-        lblTimeStamp.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        lblTimeStamp.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         clientFrame.getContentPane().add(lblTimeStamp);
 
-        showTimestampValLabel = new JLabel("0.00");
+        showTimestampValLabel = new JLabel(ClientConstants.TIMESTAMP_VALUE_LABEL);
         showTimestampValLabel.setBounds(750, 55, 100, 14);
-        showTimestampValLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        showTimestampValLabel.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         clientFrame.getContentPane().add(showTimestampValLabel);
 
         JTextField hostField = new JTextField(8);
@@ -66,17 +68,17 @@ public class Client {
         portField.setText(String.valueOf(Connection.getInstance().getPort()));
 
         JPanel connectToServerPanel = new JPanel();
-        connectToServerPanel.add(new JLabel("host:"));
+        connectToServerPanel.add(new JLabel(ClientConstants.HOST_LABEL));
         connectToServerPanel.add(hostField);
-        connectToServerPanel.add(new JLabel("port:"));
+        connectToServerPanel.add(new JLabel(ClientConstants.PORT_LABEL));
         connectToServerPanel.add(portField);
 
         JPanel errorPanel = new JPanel();
-        errorPanel.add(new JLabel("Cannot connect to server with the given host and port."));
+        errorPanel.add(new JLabel(ClientConstants.CONNECT_ERROR_MESSAGE));
 
-        JButton btnConnect = new JButton("Connect Server");
+        JButton btnConnect = new JButton(ClientConstants.CONNECT_BUTTON_LABEL);
         btnConnect.setBounds(180, 52, 180, 23);
-        btnConnect.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        btnConnect.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         btnConnect.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -84,10 +86,10 @@ public class Client {
                                 JOptionPane.showConfirmDialog(
                                         null,
                                         connectToServerPanel,
-                                        "Please Enter the Host and Port",
+                                        ClientConstants.CONNECT_DIALOG_MESSAGE,
                                         JOptionPane.OK_CANCEL_OPTION);
                         if (result == JOptionPane.OK_OPTION) {
-                            System.out.println("ServerInit.isServerLeaunched in Client " + ServerInit.isServerLeaunched);
+                            //System.out.println("ServerInit.isServerLeaunched in Client " + ServerInit.isServerLeaunched);
                             if (hostField.getText().equals(Connection.getInstance().getHost())
                                     && portField.getText().equals(String.valueOf(Connection.getInstance().getPort()))
                                     && ServerInit.isServerLeaunched) {
@@ -106,7 +108,7 @@ public class Client {
 
         JSplitPane splitPanePerformance = new JSplitPane();
         splitPanePerformance.setDividerLocation(490);
-        tabbedPane.addTab("Performance Metrics", null, splitPanePerformance, null);
+        tabbedPane.addTab(ClientConstants.PERFORMANCE_TAB_TITLE, null, splitPanePerformance, null);
 
 
         splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
@@ -116,21 +118,21 @@ public class Client {
         splitPanePerformance.setRightComponent(btnPanel);
         btnPanel.setLayout(null);
 
-        JButton btnInterest = new JButton("Interest");
+        JButton btnInterest = new JButton(ClientConstants.INTEREST_LABEL);
         btnInterest.setBackground(Color.WHITE);
         btnInterest.setBounds(60, 60, 140, 100);
         btnPanel.add(btnInterest);
         btnInterest.setBackground(AffectiveTimeSeriesGraph.getinstance().getInterestColor());
         btnInterest.setOpaque(true);
         btnInterest.setBorderPainted(false);
-        if(AffectiveTimeSeriesGraph.getinstance().getInterestColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getInterestColor() == Color.black) {
             btnInterest.setForeground(Color.WHITE);
         }
         btnInterest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getInterestColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.INTEREST + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE  + ServerConstants.INTEREST + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setInterestColor(newBackground);
@@ -143,14 +145,14 @@ public class Client {
             }
         });
 
-        JButton btnExcitement = new JButton("Excitement");
+        JButton btnExcitement = new JButton(ClientConstants.EXCITEMENT_LABEL);
 
 
         btnExcitement.setBackground(Color.WHITE);
         btnExcitement.setBounds(240, 60, 140, 100);
         btnPanel.add(btnExcitement);
         btnExcitement.setBackground(AffectiveTimeSeriesGraph.getinstance().getExcitementColor());
-        if(AffectiveTimeSeriesGraph.getinstance().getExcitementColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getExcitementColor() == Color.black) {
             btnExcitement.setForeground(Color.WHITE);
         }
         btnExcitement.setOpaque(true);
@@ -158,7 +160,7 @@ public class Client {
         btnExcitement.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getExcitementColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.EXCITEMENT + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE + ServerConstants.EXCITEMENT + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setExcitementColor(newBackground);
@@ -171,20 +173,20 @@ public class Client {
             }
         });
 
-        JButton btnEngagement = new JButton("Engagement");
+        JButton btnEngagement = new JButton(ClientConstants.ENGAGEMENT_LABEL);
         btnEngagement.setBackground(Color.WHITE);
         btnEngagement.setBounds(60, 210, 140, 100);
         btnPanel.add(btnEngagement);
         btnEngagement.setBackground(AffectiveTimeSeriesGraph.getinstance().getEngagementColor());
         btnEngagement.setOpaque(true);
         btnEngagement.setBorderPainted(false);
-        if(AffectiveTimeSeriesGraph.getinstance().getEngagementColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getEngagementColor() == Color.black) {
             btnEngagement.setForeground(Color.WHITE);
         }
         btnEngagement.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getEngagementColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.ENGAGEMENT + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE + ServerConstants.ENGAGEMENT + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setEngagementColor(newBackground);
@@ -197,20 +199,20 @@ public class Client {
             }
         });
 
-        JButton btnStress = new JButton("Stress");
+        JButton btnStress = new JButton(ClientConstants.STRESS_LABEL);
         btnStress.setBackground(Color.WHITE);
         btnStress.setBounds(240, 210, 140, 100);
         btnStress.setBackground(AffectiveTimeSeriesGraph.getinstance().getStressColor());
         btnStress.setOpaque(true);
         btnStress.setBorderPainted(false);
-        if(AffectiveTimeSeriesGraph.getinstance().getStressColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getStressColor() == Color.black) {
             btnStress.setForeground(Color.WHITE);
         }
         btnPanel.add(btnStress);
         btnStress.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getStressColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.STRESS + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE + ServerConstants.STRESS + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setStressColor(newBackground);
@@ -223,20 +225,20 @@ public class Client {
             }
         });
 
-        JButton btnRelaxation = new JButton("Relaxation");
+        JButton btnRelaxation = new JButton(ClientConstants.RELAXATION_LABEL);
         btnRelaxation.setBackground(Color.WHITE);
         btnRelaxation.setBounds(60, 370, 140, 100);
         btnPanel.add(btnRelaxation);
         btnRelaxation.setBackground(AffectiveTimeSeriesGraph.getinstance().getRelaxationColor());
         btnRelaxation.setOpaque(true);
         btnRelaxation.setBorderPainted(false);
-        if(AffectiveTimeSeriesGraph.getinstance().getRelaxationColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getRelaxationColor() == Color.black) {
             btnRelaxation.setForeground(Color.WHITE);
         }
         btnRelaxation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getRelaxationColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.RELAXATION + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE + ServerConstants.RELAXATION + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setRelaxationColor(newBackground);
@@ -249,20 +251,20 @@ public class Client {
             }
         });
 
-        JButton btnFocus = new JButton("Focus");
+        JButton btnFocus = new JButton(ClientConstants.FOCUS_LABEL);
         btnFocus.setBackground(Color.WHITE);
         btnFocus.setBounds(240, 370, 140, 100);
         btnFocus.setBackground(AffectiveTimeSeriesGraph.getinstance().getFocusColor());
         btnFocus.setOpaque(true);
         btnFocus.setBorderPainted(false);
-        if(AffectiveTimeSeriesGraph.getinstance().getFocusColor()==Color.black){
+        if (AffectiveTimeSeriesGraph.getinstance().getFocusColor() == Color.black) {
             btnFocus.setForeground(Color.WHITE);
         }
         btnPanel.add(btnFocus);
         btnFocus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Color initialBackground = AffectiveTimeSeriesGraph.getinstance().getFocusColor();
-                Color newBackground = JColorChooser.showDialog(null, "Change " + ServerConstants.FOCUS + " Color",
+                Color newBackground = JColorChooser.showDialog(null, ClientConstants.COLOR_CHANGE_DIALOG_TITLE + ServerConstants.FOCUS + " Color",
                         initialBackground);
                 if (newBackground != null) {
                     AffectiveTimeSeriesGraph.getinstance().setFocusColor(newBackground);
@@ -275,27 +277,27 @@ public class Client {
             }
         });
 
-        JLabel lblDisplayLength = new JLabel("Display Length :");
+        JLabel lblDisplayLength = new JLabel(ClientConstants.DISPLAY_LENGTH_LABEL);
         lblDisplayLength.setBounds(140, 500, 130, 20);
         btnPanel.add(lblDisplayLength);
-        JLabel lblDisplayLengthValue = new JLabel(Integer.toString(AffectiveTimeSeriesGraph.getinstance().getDisplayLength().intValue()/1000));
+        JLabel lblDisplayLengthValue = new JLabel(Integer.toString(AffectiveTimeSeriesGraph.getinstance().getDisplayLength().intValue() / 1000));
         lblDisplayLengthValue.setBounds(260, 500, 50, 20);
         btnPanel.add(lblDisplayLengthValue);
 
-        JLabel labelSec = new JLabel("sec");
+        JLabel labelSec = new JLabel(ClientConstants.SEC_LABEL);
         labelSec.setBounds(300, 500, 50, 20);
         btnPanel.add(labelSec);
 
 
         JSplitPane splitPaneExpressive = new JSplitPane();
-        tabbedPane.addTab("Expressive Suite", null, splitPaneExpressive, null);
+        tabbedPane.addTab(ClientConstants.EXPRESSIVE_TAB, null, splitPaneExpressive, null);
         splitPaneExpressive.setDividerLocation(490);
 
         splitPaneExpressive.setLeftComponent(FacialExpressions.getPanel());
 
         splitPaneExpressive.setRightComponent(ExpressiveTimeSeriesGraph.getinstance().getPanel());
 
-        JButton btnOpenServer = new JButton("Open EmoComposer");
+        JButton btnOpenServer = new JButton(ClientConstants.EMO_COMPOSER_BUTTON_TEXT);
         btnOpenServer.setBounds(180, 25, 180, 23);
 
         btnOpenServer.addActionListener(
@@ -305,7 +307,7 @@ public class Client {
                     }
                 });
 
-        btnOpenServer.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        btnOpenServer.setFont(new Font(ClientConstants.FONT_TYPE, Font.PLAIN, 16));
         clientFrame.getContentPane().add(btnOpenServer);
         clientFrame.setVisible(true);
         clientFrame.pack();
@@ -315,10 +317,10 @@ public class Client {
 
     private static void setServerReadyLabel() {
         if (isServerReady) {
-            showStatusValLabel.setText("Connected");
+            showStatusValLabel.setText(ClientConstants.SERVER_STATUS_TEXT_SUCCESS);
             showStatusValLabel.setForeground(Color.GREEN);
         } else {
-            showStatusValLabel.setText("Not Connected");
+            showStatusValLabel.setText(ClientConstants.SERVER_STATUS_TEXT_UNSUCCESS);
             showStatusValLabel.setForeground(Color.RED);
         }
     }
