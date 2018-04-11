@@ -28,20 +28,20 @@ public class MessageSender {
 		}
 	}
 
-	private static void clearLowerFaceValues() {
+	public static void clearLowerFaceValues() {
 		status.setSmile(0);
 		status.setClench(0);
 		status.setSmirkLeft(0);
 		status.setSmirkRight(0);
 		status.setLaugh(0);
 	}
-	
-	private static void clearEyeBrowValue() {
+
+	public static void clearEyeBrowValue() {
 		status.setEyebrowRaise(0);
 		status.setEyebrowFurrow(0);
 	}
-	
-	private static void clearEyeActionValues() {
+
+	public static void clearEyeActionValues() {
 		status.setBlink(false);
 		status.setLeftWink(false);
 		status.setRightWink(false);
