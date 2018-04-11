@@ -70,11 +70,10 @@ public class Client {
 
   private static JButton createInterestButton() {
     JButton btnInterest = new JButton(ClientConstants.INTEREST_LABEL);
-    btnInterest.setBackground(Color.WHITE);
     btnInterest.setBounds(60, 60, 140, 100);
     btnInterest.setBackground(AffectiveTimeSeriesGraph.getinstance().getInterestColor());
     btnInterest.setOpaque(true);
-    btnInterest.setBorderPainted(false);
+    btnInterest.setBorderPainted(true);
     if (AffectiveTimeSeriesGraph.getinstance().getInterestColor() == Color.black) {
       btnInterest.setForeground(Color.WHITE);
     }
@@ -93,7 +92,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnInterest.setBackground(newBackground);
               btnInterest.setOpaque(true);
-              btnInterest.setBorderPainted(false);
+              btnInterest.setBorderPainted(true);
               // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
             }
           }
@@ -103,15 +102,13 @@ public class Client {
 
   private static JButton createExcitementButton() {
     JButton btnExcitement = new JButton(ClientConstants.EXCITEMENT_LABEL);
-
-    btnExcitement.setBackground(Color.WHITE);
     btnExcitement.setBounds(240, 60, 140, 100);
     btnExcitement.setBackground(AffectiveTimeSeriesGraph.getinstance().getExcitementColor());
     if (AffectiveTimeSeriesGraph.getinstance().getExcitementColor() == Color.black) {
       btnExcitement.setForeground(Color.WHITE);
     }
     btnExcitement.setOpaque(true);
-    btnExcitement.setBorderPainted(false);
+    btnExcitement.setBorderPainted(true);
     btnExcitement.addActionListener(
         new ActionListener() {
           public void actionPerformed(ActionEvent e) {
@@ -128,8 +125,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnExcitement.setBackground(newBackground);
               btnExcitement.setOpaque(true);
-              btnExcitement.setBorderPainted(false);
-              // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+              btnExcitement.setBorderPainted(true);
             }
           }
         });
@@ -138,11 +134,10 @@ public class Client {
 
   private static JButton createEngagementButton() {
     JButton btnEngagement = new JButton(ClientConstants.ENGAGEMENT_LABEL);
-    btnEngagement.setBackground(Color.WHITE);
     btnEngagement.setBounds(60, 210, 140, 100);
     btnEngagement.setBackground(AffectiveTimeSeriesGraph.getinstance().getEngagementColor());
     btnEngagement.setOpaque(true);
-    btnEngagement.setBorderPainted(false);
+    btnEngagement.setBorderPainted(true);
     if (AffectiveTimeSeriesGraph.getinstance().getEngagementColor() == Color.black) {
       btnEngagement.setForeground(Color.WHITE);
     }
@@ -162,8 +157,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnEngagement.setBackground(newBackground);
               btnEngagement.setOpaque(true);
-              btnEngagement.setBorderPainted(false);
-              // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+              btnEngagement.setBorderPainted(true);
             }
           }
         });
@@ -172,11 +166,10 @@ public class Client {
 
   private static JButton createStressButton() {
     JButton btnStress = new JButton(ClientConstants.STRESS_LABEL);
-    btnStress.setBackground(Color.WHITE);
     btnStress.setBounds(240, 210, 140, 100);
     btnStress.setBackground(AffectiveTimeSeriesGraph.getinstance().getStressColor());
     btnStress.setOpaque(true);
-    btnStress.setBorderPainted(false);
+    btnStress.setBorderPainted(true);
     if (AffectiveTimeSeriesGraph.getinstance().getStressColor() == Color.black) {
       btnStress.setForeground(Color.WHITE);
     }
@@ -194,7 +187,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnStress.setBackground(newBackground);
               btnStress.setOpaque(true);
-              btnStress.setBorderPainted(false);
+              btnStress.setBorderPainted(true);
               // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
             }
           }
@@ -204,13 +197,12 @@ public class Client {
 
   private static JButton createRelaxationButton() {
     JButton btnRelaxation = new JButton(ClientConstants.RELAXATION_LABEL);
-    btnRelaxation.setBackground(Color.WHITE);
     btnRelaxation.setBounds(60, 370, 140, 100);
     btnRelaxation.setBackground(AffectiveTimeSeriesGraph.getinstance().getRelaxationColor());
     btnRelaxation.setOpaque(true);
-    btnRelaxation.setBorderPainted(false);
+    btnRelaxation.setBorderPainted(true);
     if (AffectiveTimeSeriesGraph.getinstance().getRelaxationColor() == Color.black) {
-      btnRelaxation.setForeground(Color.WHITE);
+      btnRelaxation.setForeground(Color.BLACK);
     }
     btnRelaxation.addActionListener(
         new ActionListener() {
@@ -228,8 +220,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnRelaxation.setBackground(newBackground);
               btnRelaxation.setOpaque(true);
-              btnRelaxation.setBorderPainted(false);
-              // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
+              btnRelaxation.setBorderPainted(true);
             }
           }
         });
@@ -238,11 +229,10 @@ public class Client {
 
   private static JButton createFocusButton() {
     JButton btnFocus = new JButton(ClientConstants.FOCUS_LABEL);
-    btnFocus.setBackground(Color.WHITE);
     btnFocus.setBounds(240, 370, 140, 100);
     btnFocus.setBackground(AffectiveTimeSeriesGraph.getinstance().getFocusColor());
     btnFocus.setOpaque(true);
-    btnFocus.setBorderPainted(false);
+    btnFocus.setBorderPainted(true);
     if (AffectiveTimeSeriesGraph.getinstance().getFocusColor() == Color.black) {
       btnFocus.setForeground(Color.WHITE);
     }
@@ -260,7 +250,7 @@ public class Client {
               AffectiveTimeSeriesGraph.getinstance().updateGraph();
               btnFocus.setBackground(newBackground);
               btnFocus.setOpaque(true);
-              btnFocus.setBorderPainted(false);
+              btnFocus.setBorderPainted(true);
               // splitPanePerformance.setLeftComponent(AffectiveTab.getPanel());
             }
           }

@@ -31,12 +31,11 @@ public class Console {
 
 	public static void getPanel() {
 		console = new JPanel();
-
 		console.setPreferredSize(new Dimension(1000, 200));
 		console.setLayout(null);
 
 		JLabel consoleLabel = new JLabel("Console");
-		consoleLabel.setBounds(15, 0, 119, 27);
+		consoleLabel.setBounds(15, 5, 119, 27);
 		consoleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		console.add(consoleLabel);
 
