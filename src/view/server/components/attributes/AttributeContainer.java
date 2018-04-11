@@ -21,6 +21,9 @@ public class AttributeContainer {
 	private static JSpinner spinnerFocus = null;
 	private static JToggleButton btnActivate = null;
 	private static JCheckBox detectionAutoResetCheckBox = null;
+	private static JPanel attributeContainer = null;
+	private static JPanel detectionTab = null;
+	private static JTabbedPane tabbedPane = null;
 
 	public static boolean getActivateStatus() {
 		return btnActivate.isSelected();
@@ -92,22 +95,34 @@ public class AttributeContainer {
 	public static JSpinner getFocusSpinner() {
 		return spinnerFocus;
 	}
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+
 	@SuppressWarnings("unchecked")
 	public static JPanel getPanel() {
-		JPanel attributeContainer = new JPanel();
-
-
+		
+		if (attributeContainer == null) {
+			attributeContainer = new JPanel();
+			constructAttributePanel();
+		}
+		return attributeContainer;
+	}
+	
+	
+	public static void constructAttributePanel() {
+		constructStatusPanel();
+		constructAffectivePanel();
+		constructExpressivePanel();
+	}
+		
+	public static void constructStatusPanel() {
+	
 		attributeContainer.setPreferredSize(new Dimension(600, 360));
 		attributeContainer.setLayout(null);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 1000, 400);
 		attributeContainer.add(tabbedPane);
 
-		JPanel detectionTab = new JPanel();
+		detectionTab = new JPanel();
 		detectionTab.setBackground(Color.WHITE);
 		detectionTab.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		tabbedPane.addTab("Detection", null, detectionTab, null);
@@ -132,25 +147,14 @@ public class AttributeContainer {
 		labelSec.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		labelSec.setBounds(224, 61, 69, 20);
 		detectionTab.add(labelSec);
+	}
+	
+	public static void constructAffectivePanel() {
 
-//		Affective Input Items
 		JLabel labelAffective = new JLabel("Affective");
 		labelAffective.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		labelAffective.setBounds(15, 100, 76, 20);
 		detectionTab.add(labelAffective);
-//-----------
-		/*JLabel lbMeditation = new JLabel("Meditation");
-		lbMeditation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lbMeditation.setBounds(15, 130, 96, 20);
-		detectionTab.add(lbMeditation);
-
-		spinnerInterest = new JSpinner();
-		spinnerInterest.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-		JSpinner.NumberEditor meditationSpinnerEditor = new JSpinner.NumberEditor(spinnerInterest);
-		spinnerInterest.setEditor(meditationSpinnerEditor);
-		spinnerInterest.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerInterest.setBounds(320, 130, 59, 26);
-		detectionTab.add(spinnerInterest);*/
 		
 		JLabel lbInterest = new JLabel(ServerConstants.INTEREST);
 		lbInterest.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -158,26 +162,12 @@ public class AttributeContainer {
 		detectionTab.add(lbInterest);
 
 		spinnerInterest = new JSpinner();
-		spinnerInterest.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerInterest.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor meditationSpinnerEditor = new JSpinner.NumberEditor(spinnerInterest);
 		spinnerInterest.setEditor(meditationSpinnerEditor);
 		spinnerInterest.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		spinnerInterest.setBounds(320, 130, 59, 26);
 		detectionTab.add(spinnerInterest);
-		
-//---------
-	/*	JLabel lblEngagement = new JLabel("Engagement / Boredom");
-		lblEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblEngagement.setBounds(15, 160, 174, 20);
-		detectionTab.add(lblEngagement);
-
-		spinnerEngagement = new JSpinner();
-		spinnerEngagement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-		JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(spinnerEngagement);
-		spinnerEngagement.setEditor(editor2);
-		spinnerEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerEngagement.setBounds(320, 160, 59, 26);
-		detectionTab.add(spinnerEngagement);*/
 		
 		JLabel lblEngagement = new JLabel(ServerConstants.ENGAGEMENT);
 		lblEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -185,26 +175,12 @@ public class AttributeContainer {
 		detectionTab.add(lblEngagement);
 
 		spinnerEngagement = new JSpinner();
-		spinnerEngagement.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerEngagement.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(spinnerEngagement);
 		spinnerEngagement.setEditor(editor2);
 		spinnerEngagement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		spinnerEngagement.setBounds(320, 160, 59, 26);
 		detectionTab.add(spinnerEngagement);
-//--------
-	/*	JLabel lblStress = new JLabel("Excitement Short Term");
-		lblStress.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblStress.setBounds(15, 190, 174, 20);
-		detectionTab.add(lblStress);
-
-		spinnerStress = new JSpinner();
-		spinnerStress.setBounds(320, 190, 59, 26);
-		spinnerStress.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerStress.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-		JSpinner.NumberEditor editor5 = new JSpinner.NumberEditor(spinnerStress);
-		spinnerStress.setEditor(editor5);
-		detectionTab.add(spinnerStress);
-		tabbedPane.setEnabledAt(0, true);*/
 		
 		JLabel lblStress = new JLabel(ServerConstants.STRESS);
 		lblStress.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -214,26 +190,11 @@ public class AttributeContainer {
 		spinnerStress = new JSpinner();
 		spinnerStress.setBounds(320, 190, 59, 26);
 		spinnerStress.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerStress.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerStress.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor5 = new JSpinner.NumberEditor(spinnerStress);
 		spinnerStress.setEditor(editor5);
 		detectionTab.add(spinnerStress);
 		tabbedPane.setEnabledAt(0, true);
-		
-//------------
-
-		/*JLabel lblRelaxation = new JLabel("Frustration");
-		lblRelaxation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblRelaxation.setBounds(15, 220, 86, 20);
-		detectionTab.add(lblRelaxation);
-
-		spinnerRelaxation = new JSpinner();
-		spinnerRelaxation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerRelaxation.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-		JSpinner.NumberEditor editor4 = new JSpinner.NumberEditor(spinnerRelaxation);
-		spinnerRelaxation.setEditor(editor4);
-		spinnerRelaxation.setBounds(320, 220, 59, 26);
-		detectionTab.add(spinnerRelaxation);*/
 		
 		JLabel lblRelaxation = new JLabel(ServerConstants.RELAXATION);
 		lblRelaxation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -242,26 +203,11 @@ public class AttributeContainer {
 
 		spinnerRelaxation = new JSpinner();
 		spinnerRelaxation.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerRelaxation.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerRelaxation.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor4 = new JSpinner.NumberEditor(spinnerRelaxation);
 		spinnerRelaxation.setEditor(editor4);
 		spinnerRelaxation.setBounds(320, 220, 59, 26);
 		detectionTab.add(spinnerRelaxation);
-
-//-----------
-
-		/*JLabel lblExcitement = new JLabel("Excitement Long Term");
-		lblExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblExcitement.setBounds(15, 250, 260, 20);
-		detectionTab.add(lblExcitement);
-
-		spinnerExcitement = new JSpinner();
-		spinnerExcitement.setModel(new SpinnerNumberModel(0.0, 0.0, 1000.0, 0.01));
-		JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(spinnerExcitement);
-		spinnerExcitement.setEditor(editor3);
-		spinnerExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		spinnerExcitement.setBounds(320, 250, 59, 26);
-		detectionTab.add(spinnerExcitement);*/
 		
 		JLabel lblExcitement = new JLabel(ServerConstants.EXCITEMENT);
 		lblExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -269,7 +215,7 @@ public class AttributeContainer {
 		detectionTab.add(lblExcitement);
 
 		spinnerExcitement = new JSpinner();
-		spinnerExcitement.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerExcitement.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(spinnerExcitement);
 		spinnerExcitement.setEditor(editor3);
 		spinnerExcitement.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -282,17 +228,17 @@ public class AttributeContainer {
 		detectionTab.add(lblFocus);
 
 		spinnerFocus = new JSpinner();
-		spinnerFocus.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerFocus.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor51 = new JSpinner.NumberEditor(spinnerFocus);
 		spinnerFocus.setEditor(editor51);
 		spinnerFocus.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		spinnerFocus.setBounds(320, 280, 59, 26);
-		detectionTab.add(spinnerFocus);
-		
+		detectionTab.add(spinnerFocus);	
+	}
 		
 
-//------------------
-//	Expressive Input Items
+	public static void constructExpressivePanel() {
+		
 		JLabel labelExpressive = new JLabel("Expressive");
 		labelExpressive.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		labelExpressive.setBounds(430, 100, 100, 20);
@@ -313,7 +259,7 @@ public class AttributeContainer {
 		detectionTab.add(upperFaceCombo);
 
 		spinnerUpperFace = new JSpinner();
-		spinnerUpperFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerUpperFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor0 = new JSpinner.NumberEditor(spinnerUpperFace);
 		spinnerUpperFace.setEditor(editor0);
 		spinnerUpperFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -334,7 +280,7 @@ public class AttributeContainer {
 		detectionTab.add(lowerFaceCombo);
 
 		spinnerLowerFace = new JSpinner();
-		spinnerLowerFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+		spinnerLowerFace.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
 		JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinnerLowerFace);
 		spinnerLowerFace.setEditor(editor);
 		spinnerLowerFace.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -365,8 +311,5 @@ public class AttributeContainer {
 		detectionAutoResetCheckBox.setBounds(862, 190, 183, 29);
 		detectionTab.add(detectionAutoResetCheckBox);
 
-//		-----------
-
-		 return attributeContainer;
 	 }
 }

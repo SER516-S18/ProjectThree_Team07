@@ -47,7 +47,7 @@ public class ServerCommand {
         intervalSpinner = new JSpinner();
         intervalSpinner.setAutoscrolls(true);
         intervalSpinner.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.01));
+        intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.5));
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(intervalSpinner);
         intervalSpinner.setEditor(editor);
         intervalSpinner.setBounds(370, 20, 68, 26);
