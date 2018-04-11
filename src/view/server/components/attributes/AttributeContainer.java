@@ -311,8 +311,6 @@ public class AttributeContainer {
               ServerConstants.BLINK,
               ServerConstants.LOOKING_LEFT,
               ServerConstants.LOOKING_RIGHT,
-              "Looking Up",
-              "Looking Down",
               ServerConstants.RIGHT_WINK,
               ServerConstants.LEFT_WINK
             }));

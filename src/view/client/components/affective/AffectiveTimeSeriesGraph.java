@@ -168,7 +168,7 @@ public class AffectiveTimeSeriesGraph {
     interestColor = Color.MAGENTA;
     engagementColor = Color.BLUE;
     stressColor = Color.GRAY;
-    relaxationColor = Color.BLACK;
+    relaxationColor = Color.ORANGE;
     excitementColor = Color.CYAN;
     focusColor = Color.RED;
   }
