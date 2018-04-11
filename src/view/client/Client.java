@@ -19,6 +19,7 @@ import controller.client.FacialExpressionSolver;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/** @author Team 7 Client View */
 public class Client {
   private static boolean isServerReady = false;
   private static JLabel showStatusValLabel;
@@ -258,6 +259,7 @@ public class Client {
     return btnFocus;
   }
 
+  /** Create anf SHow Client GUI */
   private static void createAndShowClientGUI() {
     JFrame clientFrame = createClientFrame();
     clientFrame.getContentPane().add(createLabelStatus());
