@@ -12,11 +12,19 @@ import javax.swing.*;
 import static util.NetworkConstants.HOST;
 import static util.NetworkConstants.PORT;
 
+/**
+ * @author Team 7
+ * Server view
+ */
 public class Server {
   public static Server serverViewInstance;
   public static JFrame serverView;
   public static boolean isServerUp;
 
+  /**
+   * Add server components to Server ui
+   * @param Container contentPane
+   */
   private static void addComponentsToPane(Container contentPane) {
     contentPane.setLayout(new BorderLayout(5, 5));
     contentPane.setBackground(Color.decode("#C5E0D8"));
@@ -33,12 +41,16 @@ public class Server {
     return serverViewInstance;
   }
 
+  /**
+   * Creartes server gui
+   * @return JFrame ServerGUI
+   */
   public JFrame createAndShowServerGUI() {
 
-    if(serverView == null) {
+    if (serverView == null) {
       JFrame.setDefaultLookAndFeelDecorated(true);
       serverView = new JFrame("Project 3 Team 7 - EmojiServer");
-//      serverView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+      //      serverView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
       // set up the content pane and add swing components to it
       addComponentsToPane(serverView.getContentPane());
       serverView.setPreferredSize(new Dimension(1000, 800));
@@ -48,6 +60,10 @@ public class Server {
     return serverView;
   }
 
+  /**
+   * Server main
+   * @param args
+   */
   public static void main(String[] args) {
     network.server.Server server = network.server.Server.getInstance();
 
