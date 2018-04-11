@@ -11,7 +11,7 @@ public class ClientConstants {
 	public static final String TITLE = "Project 3 Team 7 - Emotiv Xavier Control Panel";
 	public static final String FRAME_NAME = "frame212";
 	public static final String STATUS_LABEL = "Status:";
-	public static final String FONT_TYPE = "Times New Roman:";
+	public static final String FONT_TYPE = "Times New Roman";
 	public static final String TIMESTAMP_LABEL= "Time Stamp:";
 	public static final String TIMESTAMP_VALUE_LABEL= "0.00";
 	public static final String HOST_LABEL= "Host:";
