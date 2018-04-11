@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * @author Team 7
  * A Timer singleton that runs repetitively for the specified interval
- *
  */
 public class MessageTimer {
 	private boolean isAutoRepeated = false;
@@ -31,7 +31,8 @@ public class MessageTimer {
 	/**
 	 * Constructs and starts the timer thread
 	 * 
-	 * @param interval - interval in which data has to sent to the client
+	 * @param double interval - interval in which data has to sent to the client
+   * @param boolean isAutoRepeated
 	 */
 	public void startTimer(double interval,boolean isAutoRepeated) {
 		this.isAutoRepeated = isAutoRepeated;
@@ -57,19 +58,32 @@ public class MessageTimer {
 
 	/**
 	 * Sets if the timer should repeat or not
+   * @param boolean autoRepeated
 	 */
 	public void setAutoRepeated(boolean autoRepeated) {
 		this.isAutoRepeated = autoRepeated;
 	}
-	
+
+  /**
+   * Update time
+   * @param double interval
+   */
 	void updateTimer(double interval) {
 		timeCounter += interval; 
 	}
-	
+
+  /**
+   * Get timer in seconds
+   * @return double time counter
+   */
 	double getTimerInSeconds() {
 		return Math.round(timeCounter * 100.0) / 100.0;
 	}
-	
+
+  /**
+   *  Set timer
+   * @param double time
+   */
 	public void setTimer(double time) {
 		timeCounter = time;
 	}

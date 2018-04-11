@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * @author Team 7
+ * Observer for timestamp
+ */
 public class TimerObserver implements Observer {
 
 	private static TimerObserver timerObserverInstance = null;
@@ -14,7 +18,12 @@ public class TimerObserver implements Observer {
 		}
 		return timerObserverInstance;
 	}
-	
+
+  /**
+   * Updates timestamp values
+   * @param observable
+   * @param arg
+   */
 	@Override
 	public void update(Observable observable, Object arg) {		
 		ArrayList<Status> statusContainer = StatusObservable.getObserverInstance().getStatusContainer(); 
