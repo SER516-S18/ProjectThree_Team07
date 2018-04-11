@@ -1,47 +1,59 @@
 package network.model;
 
 /**
+ * @author Team 7
  * A singleton implementation of the current connection between a client and server
  *
- */
+ * */
 public class Connection {
 
-    private static Connection connectionInstance = null;
+  private static Connection connectionInstance = null;
+  private String host = util.NetworkConstants.HOST;
+  private int port = util.NetworkConstants.PORT;
+  private boolean isLaunched;
 
-    private String host = util.NetworkConstants.HOST;
-    private int port = util.NetworkConstants.PORT;
-    private boolean isLaunched;
+  private Connection() {}
 
-//    public boolean isLaunched() {
-//        return isLaunched;
-//    }
-//
-//    public void setLaunched(boolean launched) {
-//        isLaunched = launched;
-//    }
-
-    private Connection() {}
-
-    public static Connection getInstance() {
-        if (connectionInstance == null) {
-            connectionInstance = new Connection();
-        }
-        return connectionInstance;
+  /**
+   * Connection singleton instance
+   * @return Connection instance
+   */
+  public static Connection getInstance() {
+    if (connectionInstance == null) {
+      connectionInstance = new Connection();
     }
+    return connectionInstance;
+  }
 
-    public String getHost() {
-        return host;
-    }
+  /**
+   * Getter for host
+   * @return String host
+   */
+  public String getHost() {
+    return host;
+  }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
+  /**
+   * Setter for Host
+   * @param String host
+   */
+  public void setHost(String host) {
+    this.host = host;
+  }
 
-    public int getPort() {
-        return port;
-    }
+  /**
+   * Getter for Port
+   * @return int port
+   */
+  public int getPort() {
+    return port;
+  }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
+  /**
+   * Setter for port
+   * @param int port
+   */
+  public void setPort(int port) {
+    this.port = port;
+  }
 }

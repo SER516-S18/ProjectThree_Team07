@@ -3,16 +3,14 @@ package controller.client;
 import network.model.Status;
 
 /**
- * Computes the Expressions data and choose face expression according to it
- *
- * @author raam
+ * @author Team 7
+ * * @implNote Computes the Expressions data and choose face expression according to it
  */
 public class FacialExpressionSolver {
 
   /**
-   * Types of Lower Face Expressions
-   *
-   * @author raam
+   * @author Team 7
+   * @implNote Types of Lower Face Expressions
    */
   public enum LowerFace {
     SMILE("smile"),
@@ -34,9 +32,8 @@ public class FacialExpressionSolver {
   }
 
   /**
-   * Types of Upper Face Expressions
-   *
-   * @author raam
+   * @author Team 7
+   * @implNote Types of Upper Face Expressions
    */
   public enum UpperFace {
     RAISE_BROW("raise_brow"),
@@ -61,7 +58,6 @@ public class FacialExpressionSolver {
 
   /**
    * Computes the lower face expression based on the data sent
-   *
    * @param status - data sent from the server
    * @return the lower face expression
    */
