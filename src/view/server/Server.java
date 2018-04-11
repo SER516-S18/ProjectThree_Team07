@@ -49,7 +49,7 @@ public class Server {
 
     if (serverView == null) {
       JFrame.setDefaultLookAndFeelDecorated(true);
-      serverView = new JFrame("Project 3 Team 7 - EmojiServer");
+      serverView = new JFrame("Project 3 Team 7 - EmoComposer");
       //      serverView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
       // set up the content pane and add swing components to it
       addComponentsToPane(serverView.getContentPane());

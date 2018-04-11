@@ -1,10 +1,12 @@
 package view.client.components.expressive;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.*;
 
 import controller.client.FacialExpressionSolver;
+import util.ClientConstants;
 import view.client.ImageLoader;
 
 /**
@@ -15,6 +17,7 @@ import view.client.ImageLoader;
 public class FacialExpressions {
 
 	static JPanel facialExpressions = null;
+	static JComboBox<String> fileTypeCombo = null;
 	
 	/**
 	 * Constructs and return the facial expression panel
@@ -27,6 +30,20 @@ public class FacialExpressions {
         }
         
         return facialExpressions;
+    }
+    
+    public static JComboBox<String> getFileTypeCombo() {
+    		if (fileTypeCombo == null) {
+    			constructFileTypeCombo();
+    		}
+    		return fileTypeCombo;
+    }
+    
+    public static void constructFileTypeCombo() {
+		fileTypeCombo = new JComboBox<String>();
+		fileTypeCombo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		fileTypeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {ClientConstants.IMAGE_TYPE, ClientConstants.EMOJI_TYPE}));
+		
     }
     
     public static void constructFacePanel() {

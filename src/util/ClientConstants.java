@@ -7,8 +7,7 @@ package util;
  */
 public class ClientConstants {
   public static final String IMG_PATH = "resources/images/";
-  public static final String FILE_TYPE = ".jpeg";
-  public static final String TITLE = "Project 3 Team 7 - Emotiv Xavier Control Panel";
+  public static final String TITLE = "Project 3 Team 7 - Emotiv Control Panel";
   public static final String FRAME_NAME = "frame212";
   public static final String STATUS_LABEL = "Status:";
   public static final String FONT_TYPE = "Times New Roman";
@@ -34,4 +33,14 @@ public class ClientConstants {
   public static final String EMO_COMPOSER_BUTTON_TEXT = "Open EmoComposer";
   public static final String SERVER_STATUS_TEXT_SUCCESS = "Connected";
   public static final String SERVER_STATUS_TEXT_UNSUCCESS = "Not Connected";
+  public static final String FILE_TYPE_JPEG = ".jpeg";
+  public static final String FILE_TYPE_PNG = ".png";
+  public static final String EMOJI_TYPE = "emoji";
+  public static final String IMAGE_TYPE = "image";
+  public static final int PNG_WIDTH = 380;
+  public static final int PNG_LOWER_HEIGHT = 140;
+  public static final int PNG_UPPER_HEIGHT = 250;
+  public static final int JPEG_WIDTH = 490;
+  public static final int JPEG_LOWER_HEIGHT = 250;
+  public static final int JPEG_UPPER_HEIGHT = 265;
 }

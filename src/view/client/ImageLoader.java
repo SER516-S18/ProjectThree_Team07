@@ -8,6 +8,7 @@ import javax.imageio.*;
 import javax.swing.*;
 
 import util.ClientConstants;
+import view.client.components.expressive.FacialExpressions;
 
 /**
  * This class loads the facial images in the specified panel
@@ -24,7 +25,7 @@ public class ImageLoader {
 	 */
 	public static Image getImage(String path) {
 		try {
-		    File pathToFile = new File(ClientConstants.IMG_PATH + path + ClientConstants.FILE_TYPE);
+		    File pathToFile = new File(ClientConstants.IMG_PATH + path);
 		    return ImageIO.read(pathToFile);
 		} catch (IOException ex) {
 		    ex.printStackTrace();
@@ -42,8 +43,19 @@ public class ImageLoader {
 	 */
     public static void loadImage(JPanel facePanel, String upperImagePath, String lowerImagePath) {
     		
-    		Image scaledUpperImage = getImage(upperImagePath).getScaledInstance(490, 265, Image.SCALE_SMOOTH);
-    		Image scaledLowerImage = getImage(lowerImagePath).getScaledInstance(490, 250, Image.SCALE_SMOOTH);
+    		Image scaledUpperImage = null;		
+    		Image scaledLowerImage = null;
+    		
+       	facePanel.removeAll();
+    		if (FacialExpressions.getFileTypeCombo().getSelectedItem().toString().equals(ClientConstants.EMOJI_TYPE)) {
+    			scaledUpperImage = 	getImage(upperImagePath + ClientConstants.FILE_TYPE_PNG).getScaledInstance(ClientConstants.PNG_WIDTH, ClientConstants.PNG_UPPER_HEIGHT, Image.SCALE_SMOOTH);
+    			scaledLowerImage =	getImage(lowerImagePath + ClientConstants.FILE_TYPE_PNG).getScaledInstance(ClientConstants.PNG_WIDTH, ClientConstants.PNG_LOWER_HEIGHT, Image.SCALE_SMOOTH);
+    			facePanel.setBackground(new Color(255, 255, 255));
+    		} else {
+    			scaledUpperImage = 	getImage(upperImagePath + ClientConstants.FILE_TYPE_JPEG).getScaledInstance(ClientConstants.JPEG_WIDTH, ClientConstants.JPEG_UPPER_HEIGHT, Image.SCALE_SMOOTH);
+    			scaledLowerImage =	getImage(lowerImagePath + ClientConstants.FILE_TYPE_JPEG).getScaledInstance(ClientConstants.JPEG_WIDTH, ClientConstants.JPEG_LOWER_HEIGHT, Image.SCALE_SMOOTH);
+    			facePanel.setBackground(new Color(177, 177, 177));
+    		}
     		
     		JLabel upperImageLabel = new JLabel(new ImageIcon(scaledUpperImage));
     		JLabel lowerImageLabel = new JLabel(new ImageIcon(scaledLowerImage));
@@ -53,7 +65,7 @@ public class ImageLoader {
     		imagePanel.setMaximumSize(new Dimension(600, 200));
     		imagePanel.add(upperImageLabel);
     		imagePanel.add(lowerImageLabel);
-    		facePanel.removeAll();
+    		facePanel.add(FacialExpressions.getFileTypeCombo());
     		facePanel.add(imagePanel);
     		facePanel.validate();
     		
