@@ -21,7 +21,9 @@
 ## How to Run Project
 
     java -jar client.jar
-
+    
+	If you get any error with the java version while running the project, compile the project using your java version(Compilation 	steps are give below) and try running it.
+	
 ## How to Compile Project
 
 ### Mac/Linux
