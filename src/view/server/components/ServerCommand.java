@@ -71,12 +71,15 @@ public class ServerCommand {
 					if(btnText.equals(ServerConstants.START)) {
 						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue(), true);
 						startButton.setText(ServerConstants.STOP);
+						autoRepeatcheckbox.setEnabled(false);
 					} else if(btnText.equals(ServerConstants.STOP)) {
 						MessageTimer.getInstance().stopTimer();
 						startButton.setText(ServerConstants.START);
+						autoRepeatcheckbox.setEnabled(true);
+						
 					} else {
 						MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue(), false);
-						startButton.setText(ServerConstants.SEND);	
+						startButton.setText(ServerConstants.SEND);		
 					}
 				}
 			}
