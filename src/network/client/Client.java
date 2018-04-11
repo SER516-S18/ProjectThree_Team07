@@ -2,7 +2,6 @@ package network.client;
 
 import network.model.Connection;
 import org.glassfish.tyrus.client.ClientManager;
-import view.client.ServerInit;
 
 import javax.websocket.DeploymentException;
 import java.net.URI;

@@ -1,6 +1,5 @@
 package view.server;
 
-import view.client.ServerInit;
 import view.server.components.Console;
 import view.server.components.ServerCommand;
 import view.server.components.attributes.AttributeContainer;
@@ -14,62 +13,54 @@ import static util.NetworkConstants.HOST;
 import static util.NetworkConstants.PORT;
 
 public class Server {
+  public static Server serverViewInstance;
+  public static JFrame serverView;
+  public static boolean isServerUp;
 
-    private static void addComponentsToPane(Container contentPane) {
-        contentPane.setLayout(new BorderLayout(5,5));
-        contentPane.setBackground(Color.decode("#C5E0D8"));
+  private static void addComponentsToPane(Container contentPane) {
+    contentPane.setLayout(new BorderLayout(5, 5));
+    contentPane.setBackground(Color.decode("#C5E0D8"));
+    contentPane.add(ServerCommand.getPanel(), BorderLayout.PAGE_START);
+    contentPane.add(AttributeContainer.getPanel(), BorderLayout.CENTER);
+    contentPane.add(Console.getConsolePanel(), BorderLayout.PAGE_END);
+  }
 
-        contentPane.add(ServerCommand.getPanel(), BorderLayout.PAGE_START);
-
-        contentPane.add(AttributeContainer.getPanel(), BorderLayout.CENTER);
-
-        contentPane.add(Console.getConsolePanel(), BorderLayout.PAGE_END);
+  public static Server getInstance() {
+    if (serverViewInstance == null) {
+      serverViewInstance = new Server();
     }
+    isServerUp = true;
+    return serverViewInstance;
+  }
 
-    private static void createAndShowServerGUI() {
-        JFrame.setDefaultLookAndFeelDecorated(true);
+  public JFrame createAndShowServerGUI() {
 
-        JFrame serverFrame = new JFrame("Project 3 Team 7 - EmojiServer");
-//        serverFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        serverFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                System.out.println("Closing Server Window");
-                view.client.ServerInit serverInstance = view.client.ServerInit.getInstance();
-                serverInstance.closeLock();
-//                serverInstance.deleteFile();
-                ServerInit.isServerLeaunched = false;
-                File file = new File(System.getProperty("user.home"), "EmojiServer.tmp");
-                if(file.exists() && !file.isDirectory()) {
-                    file.delete();
-                }
-                serverFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            }
-        });
-
-        // set up the content pane and add swing components to it
-        addComponentsToPane(serverFrame.getContentPane());
-        serverFrame.setPreferredSize(new Dimension(1000,800));
-
-        serverFrame.pack();
-        serverFrame.setVisible(true);
-        serverFrame.setResizable(false);
+    if(serverView == null) {
+      JFrame.setDefaultLookAndFeelDecorated(true);
+      serverView = new JFrame("Project 3 Team 7 - EmojiServer");
+//      serverView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+      // set up the content pane and add swing components to it
+      addComponentsToPane(serverView.getContentPane());
+      serverView.setPreferredSize(new Dimension(1000, 800));
+      serverView.pack();
+      serverView.setResizable(false);
     }
+    return serverView;
+  }
 
-    public static void main(String[] args) {
-        network.server.Server server = network.server.Server.getInstance();
+  public static void main(String[] args) {
+    network.server.Server server = network.server.Server.getInstance();
 
-        if(args.length == 0) {
-            // development server running off localhost
-            server.start(HOST, PORT);
-        } else {
-            // production server launched from client
-            server.start(args[0], Integer.valueOf(args[1]));
-        }
-
-        createAndShowServerGUI();
-        Console.setMessage("Server is ready");
+    if (args.length == 0) {
+      // development server running off localhost
+      server.start(HOST, PORT);
+    } else {
+      // production server launched from client
+      server.start(args[0], Integer.valueOf(args[1]));
     }
+    Server serverViewInstance = Server.getInstance();
+    JFrame serverFrame = serverViewInstance.createAndShowServerGUI();
+    serverFrame.setVisible(true);
+    Console.setMessage("Server is ready");
+  }
 }
