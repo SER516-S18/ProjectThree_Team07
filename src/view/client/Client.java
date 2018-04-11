@@ -7,6 +7,8 @@ import view.client.components.affective.AffectiveTab;
 import view.client.components.affective.AffectiveTimeSeriesGraph;
 import view.client.components.expressive.ExpressiveTimeSeriesGraph;
 import view.client.components.expressive.FacialExpressions;
+import java.awt.event.KeyAdapter;
+import javax.swing.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -272,6 +274,17 @@ public class Client {
                 }
             }
         });
+
+        JLabel lblDisplayLength = new JLabel("Display Length :");
+        lblDisplayLength.setBounds(140, 500, 130, 20);
+        btnPanel.add(lblDisplayLength);
+        JLabel lblDisplayLengthValue = new JLabel(Integer.toString(AffectiveTimeSeriesGraph.getinstance().getDisplayLength().intValue()/1000));
+        lblDisplayLengthValue.setBounds(260, 500, 50, 20);
+        btnPanel.add(lblDisplayLengthValue);
+
+        JLabel labelSec = new JLabel("sec");
+        labelSec.setBounds(300, 500, 50, 20);
+        btnPanel.add(labelSec);
 
 
         JSplitPane splitPaneExpressive = new JSplitPane();

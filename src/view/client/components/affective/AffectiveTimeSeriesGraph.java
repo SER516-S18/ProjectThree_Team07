@@ -8,6 +8,7 @@ package view.client.components.affective;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.Random;
 
 import javax.swing.*;
@@ -51,6 +52,7 @@ public class AffectiveTimeSeriesGraph {
     private Color relaxationColor;
     private Color excitementColor;
     private Color focusColor;
+    private Double displayLength;
 
     public Color getInterestColor() {
         return interestColor;
@@ -103,6 +105,13 @@ public class AffectiveTimeSeriesGraph {
         this.focusColor = focusColor;
     }
 
+    public Double getDisplayLength() {
+        return displayLength;
+    }
+
+    public void setDisplayLength(Double displayLength) {
+        this.displayLength = displayLength;
+    }
 
     /**
      * Constructs a new graph application.
@@ -118,6 +127,7 @@ public class AffectiveTimeSeriesGraph {
         this.relaxationSeries = new TimeSeries(ServerConstants.RELAXATION, Millisecond.class);
         this.excitementSeries = new TimeSeries(ServerConstants.EXCITEMENT, Millisecond.class);
         this.focusSeries = new TimeSeries(ServerConstants.FOCUS, Millisecond.class);
+        this.displayLength = 60000.0; //60 seconds
         setColors();
 
         chart = createChart(createDataSet());
@@ -170,11 +180,12 @@ public class AffectiveTimeSeriesGraph {
 
         ValueAxis axis = plot.getDomainAxis();
         axis.setAutoRange(true);
-        axis.setFixedAutoRange(60000.0);  // 60 seconds
+        axis.setFixedAutoRange(displayLength);  // 60 seconds
         axis = plot.getRangeAxis();
         axis.setRange(0.0, 1.0);
         axis.setVerticalTickLabels(false);
         axis.setTickLabelsVisible(false);
+
         return result;
     }
 
@@ -214,7 +225,6 @@ public class AffectiveTimeSeriesGraph {
         content.add(chartPanel);
         chartPanel.setPreferredSize(new java.awt.Dimension(400, 500));
         content.setVisible(true);
-        //update(Status.getInstance());
     }
     /**
      * Starting point for the demonstration application.
