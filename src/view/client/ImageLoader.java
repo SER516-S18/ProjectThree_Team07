@@ -48,13 +48,13 @@ public class ImageLoader {
     		JLabel upperImageLabel = new JLabel(new ImageIcon(scaledUpperImage));
     		JLabel lowerImageLabel = new JLabel(new ImageIcon(scaledLowerImage));
     		
-    		JPanel tempPanel = new JPanel( new FlowLayout(FlowLayout.LEFT,0,0));
-    		tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.Y_AXIS));
-    		tempPanel.setMaximumSize(new Dimension(600, 200));
-    		tempPanel.add(upperImageLabel);
-    		tempPanel.add(lowerImageLabel);
+    		JPanel imagePanel = new JPanel( new FlowLayout(FlowLayout.LEFT,0,0));
+    		imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
+    		imagePanel.setMaximumSize(new Dimension(600, 200));
+    		imagePanel.add(upperImageLabel);
+    		imagePanel.add(lowerImageLabel);
     		facePanel.removeAll();
-    		facePanel.add(tempPanel);
+    		facePanel.add(imagePanel);
     		facePanel.validate();
     		
     }
