@@ -1,5 +1,10 @@
 package view.client.components.affective;
 
+/**
+ * Added label for  Graph displaying affective data
+ * @author team 7
+ *
+ */
 import javax.swing.*;
 
 public class AffectiveGraph {
