@@ -2,6 +2,7 @@ package network.model;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import controller.observers.*;
 
 /** @author Team 7 Observable for Status obvject */
 public class StatusObservable extends Observable {

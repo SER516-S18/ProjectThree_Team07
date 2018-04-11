@@ -1,10 +1,12 @@
-package network.model;
+package controller.observers;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import controller.client.FacialExpressionSolver;
+import network.model.Status;
+import network.model.StatusObservable;
 import view.client.ImageLoader;
 import view.client.components.expressive.FacialExpressions;
 
