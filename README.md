@@ -40,3 +40,15 @@ Compile
 
     build.bat
 
+#### Things to note
+    Smile > 0.5
+    clench > 0.5
+    smirk left > 0
+    smirk right > 0
+    laugh > 0
+    eyebrows raise > 0
+    eyebrow furrow > 0
+
+blink, wink left, wink right, look right, look left are boolean and work when Active is clicked.
+
+The option to change the facial expression in image view or emoji view will only work when next calls reach the client
