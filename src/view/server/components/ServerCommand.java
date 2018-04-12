@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.server.MessageTimer;
 import util.ServerConstants;
+import view.client.components.expressive.FacialExpressions;
 import view.server.components.attributes.AttributeContainer;
 
 import java.awt.*;
@@ -45,7 +46,7 @@ public class ServerCommand {
     intervalSpinner = new JSpinner();
     intervalSpinner.setAutoscrolls(true);
     intervalSpinner.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    intervalSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.5));
+    intervalSpinner.setModel(new SpinnerNumberModel(0.25, 0.25, 100, 0.5));
     JSpinner.NumberEditor editor = new JSpinner.NumberEditor(intervalSpinner);
     intervalSpinner.setEditor(editor);
     intervalSpinner.setBounds(370, 20, 68, 26);
@@ -69,10 +70,12 @@ public class ServerCommand {
               String btnText = startButton.getText();
               if (btnText.equals(ServerConstants.START)) {
                 MessageTimer.getInstance().startTimer((double) intervalSpinner.getValue(), true);
+                FacialExpressions.getFileTypeCombo().setEnabled(false);
                 startButton.setText(ServerConstants.STOP);
                 autoRepeatcheckbox.setEnabled(false);
               } else if (btnText.equals(ServerConstants.STOP)) {
                 MessageTimer.getInstance().stopTimer();
+                FacialExpressions.getFileTypeCombo().setEnabled(true);
                 startButton.setText(ServerConstants.START);
                 autoRepeatcheckbox.setEnabled(true);
 

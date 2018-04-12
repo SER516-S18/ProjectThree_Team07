@@ -18,10 +18,6 @@
 * Suman Parlapalli - 86
 * Tejasi Palkar - 83
 
-## How to Run Project
-
-    java -jar client.jar
-
 ## How to Compile Project
 
 ### Mac/Linux
@@ -39,6 +35,12 @@ Compile
 Compile
 
     build.bat
+
+## How to Run Project
+
+    java -jar client.jar
+    
+<div style="color:red;font-size:1.5em;">Please compile the project before executing the jar.</div>
 
 #### Things to note
     Smile > 0.5
